@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" id="archivo" name="archivo">
+    <img src="" id="preview" height="200">
+
+    <script>
+        function mostrarImagen(event){
+            var imagenSource = event.target.result;
+            var previewImage = document.getElementById("preview");
+
+            previewImage.src = imagenSource;
+        }
+
+        function procesarArchivo(event){
+            var imagen = event.target.files[0];
+
+            var lector = new FileReader();
+
+            lector.addEventListener('load', mostrarImagen, false);
+
+            lector.readAsDataURL(imagen);
+        }
+
+        document.getElementById("archivo").addEventListener('change', procesarArchivo, false);
+    </script>
+</body>
+</html>

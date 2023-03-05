@@ -1,0 +1,21 @@
+.ImageFromCarousel{
+    height: 30em;
+}
+
+.CategoryFromCard{
+    text-decoration: none;
+    font-size: 2em;
+}
+
+a.CategoryFromCard:hover{
+    color: #DBA800 !important;
+}
+
+.ImageFromCategory{
+    height: 15em;
+}
+
+.Separator{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}

@@ -1,0 +1,7 @@
+.square{
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 20px;
+  /* width: 200px; afecta al grid de css*/
+  height: 150px;
+}
