@@ -19,3 +19,21 @@ a.CategoryFromCard:hover{
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
+@media all and (max-width: 976px){
+    .ImageFromCarousel{
+        height: 25em;
+    }
+}
+
+@media all and (max-width: 760px){
+    .ImageFromCarousel{
+        height: 20em;
+    }
+}
+
+@media all and (max-width: 555px){
+    .ImageFromCarousel{
+        height: 15em;
+    }
+}

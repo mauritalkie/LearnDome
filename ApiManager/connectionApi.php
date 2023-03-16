@@ -6,6 +6,7 @@ if(isset($_POST['connectionTest']))
 	$connection = new Connection();
 	$result = $connection->connect();
 	echo $result;
+	$connection->disconnect();
 }
 else
 {

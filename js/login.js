@@ -4,12 +4,12 @@ function checkData(){
     let selectedValue = document.getElementById("cbRoleLogin").value
 
     if(user === "" || password === ""){
-        alert("Se deben llenar todos los campos")
+        alert('Se deben llenar todos los campos')
         return
     }
 
     if(selectedValue === "No selection"){
-        alert("Se debe seleccionar un rol de usuario")
+        alert('Se debe seleccionar un rol de usuario')
         return
     }
 

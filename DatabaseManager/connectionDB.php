@@ -1,23 +1,26 @@
 <?php
 class Connection{
-	public $dbname = 'learn_dome';
-	public $user = 'root';
-	public $password ='root'; // aqui hay que cambiar el user y password dependiendo del server
+	protected $dbname = 'learn_dome';
+	protected $user = 'root';
+	protected $password ='root'; // aqui hay que cambiar el user y password dependiendo del server
+
+	protected $dbh;
 
 	public function connect(){
 		try{
 			$dsn = "mysql:host=localhost;dbname=$this->dbname";
-			$dbh = new PDO($dsn, $this->user, $this->password);
+			$this->dbh = new PDO($dsn, $this->user, $this->password);
 
-			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			return 'Connection successfully';
+			$this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			return 'connection successfully';
 		}
 		catch(PDOException $e){
 			return $e->getMessage();
 		}
-		finally{ // puede que esto se quite o se cambie de lugar después idk
-			$dbh = null; // cierra la conexión
-		}
+	}
+
+	public function disconnect(){
+		$this->dbh = null; // cierra la conexión
 	}
 }
 ?>
