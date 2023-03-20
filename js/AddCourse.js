@@ -1,3 +1,18 @@
+function makeSweetAlert(icon, title, message){
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+        icon: icon,
+        title: title,
+        html: `<p style='color:white'>${message}</p>`,
+        confirmButtonText: 'OK'
+    })
+}
+
 function filledFields(name, description, price, categories){
     return(name === "" || description === "" || price === "" || categories === "")
 }
@@ -40,15 +55,15 @@ function checkData(){
 
     let areFieldsEmpty = filledFields(name, description, price, categories)
     if(areFieldsEmpty){
-        alert("Se deben llenar todos los campos")
+        makeSweetAlert('error', 'Error', 'Se deben llenar todos los campos')
         return
     }
 
     let isRightPrice = rightPrice(price)
     if(!isRightPrice){
-        alert("El precio no es válido")
+        makeSweetAlert('error', 'Error', 'El precio no es válido')
         return
     }
 
-    alert("Todo correcto")
+    makeSweetAlert('success', 'Éxito', 'Todo correcto')
 }

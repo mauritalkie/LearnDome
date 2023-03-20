@@ -1,5 +1,20 @@
 getAdministrator()
 
+function makeSweetAlert(icon, title, message){
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+        icon: icon,
+        title: title,
+        html: `<p style='color:white'>${message}</p>`,
+        confirmButtonText: 'OK'
+    })
+}
+
 function updateAdministrator(){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
@@ -26,7 +41,7 @@ function getAdministrator(){ // AJAX
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
-            alert(request.responseText)
+            makeSweetAlert('info', 'JSON', request.responseText)
             let jsonadmin = JSON.parse(request.responseText)
 
             let firstName = jsonadmin[0].first_name
@@ -43,7 +58,6 @@ function getAdministrator(){ // AJAX
         }
     }
     let id = 1
-    //request.send('getAdministrator&id=1')
     request.send(`getAdministrator&id=${id}`)
 }
 
@@ -85,25 +99,25 @@ function rightPassword(password){
 function rightFields(name, lastName, email, user, password){
     let isRightName = rightName(name)
     if(!isRightName){
-        alert("El nombre no es válido")
+        makeSweetAlert('error', 'Error', 'El nombre no es válido')
         return false
     }
 
     let isRightLastName = rightName(lastName)
     if(!isRightLastName){
-        alert("El apellido no es válido")
+        makeSweetAlert('error', 'Error', 'El apellido no es válido')
         return false
     }
 
     let isRightEmail = rightEmail(email)
     if(!isRightEmail){
-        alert("El correo electrónico no es válido")
+        makeSweetAlert('error', 'Error', 'El correo electrónico no es válido')
         return false
     }
 
     let isRightPassword = rightPassword(password)
     if(!isRightPassword){
-        alert("La contraseña debe de tener al menos una letra minúscula, una letra mayúscula, un número, un símbolo especial y al menos 8 caracteres")
+        makeSweetAlert('error', 'Error', 'La contraseña debe de tener al menos una letra minúscula, una letra mayúscula, un número, un símbolo especial y al menos 8 caracteres')
         return false
     }
 
@@ -123,7 +137,7 @@ function checkData(){
 
     let areFieldsEmpty = filledFields(name, lastName, email, user, password)
      if(areFieldsEmpty){
-         alert("Se deben llenar todos los campos")
+         makeSweetAlert('error', 'Error', 'Se deben llenar todos los campos')
          return
      }
 
@@ -132,5 +146,6 @@ function checkData(){
         return
     }
 
-    alert("Campos actualizados")
+    updateAdministrator()
+    makeSweetAlert('success', 'Éxito', 'Campos actualizados')
 }

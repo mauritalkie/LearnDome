@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="/LearnDome/css/login.css">
     <link rel="stylesheet" href="/LearnDome/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/LearnDome/sweetalert/sweetalert_dark.css">
 
 </head>
 <body class="bg-dark d-flex justify-content-center align-items-center vh-100">
@@ -49,7 +50,38 @@
             <div>¿No tienes cuenta?</div>
             <a href="/LearnDome/html/signup.html" class="text-decoration-none text-danger fw-semibold" id="myLink">Regístrate aquí</a>
         </div>
+        <div class="d-flex gap-1 justify-content-center mt-1">
+            <div>¿Olvidaste tu contraseña?</div>
+            <a href="/LearnDome/html/signup.html" class="text-decoration-none text-danger fw-semibold" data-bs-toggle="modal" data-bs-target="#exampleModal">Recupérala aquí</a>
+        </div>
     </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ayúdanos a recuperar tu contraseña</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mt-1">
+            <input class="form-control bg-light" type="text" placeholder="Introduce tu correo electrónico" id="txtEmailRecovery">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger" onclick="sendEmail()">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="/LearnDome/sweetalert/sweetalert_dark.min.js"></script>
+
+    <script src="/LearnDome/jquery/jquery.min.js"></script>
+    <script src="/LearnDome/popper/popper.min.js"></script>
+    <script src="/LearnDome/bootstrap/js/bootstrap.min.js"></script>
 
     <script src="/LearnDome/js/login.js"></script>
 </body>

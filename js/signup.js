@@ -1,5 +1,20 @@
 let isTherePicture = false
 
+function makeSweetAlert(icon, title, message){
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+        icon: icon,
+        title: title,
+        html: `<p style='color:white'>${message}</p>`,
+        confirmButtonText: 'OK'
+    })
+}
+
 document.getElementById("file").addEventListener('change', (event) => {
     let image = event.target.files[0]
     let reader = new FileReader()
@@ -47,31 +62,31 @@ function rightDate(date){
 function rightFields(name, lastName, email, user, password, selectedGenre, selectedRole, selectedDate){
     let isRightName = rightName(name)
     if(!isRightName){
-        alert("El nombre no es válido")
+        makeSweetAlert('error', 'Error', 'El nombre no es válido')
         return false
     }
 
     let isRightLastName = rightName(lastName)
     if(!isRightLastName){
-        alert("El apellido no es válido")
+        makeSweetAlert('error', 'Error', 'El apellido no es válido')
         return false
     }
 
     let isRightEmail = rightEmail(email)
     if(!isRightEmail){
-        alert("El correo electrónico no es válido")
+        makeSweetAlert('error', 'Error', 'El correo electrónico no es válido')
         return false
     }
 
     let isRightPassword = rightPassword(password)
     if(!isRightPassword){
-        alert("La contraseña debe de tener al menos una letra minúscula, una letra mayúscula, un número, un símbolo especial y al menos 8 caracteres")
+        makeSweetAlert('error', 'Error', 'La contraseña debe de tener al menos una letra minúscula, una letra mayúscula, un número, un símbolo especial y al menos 8 caracteres')
         return false
     }
 
     let isRightDate = rightDate(selectedDate)
     if(!isRightDate){
-        alert("La fecha de nacimiento debe suceder antes del día actual")
+        makeSweetAlert('error', 'Error', 'La fecha de nacimiento debe suceder antes del día actual')
         return false
     }
 
@@ -107,7 +122,7 @@ function checkData(){
 
     let areFieldsEmpty = filledFields(name, lastName, email, user, password, selectedGenre, selectedRole, selectedDate)
      if(areFieldsEmpty){
-         alert("Se deben llenar todos los campos")
+         makeSweetAlert('error', 'Error', 'Se deben llenar todos los campos')
          return
      }
 
