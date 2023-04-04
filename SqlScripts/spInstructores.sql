@@ -150,3 +150,12 @@ BEGIN
     WHERE username = _username AND user_password = _user_password;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_locked_instructors()
+BEGIN
+	SELECT id, username
+    FROM instructor
+    WHERE unlocked = FALSE;
+END //
+DELIMITER ;

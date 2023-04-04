@@ -22,7 +22,7 @@ CREATE PROCEDURE sp_get_student
 	IN _id INT
 )
 BEGIN
-	SELECT username, user_password, first_name, last_name, email, image, bought_courses, completed_courses
+	SELECT username, user_password, first_name, last_name, email, image
 	FROM student
 	WHERE id =_id;
 END //
@@ -141,5 +141,14 @@ BEGIN
 	UPDATE student
 	SET completed_courses = completed_courses + 1
 	WHERE id = _id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_locked_students()
+BEGIN
+	SELECT id, username
+    FROM student
+    WHERE unlocked = FALSE;
 END //
 DELIMITER ;
