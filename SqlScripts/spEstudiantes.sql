@@ -22,7 +22,7 @@ CREATE PROCEDURE sp_get_student
 	IN _id INT
 )
 BEGIN
-	SELECT username, user_password, first_name, last_name, email, image
+	SELECT username, user_password, first_name, last_name, email, image, bought_courses, completed_courses
 	FROM student
 	WHERE id =_id;
 END //
@@ -123,7 +123,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE sp_buy_course
 (
-	IN _id TINYINT
+	IN _id INT
 )
 BEGIN
 	UPDATE student
@@ -135,7 +135,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE sp_complete_course
 (
-	IN _id TINYINT
+	IN _id INT
 )
 BEGIN
 	UPDATE student

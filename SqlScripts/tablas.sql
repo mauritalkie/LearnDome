@@ -44,6 +44,8 @@ CREATE TABLE IF NOT EXISTS student (
 	genre VARCHAR(20) NOT NULL,
 	birthdate DATE NOT NULL,
 	email VARCHAR(40) UNIQUE NOT NULL,
+	bought_courses TINYINT DEFAULT 0,
+    completed_courses TINYINT DEFAULT 0,
     created_at DATETIME DEFAULT NOW(),
     image BLOB NOT NULL,
     unlocked BOOL DEFAULT TRUE,
@@ -124,7 +126,7 @@ CREATE TABLE IF NOT EXISTS course_bought_by_student (
 CREATE TABLE IF NOT EXISTS course_level (
 	id INT AUTO_INCREMENT,
     course_id INT NOT NULL,
-    number_level TINYINT NOT NULL,
+    level_number TINYINT NOT NULL,
     block_title VARCHAR(30) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (course_id) REFERENCES course(id)
@@ -133,8 +135,8 @@ CREATE TABLE IF NOT EXISTS course_level (
 CREATE TABLE IF NOT EXISTS course_sublevel (
 	id INT AUTO_INCREMENT,
     course_id INT NOT NULL,
-    number_level TINYINT NOT NULL,
-    number_sublevel TINYINT NOT NULL,
+    level_number TINYINT NOT NULL,
+    sublevel_number TINYINT NOT NULL,
     topic_title VARCHAR(30) NOT NULL,
     media_file BLOB NOT NULL,
     PRIMARY KEY (id),
