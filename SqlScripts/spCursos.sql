@@ -49,7 +49,7 @@ CREATE PROCEDURE sp_delete_course
 	IN _id INT
 )
 BEGIN
-	UPDATE courses
+	UPDATE course
     SET is_active = FALSE
     WHERE id = _id;
 END //
@@ -68,3 +68,4 @@ END //
 DELIMITER ;
 
 -- TODO: sp de obtener cursos por categoría con like o con inner join
+-- TODO: duplicar el último sp para que los estudiantes lo vizualicen

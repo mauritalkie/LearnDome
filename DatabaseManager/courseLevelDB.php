@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__DIR__).'/DatabaseManager/courseLevelDB.php');
+include_once(dirname(__DIR__).'/DatabaseManager/connectionDB.php');
 
 class CourseLevel extends Connection{
 	public function insertCourselevel($courseId, $levelNumber, $blockTitle){

@@ -50,7 +50,7 @@ class Student extends Connection{
 	public function deleteStudent($id){
 		$this->connect();
 
-		$stmt = $this->dbh>prepare("CALL sp_delete_student(?)");
+		$stmt = $this->dbh->prepare("CALL sp_delete_student(?)");
 		$stmt->bindParam(1, $id, PDO::PARAM_INT);
 		$stmt->execute();
 
@@ -61,7 +61,7 @@ class Student extends Connection{
 		$this->connect();
 
 		$stmt = $this->dbh->prepare("CALL sp_get_student_username(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_STR);
+		$stmt->bindParam(1, $username, PDO::PARAM_STR);
 		$stmt->execute();
 
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -73,7 +73,7 @@ class Student extends Connection{
 		$this->connect();
 
 		$stmt = $this->dbh->prepare("CALL sp_get_student_email(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_STR);
+		$stmt->bindParam(1, $email, PDO::PARAM_STR);
 		$stmt->execute();
 
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -84,7 +84,7 @@ class Student extends Connection{
 	public function lockStudent($id){
 		$this->connect();
 
-		$stmt = $this->dbh>prepare("CALL sp_lock_student(?)");
+		$stmt = $this->dbh->prepare("CALL sp_lock_student(?)");
 		$stmt->bindParam(1, $id, PDO::PARAM_INT);
 		$stmt->execute();
 
@@ -94,7 +94,7 @@ class Student extends Connection{
 	public function unlockStudent($id){
 		$this->connect();
 
-		$stmt = $this->dbh>prepare("CALL sp_unlock_student(?)");
+		$stmt = $this->dbh->prepare("CALL sp_unlock_student(?)");
 		$stmt->bindParam(1, $id, PDO::PARAM_INT);
 		$stmt->execute();
 
@@ -106,7 +106,7 @@ class Student extends Connection{
 
 		$stmt = $this->dbh->prepare("CALL sp_login_student(?, ?)");
 		$stmt->bindParam(1, $username, PDO::PARAM_STR);
-		$stmt->bindParam(1, $userPassword, PDO::PARAM_STR);
+		$stmt->bindParam(2, $userPassword, PDO::PARAM_STR);
 		$stmt->execute();
 
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -117,7 +117,7 @@ class Student extends Connection{
 	public function buyCourse($id){
 		$this->connect();
 
-		$stmt = $this->dbh>prepare("CALL sp_buy_course(?)");
+		$stmt = $this->dbh->prepare("CALL sp_buy_course(?)");
 		$stmt->bindParam(1, $id, PDO::PARAM_INT);
 		$stmt->execute();
 
@@ -127,7 +127,7 @@ class Student extends Connection{
 	public function completeCourse($id){
 		$this->connect();
 
-		$stmt = $this->dbh>prepare("CALL sp_complete_course(?)");
+		$stmt = $this->dbh->prepare("CALL sp_complete_course(?)");
 		$stmt->bindParam(1, $id, PDO::PARAM_INT);
 		$stmt->execute();
 

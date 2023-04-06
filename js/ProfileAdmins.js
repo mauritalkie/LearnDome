@@ -15,52 +15,6 @@ function makeSweetAlert(icon, title, message){
     })
 }
 
-function updateAdministrator(){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            getAdministrator()
-    }
-
-    let firstName = document.getElementById("txtNamePA").value
-    let lastName = document.getElementById("txtLastNamePA").value
-    let email = document.getElementById("txtEmailPA").value
-    let username = document.getElementById("txtUserPA").value
-    let password = document.getElementById("txtPasswordPA").value
-    let image = 'XD'
-    let id = 1
-
-    request.send(`updateAdministrator&username=${username}&password=${password}&firstname=${firstName}&lastname=${lastName}&email=${email}&image=${image}&id=${id}`)
-}
-
-function getAdministrator(){ // AJAX
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200){
-            makeSweetAlert('info', 'JSON', request.responseText)
-            let jsonadmin = JSON.parse(request.responseText)
-
-            let firstName = jsonadmin[0].first_name
-            let lastName = jsonadmin[0].last_name
-            let email = jsonadmin[0].email
-            let username = jsonadmin[0].username
-            let password = jsonadmin[0].user_password
-
-            document.getElementById("txtNamePA").value = firstName
-            document.getElementById("txtLastNamePA").value = lastName
-            document.getElementById("txtEmailPA").value = email
-            document.getElementById("txtUserPA").value = username
-            document.getElementById("txtPasswordPA").value = password
-        }
-    }
-    let id = 1
-    request.send(`getAdministrator&id=${id}`)
-}
-
 document.getElementById("filePA").addEventListener('change', (event) => {
     let image = event.target.files[0]
     let reader = new FileReader()
@@ -148,4 +102,53 @@ function checkData(){
 
     updateAdministrator()
     makeSweetAlert('success', 'Éxito', 'Campos actualizados')
+}
+
+// --------------------------------------- AJAX functions ---------------------------------------
+
+function getAdministrator(){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            makeSweetAlert('info', 'JSON', request.responseText)
+            let jsonadmin = JSON.parse(request.responseText)
+
+            let firstName = jsonadmin[0].first_name
+            let lastName = jsonadmin[0].last_name
+            let email = jsonadmin[0].email
+            let username = jsonadmin[0].username
+            let password = jsonadmin[0].user_password
+
+            document.getElementById("txtNamePA").value = firstName
+            document.getElementById("txtLastNamePA").value = lastName
+            document.getElementById("txtEmailPA").value = email
+            document.getElementById("txtUserPA").value = username
+            document.getElementById("txtPasswordPA").value = password
+        }
+    }
+    let id = 1
+    request.send(`getAdministrator&id=${id}`)
+}
+
+function updateAdministrator(){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+            getAdministrator()
+    }
+
+    let firstname = document.getElementById("txtNamePA").value
+    let lastname = document.getElementById("txtLastNamePA").value
+    let email = document.getElementById("txtEmailPA").value
+    let username = document.getElementById("txtUserPA").value
+    let password = document.getElementById("txtPasswordPA").value
+    let image = 'XD'
+    let id = 1
+
+    request.send(`updateAdministrator&username=${username}&password=${password}&firstname=${firstname}` +
+        `&lastname=${lastname}&email=${email}&image=${image}&id=${id}`)
 }

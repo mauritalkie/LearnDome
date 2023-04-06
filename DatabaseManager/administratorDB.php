@@ -50,7 +50,7 @@ class Administrator extends Connection{
 	public function deleteAdministrator($id){
 		$this->connect();
 
-		$stmt = $this->dbh>prepare("CALL sp_delete_administrator(?)");
+		$stmt = $this->dbh->prepare("CALL sp_delete_administrator(?)");
 		$stmt->bindParam(1, $id, PDO::PARAM_INT);
 		$stmt->execute();
 
@@ -61,7 +61,7 @@ class Administrator extends Connection{
 		$this->connect();
 
 		$stmt = $this->dbh->prepare("CALL sp_get_administrator_username(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_STR);
+		$stmt->bindParam(1, $username, PDO::PARAM_STR);
 		$stmt->execute();
 
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -73,7 +73,7 @@ class Administrator extends Connection{
 		$this->connect();
 
 		$stmt = $this->dbh->prepare("CALL sp_get_administrator_email(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_STR);
+		$stmt->bindParam(1, $email, PDO::PARAM_STR);
 		$stmt->execute();
 
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -86,7 +86,7 @@ class Administrator extends Connection{
 
 		$stmt = $this->dbh->prepare("CALL sp_login_administrator(?, ?)");
 		$stmt->bindParam(1, $username, PDO::PARAM_STR);
-		$stmt->bindParam(1, $userPassword, PDO::PARAM_STR);
+		$stmt->bindParam(2, $userPassword, PDO::PARAM_STR);
 		$stmt->execute();
 
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);

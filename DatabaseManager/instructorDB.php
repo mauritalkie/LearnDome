@@ -50,7 +50,7 @@ class Instructor extends Connection{
 	public function deleteInstructor($id){
 		$this->connect();
 
-		$stmt = $this->dbh>prepare("CALL sp_delete_instructor(?)");
+		$stmt = $this->dbh->prepare("CALL sp_delete_instructor(?)");
 		$stmt->bindParam(1, $id, PDO::PARAM_INT);
 		$stmt->execute();
 
@@ -61,7 +61,7 @@ class Instructor extends Connection{
 		$this->connect();
 
 		$stmt = $this->dbh->prepare("CALL sp_get_instructor_username(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_STR);
+		$stmt->bindParam(1, $username, PDO::PARAM_STR);
 		$stmt->execute();
 
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -73,7 +73,7 @@ class Instructor extends Connection{
 		$this->connect();
 
 		$stmt = $this->dbh->prepare("CALL sp_get_instructor_email(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_STR);
+		$stmt->bindParam(1, $email, PDO::PARAM_STR);
 		$stmt->execute();
 
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -84,7 +84,7 @@ class Instructor extends Connection{
 	public function increaseCoursesNumber($id){
 		$this->connect();
 
-		$stmt = $this->dbh>prepare("CALL sp_increase_courses_number(?)");
+		$stmt = $this->dbh->prepare("CALL sp_increase_courses_number(?)");
 		$stmt->bindParam(1, $id, PDO::PARAM_INT);
 		$stmt->execute();
 
@@ -94,7 +94,7 @@ class Instructor extends Connection{
 	public function decreaseCoursesNumber($id){
 		$this->connect();
 
-		$stmt = $this->dbh>prepare("CALL sp_decrease_courses_number(?)");
+		$stmt = $this->dbh->prepare("CALL sp_decrease_courses_number(?)");
 		$stmt->bindParam(1, $id, PDO::PARAM_INT);
 		$stmt->execute();
 
@@ -106,7 +106,7 @@ class Instructor extends Connection{
 	public function lockInstructor($id){
 		$this->connect();
 
-		$stmt = $this->dbh>prepare("CALL sp_lock_instructor(?)");
+		$stmt = $this->dbh->prepare("CALL sp_lock_instructor(?)");
 		$stmt->bindParam(1, $id, PDO::PARAM_INT);
 		$stmt->execute();
 
@@ -116,7 +116,7 @@ class Instructor extends Connection{
 	public function unlockInstructor($id){
 		$this->connect();
 
-		$stmt = $this->dbh>prepare("CALL sp_unlock_instructor(?)");
+		$stmt = $this->dbh->prepare("CALL sp_unlock_instructor(?)");
 		$stmt->bindParam(1, $id, PDO::PARAM_INT);
 		$stmt->execute();
 
@@ -128,7 +128,7 @@ class Instructor extends Connection{
 
 		$stmt = $this->dbh->prepare("CALL sp_login_instructor(?, ?)");
 		$stmt->bindParam(1, $username, PDO::PARAM_STR);
-		$stmt->bindParam(1, $userPassword, PDO::PARAM_STR);
+		$stmt->bindParam(2, $userPassword, PDO::PARAM_STR);
 		$stmt->execute();
 
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);

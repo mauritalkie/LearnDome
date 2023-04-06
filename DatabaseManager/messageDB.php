@@ -14,7 +14,7 @@ class Message extends Connection{
 		$this->disconnect();
 	}
 
-	public function getMesseges($firstUserId, $secondUserId){
+	public function getMessages($firstUserId, $secondUserId){
 		$this->connect();
 
 		$stmt = $this->dbh->prepare("CALL sp_get_messages(?, ?)");

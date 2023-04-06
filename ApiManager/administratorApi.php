@@ -27,6 +27,9 @@ if(isset($_POST['deleteAdministrator']))
 	$admin->deleteAdministrator($_POST['id']);
 }
 
+$admin = new Administrator();
+	$admin->deleteAdministrator(2);
+
 if(isset($_POST['getAdministratorUsername']))
 {
 	$admin = new Administrator();
