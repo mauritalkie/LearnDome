@@ -4,21 +4,39 @@ include_once(dirname(__DIR__).'/DatabaseManager/administratorDB.php');
 if(isset($_POST['insertAdministrator']))
 {
 	$admin = new Administrator();
-	$admin->insertAdministrator($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['genre'], $_POST['birthdate'], $_POST['email'], $_POST['image']);
+	$imageData = file_get_contents($_FILES['image']['tmp_name']);
+	$admin->insertAdministrator($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['genre'], $_POST['birthdate'], $_POST['email'], $imageData);
 }
 
 if(isset($_POST['getAdministrator']))
 {
 	$admin = new Administrator();
 	$result = $admin->getAdministrator($_POST['id']);
-	$currentAdmin = json_encode($result);
+
+	$arrAdmin = array();
+	$arrAdmin["results"] = array();
+
+	foreach($result as $row){
+		$obj = array(
+			"username" => $row['username'],
+			"password" => $row['user_password'],
+			"first_name" => $row['first_name'],
+			"last_name" => $row['last_name'],
+			"email" => $row['email'],
+			"image" => base64_encode($row['image'])
+		);
+		array_push($arrAdmin["results"], $obj);
+	}
+
+	$currentAdmin = json_encode($arrAdmin);
 	echo $currentAdmin;
 }
 
 if(isset($_POST['updateAdministrator']))
 {
 	$admin = new Administrator();
-	$admin->updateAdministrator($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['image'], $_POST['id']);
+	$imageData = file_get_contents($_FILES['image']['tmp_name']);
+	$admin->updateAdministrator($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $imageData, $_POST['id']);
 }
 
 if(isset($_POST['deleteAdministrator']))
@@ -26,9 +44,6 @@ if(isset($_POST['deleteAdministrator']))
 	$admin = new Administrator();
 	$admin->deleteAdministrator($_POST['id']);
 }
-
-$admin = new Administrator();
-	$admin->deleteAdministrator(2);
 
 if(isset($_POST['getAdministratorUsername']))
 {

@@ -40,3 +40,15 @@ BEGIN
     WHERE course_id = _course_id AND level_number = _level_number AND (sublevel_number = _sublevel_number OR topic_title = _topic_title);
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_set_seen_sublevel
+(
+	IN _id INT
+)
+BEGIN
+	UPDATE course_sublevel
+    SET seen = TRUE
+    WHERE id = _id;
+END //
+DELIMITER ;

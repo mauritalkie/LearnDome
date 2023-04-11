@@ -1,4 +1,8 @@
-getAdministrator()
+let formData = new FormData();
+formData.append("getAdministrator", "")
+formData.append("id", 11)
+
+getAdministrator(formData)
 
 function makeSweetAlert(icon, title, message){
     const swalWithBootstrapButtons = Swal.mixin({
@@ -106,30 +110,23 @@ function checkData(){
 
 // --------------------------------------- AJAX functions ---------------------------------------
 
-function getAdministrator(){
+function getAdministrator(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
-            makeSweetAlert('info', 'JSON', request.responseText)
-            let jsonadmin = JSON.parse(request.responseText)
-
-            let firstName = jsonadmin[0].first_name
-            let lastName = jsonadmin[0].last_name
-            let email = jsonadmin[0].email
-            let username = jsonadmin[0].username
-            let password = jsonadmin[0].user_password
-
-            document.getElementById("txtNamePA").value = firstName
-            document.getElementById("txtLastNamePA").value = lastName
-            document.getElementById("txtEmailPA").value = email
-            document.getElementById("txtUserPA").value = username
-            document.getElementById("txtPasswordPA").value = password
+            let jsonAdmin = JSON.parse(request.responseText)
+            jsonAdmin['results'].forEach(admin => {
+                document.querySelector('#picturePA').src = "data:image/png;base64, " + admin.image
+                document.querySelector('#txtNamePA').value = admin.first_name
+                document.querySelector('#txtLastNamePA').value = admin.last_name
+                document.querySelector('#txtEmailPA').value = admin.email
+                document.querySelector('#txtUserPA').value = admin.username
+                document.querySelector('#txtPasswordPA').value = admin.user_password
+            })
         }
     }
-    let id = 1
-    request.send(`getAdministrator&id=${id}`)
+    request.send(formData)
 }
 
 function updateAdministrator(){

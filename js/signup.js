@@ -105,8 +105,17 @@ function redirectPage(role){
     }
 
     if(role === "Admin"){
-        window.location.href = "/LearnDome/html/admins/CourseCommentManager.html"
-        return
+        let formData = new FormData()
+        formData.append("insertAdministrator", "")
+        formData.append("username", document.querySelector('#txtUserSignup').value)
+        formData.append("password", document.querySelector('#txtPasswordSignup').value)
+        formData.append("firstname", document.querySelector('#txtNameSignup').value)
+        formData.append("lastname", document.querySelector('#txtLastnameSignup').value)
+        formData.append("genre", document.querySelector('#cbGenderSignup').value)
+        formData.append("birthdate", document.querySelector('#bornDate').value)
+        formData.append("email", document.querySelector('#txtEmailSignup').value)
+        formData.append("image", document.querySelector('#file').files[0])
+        insertAdministrator(formData)
     }
 }
 
@@ -135,4 +144,18 @@ function checkData(){
     }
 
     redirectPage(selectedRole)
+}
+
+// AJAX functions
+
+function insertAdministrator(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            makeSweetAlert('success', 'Hecho', 'Administrador creado con éxito')
+            //window.location.href = "/LearnDome/html/admins/CourseCommentManager.html"
+        }
+    }
+    request.send(formData)
 }

@@ -4,21 +4,41 @@ include_once(dirname(__DIR__).'/DatabaseManager/studentDB.php');
 if(isset($_POST['insertStudent']))
 {
 	$student = new Student();
-	$student->insertStudent($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['genre'], $_POST['birthdate'], $_POST['email'], $_POST['image']);
+	$imageData = file_get_contents($_FILES['image']['tmp_name']);
+	$student->insertStudent($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['genre'], $_POST['birthdate'], $_POST['email'], $imageData);
 }
 
 if(isset($_POST['getStudent']))
 {
 	$student = new Student();
 	$result = $student->getStudent($_POST['id']);
-	$currentStudent = json_encode($result);
+
+	$arrStudent = array();
+	$arrStudent["results"] = array();
+
+	foreach($result as $row){
+		$obj = array(
+			"username" => $row['username'],
+			"password" => $row['user_password'],
+			"first_name" => $row['first_name'],
+			"last_name" => $row['last_name'],
+			"email" => $row['email'],
+			"image" => base64_encode($row['image']),
+			"bought_courses" => $row['bought_courses'],
+			"completed_courses" => $row['completed_courses']
+		);
+		array_push($arrStudent, $obj);
+	}
+
+	$currentStudent = json_encode($arrStudent);
 	echo $currentStudent;
 }
 
 if(isset($_POST['updateStudent']))
 {
 	$student = new Student();
-	$student->updateStudent($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['image'], $_POST['id']);
+	$imageData = file_get_contents($_FILES['image']['tmp_name']);
+	$student->updateStudent($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $imageData, $_POST['id']);
 }
 
 if(isset($_POST['deleteStudent']))

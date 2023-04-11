@@ -67,5 +67,32 @@ BEGIN
 END //
 DELIMITER ;
 
--- TODO: sp de obtener cursos por categoría con like o con inner join
--- TODO: duplicar el último sp para que los estudiantes lo vizualicen
+DELIMITER //
+CREATE PROCEDURE sp_get_courses_by_category
+(
+	IN _cateogry_id INT
+)
+BEGIN
+	SELECT A.id, A.course_name, A.course_description, A.image
+    FROM course A
+    INNER JOIN course_category B
+    ON A.id = B.course_id
+    WHERE B.category_id = _category_id AND A.is_active = TRUE AND B.is_active = TRUE;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_courses_by_search
+(
+	IN course_search VARCHAR(30)
+)
+BEGIN
+	SELECT A.id, A.course_name, A.course_description, A.image
+    FROM course
+    WHERE course_name LIKE CONCAT('%', _course_search, '%') AND is_active = TRUE;
+END //
+DELIMITER ;
+
+-- TODO: sp de obtener cursos por categoría con like o con inner join - done
+-- TODO: duplicar el último sp para que los estudiantes lo vizualicen - done
+-- TODO: sp de los 5 cursos de la ventana principal

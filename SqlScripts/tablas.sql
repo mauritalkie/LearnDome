@@ -92,12 +92,14 @@ CREATE TABLE IF NOT EXISTS message (
 	id BIGINT AUTO_INCREMENT,
 	first_user_id INT NOT NULL,
 	second_user_id INT NOT NULL,
+    user_who_sent_id INT NOT NULL,
 	message_content VARCHAR(255) NOT NULL,
 	messaged_at DATETIME DEFAULT NOW(),
     is_active BOOL DEFAULT TRUE,
 	PRIMARY KEY (id),
 	FOREIGN KEY (first_user_id) REFERENCES student(id),
-	FOREIGN KEY (second_user_id) REFERENCES student(id)
+	FOREIGN KEY (second_user_id) REFERENCES student(id),
+    FOREIGN KEY (user_who_sent_id) REFERENCES student(id)
 );
 
 CREATE TABLE IF NOT EXISTS course_score (
@@ -138,7 +140,18 @@ CREATE TABLE IF NOT EXISTS course_sublevel (
     level_number TINYINT NOT NULL,
     sublevel_number TINYINT NOT NULL,
     topic_title VARCHAR(30) NOT NULL,
-    media_file BLOB NOT NULL,
+    media_file MEDIUMBLOB NOT NULL,
+    seen BOOL DEFAULT FALSE,
     PRIMARY KEY (id),
     FOREIGN KEY (course_id) REFERENCES course(id)
+);
+
+CREATE TABLE IF NOT EXISTS course_category (
+	id INT AUTO_INCREMENT,
+    course_id INT NOT NULL,
+    category_id INT NOT NULL,
+    is_active BOOL DEFAULT TRUE,
+    PRIMARY KEY (id),
+    FOREIGN KEY (course_id) REFERENCES course(id),
+    FOREIGN KEY (category_id) REFERENCES category(id)
 );

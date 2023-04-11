@@ -22,4 +22,10 @@ if(isset($_POST['getExistingSublevel']))
 	$sublevels = json_encode($result);
 	echo $sublevels;
 }
+
+if(isset($_POST['setSeenSublevel']))
+{
+	$sublevel = new sublevel();
+	$sublevel->setSeenSublevel($_POST['id']);
+}
 ?>

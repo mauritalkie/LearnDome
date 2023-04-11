@@ -43,5 +43,15 @@ class CourseSublevel extends Connection{
 		$this->disconnect();
 		return $result;
 	}
+
+	public function setSeenSublevel($id){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_set_seen_sublevel(?)");
+		$stmt->bindParam(1, $id, PDO::PARAM_INT);
+		$stmt->execute();
+
+		$this->disconnect();
+	}
 }
 ?>

@@ -14,12 +14,13 @@ class Message extends Connection{
 		$this->disconnect();
 	}
 
-	public function getMessages($firstUserId, $secondUserId){
+	public function getMessages($firstUserId, $secondUserId, $userWhoSentId){
 		$this->connect();
 
-		$stmt = $this->dbh->prepare("CALL sp_get_messages(?, ?)");
+		$stmt = $this->dbh->prepare("CALL sp_get_messages(?, ?, ?)");
 		$stmt->bindParam(1, $firstUserId, PDO::PARAM_INT);
 		$stmt->bindParam(2, $secondUserId, PDO::PARAM_INT);
+		$stmt->bindParam(3, $userWhoSentId, PDO::PARAM_INT);
 		$stmt->execute();
 
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);

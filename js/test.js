@@ -72,7 +72,7 @@ insertCourseSublevel(2, 3, 3, 'temas selectos de C#', 'XD')*/
 
 // admins
 
-function insertAdministrator(username, password, firstname, lastname, genre, birthdate, email, image){
+function deleteAdministrator(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -80,11 +80,10 @@ function insertAdministrator(username, password, firstname, lastname, genre, bir
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`insertAdministrator&username=${username}&password=${password}&firstname=${firstname}` +
-        `&lastname=${lastname}&genre=${genre}&birthdate=${birthdate}&email=${email}&image=${image}`)
+    request.send(formData)
 }
 
-function deleteAdministrator(id){
+function getAdministratorUsername(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -92,10 +91,10 @@ function deleteAdministrator(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`deleteAdministrator&id=${id}`)
+    request.send(formData)
 }
 
-function getAdministratorUsername(username){
+function getAdministratorEmail(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -103,10 +102,10 @@ function getAdministratorUsername(username){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getAdministratorUsername&username=${username}`)
+    request.send(formData)
 }
 
-function getAdministratorEmail(email){
+function loginAdministrator(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -114,23 +113,12 @@ function getAdministratorEmail(email){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getAdministratorEmail&email=${email}`)
-}
-
-function loginAdministrator(username, password){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(`loginAdministrator&username=${username}&password=${password}`)
+    request.send(formData)
 }
 
 // instructors
 
-function insertInstructor(username, password, firstname, lastname, genre, birthdate, email, image){
+function insertInstructor(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -138,11 +126,10 @@ function insertInstructor(username, password, firstname, lastname, genre, birthd
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`insertInstructor&username=${username}&password=${password}&firstname=${firstname}` +
-        `&lastname=${lastname}&genre=${genre}&birthdate=${birthdate}&email=${email}&image=${image}`)
+    request.send(formData)
 }
 
-function getInstructor(id){
+function getInstructor(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -150,10 +137,10 @@ function getInstructor(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getInstructor&id=${id}`)
+    request.send(formData)
 }
 
-function updateInstructor(username, password, firstname, lastname, email, image, id){
+function updateInstructor(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -161,11 +148,10 @@ function updateInstructor(username, password, firstname, lastname, email, image,
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`updateInstructor&username=${username}&password=${password}&firstname=${firstname}` +
-        `&lastname=${lastname}&email=${email}&image=${image}&id=${id}`)
+    request.send(formData)
 }
 
-function deleteInstructor(id){
+function deleteInstructor(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -173,11 +159,11 @@ function deleteInstructor(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`deleteInstructor&id=${id}`)
+    request.send(formData)
 }
 
 
-function getInstructorUsername(username){
+function getInstructorUsername(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -185,10 +171,10 @@ function getInstructorUsername(username){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getInstructorUsername&username=${username}`)
+    request.send(formData)
 }
 
-function getInstructorEmail(email){
+function getInstructorEmail(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -196,10 +182,10 @@ function getInstructorEmail(email){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getInstructorEmail&email=${email}`)
+    request.send(formData)
 }
 
-function increaseCoursesNumber(id){
+function increaseCoursesNumber(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -207,10 +193,10 @@ function increaseCoursesNumber(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`increaseCoursesNumber&id=${id}`)
+    request.send(formData)
 }
 
-function decreaseCoursesNumber(id){
+function decreaseCoursesNumber(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -218,10 +204,10 @@ function decreaseCoursesNumber(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`decreaseCoursesNumber&id=${id}`)
+    request.send(formData)
 }
 
-function lockInstructor(id){
+function lockInstructor(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -229,10 +215,10 @@ function lockInstructor(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`lockInstructor&id=${id}`)
+    request.send(formData)
 }
 
-function unlockInstructor(id){
+function unlockInstructor(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -240,10 +226,10 @@ function unlockInstructor(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`unlockInstructor&id=${id}`)
+    request.send(formData)
 }
 
-function loginInstructor(username, password){
+function loginInstructor(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -251,10 +237,10 @@ function loginInstructor(username, password){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`loginInstructor&username=${username}&password=${password}`)
+    request.send(formData)
 }
 
-function getLockedInstructors(){
+function getLockedInstructors(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -262,12 +248,12 @@ function getLockedInstructors(){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getLockedInstructors`)
+    request.send(formData)
 }
 
 // students
 
-function insertStudent(username, password, firstname, lastname, genre, birthdate, email, image){
+function insertStudent(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -275,11 +261,10 @@ function insertStudent(username, password, firstname, lastname, genre, birthdate
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`insertStudent&username=${username}&password=${password}&firstname=${firstname}` +
-        `&lastname=${lastname}&genre=${genre}&birthdate=${birthdate}&email=${email}&image=${image}`)
+    request.send(formData)
 }
 
-function getStudent(id){
+function getStudent(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -287,10 +272,10 @@ function getStudent(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getStudent&id=${id}`)
+    request.send(formData)
 }
 
-function updateStudent(username, password, firstname, lastname, email, image, id){
+function updateStudent(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -298,11 +283,10 @@ function updateStudent(username, password, firstname, lastname, email, image, id
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`updateStudent&username=${username}&password=${password}&firstname=${firstname}` +
-        `&lastname=${lastname}&email=${email}&image=${image}&id=${id}`)
+    request.send(formData)
 }
 
-function deleteStudent(id){
+function deleteStudent(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -310,10 +294,10 @@ function deleteStudent(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`deleteStudent&id=${id}`)
+    request.send(formData)
 }
 
-function getStudentUsername(username){
+function getStudentUsername(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -321,10 +305,10 @@ function getStudentUsername(username){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getStudentUsername&username=${username}`)
+    request.send(formData)
 }
 
-function getStudentEmail(email){
+function getStudentEmail(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -332,10 +316,10 @@ function getStudentEmail(email){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getStudentEmail&email=${email}`)
+    request.send(formData)
 }
 
-function lockStudent(id){
+function lockStudent(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -343,10 +327,10 @@ function lockStudent(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`lockStudent&id=${id}`)
+    request.send(formData)
 }
 
-function unlockStudent(id){
+function unlockStudent(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -354,10 +338,10 @@ function unlockStudent(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`unlockStudent&id=${id}`)
+    request.send(formData)
 }
 
-function loginStudent(username, password){
+function loginStudent(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -365,10 +349,10 @@ function loginStudent(username, password){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`loginStudent&username=${username}&password=${password}`)
+    request.send(formData)
 }
 
-function buyCourse(id){
+function buyCourse(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -376,10 +360,10 @@ function buyCourse(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`buyCourse&id=${id}`)
+    request.send(formData)
 }
 
-function completeCourse(id){
+function completeCourse(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -387,10 +371,10 @@ function completeCourse(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`completeCourse&id=${id}`)
+    request.send(formData)
 }
 
-function getLockedStudents(){
+function getLockedStudents(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -398,12 +382,12 @@ function getLockedStudents(){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getLockedStudents`)
+    request.send(formData)
 }
 
 // courses
 
-function insertCourse(courseName, instructorId, price, image, courseDescription){
+function insertCourse(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -411,11 +395,10 @@ function insertCourse(courseName, instructorId, price, image, courseDescription)
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`insertCourse&courseName=${courseName}&instructorId=${instructorId}&price=${price}` +
-        `&image=${image}&courseDescription=${courseDescription}`)
+    request.send(formData)
 }
 
-function getCourse(id){
+function getCourse(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -423,10 +406,10 @@ function getCourse(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getCourse&id=${id}`)
+    request.send(formData)
 }
 
-function updateCourse(id, courseName, price, image, courseDescription){
+function updateCourse(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -434,11 +417,10 @@ function updateCourse(id, courseName, price, image, courseDescription){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`updateCourse&id=${id}&courseName=${courseName}&price=${price}&image=${image}` +
-        `&courseDescription=${courseDescription}`)
+    request.send(formData)
 }
 
-function deleteCourse(id){
+function deleteCourse(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -446,10 +428,10 @@ function deleteCourse(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`deleteCourse&id=${id}`)
+    request.send(formData)
 }
 
-function getCoursesByInstructor(instructorId){
+function getCoursesByInstructor(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -457,12 +439,34 @@ function getCoursesByInstructor(instructorId){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getCoursesByInstructor&instructorId=${instructorId}`)
+    request.send(formData)
+}
+
+function getCoursesByCategory(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+            alert(request.responseText)
+    }
+    request.send(formData)
+}
+
+function getCoursesBySearch(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+            alert(request.responseText)
+    }
+    request.send(formData)
 }
 
 // comments
 
-function insertComment(studentId, courseId, commentContent){
+function insertComment(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseCommentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -470,11 +474,10 @@ function insertComment(studentId, courseId, commentContent){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`insertComment&studentId=${studentId}&courseId=${courseId}` +
-        `&commentContent=${commentContent}`)
+    request.send(formData)
 }
 
-function getComments(courseId){
+function getComments(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseCommentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -482,10 +485,10 @@ function getComments(courseId){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getComments&courseId=${courseId}`)
+    request.send(formData)
 }
 
-function deleteComment(id){
+function deleteComment(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseCommentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -493,12 +496,12 @@ function deleteComment(id){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`deleteComment&id=${id}`)
+    request.send(formData)
 }
 
 // messages
 
-function insertMessage(firstUserId, secondUserId, messageContent){
+function insertMessage(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/messageApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -506,11 +509,10 @@ function insertMessage(firstUserId, secondUserId, messageContent){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`insertMessage&firstUserId=${firstUserId}&secondUserId=${secondUserId}` +
-        `&messageContent=${messageContent}`)
+    request.send(formData)
 }
 
-function getMesseges(firstUserId, secondUserId){
+function getMesseges(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/messageApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -518,12 +520,12 @@ function getMesseges(firstUserId, secondUserId){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getMesseges&firstUserId=${firstUserId}&secondUserId=${secondUserId}`)
+    request.send(formData)
 }
 
 // scores
 
-function insertScore(studentId, courseId, liked){
+function insertScore(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseScoreApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -531,12 +533,12 @@ function insertScore(studentId, courseId, liked){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`insertScore&studentId=${studentId}&courseId=${courseId}&liked=${liked}`)
+    request.send(formData)
 }
 
 // courses bought by students
 
-function insertPurchaseCourseStudent(studentId, courseId){
+function insertPurchaseCourseStudent(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/CourseBoughtByStudentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -544,10 +546,10 @@ function insertPurchaseCourseStudent(studentId, courseId){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`insertPurchaseCourseStudent&studentId=${studentId}&courseId=${courseId}`)
+    request.send(formData)
 }
 
-function updateCurrentLevel(studentId, courseId, newLevel){
+function updateCurrentLevel(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/CourseBoughtByStudentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -555,10 +557,10 @@ function updateCurrentLevel(studentId, courseId, newLevel){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`updateCurrentLevel&studentId=${studentId}&courseId=${courseId}&newLevel=${newLevel}`)
+    request.send(formData)
 }
 
-function setCompletedDate(studentId, courseId){
+function setCompletedDate(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/CourseBoughtByStudentApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -566,12 +568,12 @@ function setCompletedDate(studentId, courseId){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`setCompletedDate&studentId=${studentId}&courseId=${courseId}`)
+    request.send(formData)
 }
 
 // levels
 
-function insertCourselevel(courseId, levelNumber, blockTitle){
+function insertCourselevel(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseLevelApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -579,11 +581,10 @@ function insertCourselevel(courseId, levelNumber, blockTitle){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`insertCourselevel&courseId=${courseId}&levelNumber=${levelNumber}
-        &blockTitle=${blockTitle}`)
+    request.send(formData)
 }
 
-function getLevels(courseId){
+function getLevels(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseLevelApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -591,10 +592,10 @@ function getLevels(courseId){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getLevels&courseId=${courseId}`)
+    request.send(formData)
 }
 
-function getExistingLevel(courseId, levelNumber, blockTitle){
+function getExistingLevel(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseLevelApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -602,13 +603,12 @@ function getExistingLevel(courseId, levelNumber, blockTitle){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getExistingLevel&courseId=${courseId}&levelNumber=${levelNumber}` +
-        `&blockTitle=${blockTitle}`)
+    request.send(formData)
 }
 
 // sublevels
 
-function insertCourseSublevel(courseId, levelNumber, sublevelNumber, topicTitle, mediaFile){
+function insertCourseSublevel(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseSublevelApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -616,11 +616,10 @@ function insertCourseSublevel(courseId, levelNumber, sublevelNumber, topicTitle,
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`insertCourseSublevel&courseId=${courseId}&levelNumber=${levelNumber}` +
-        `&sublevelNumber=${sublevelNumber}&topicTitle=${topicTitle}&mediaFile=${mediaFile}`)
+    request.send(formData)
 }
 
-function getSublevels(courseId, levelNumber){
+function getSublevels(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseSublevelApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -628,10 +627,10 @@ function getSublevels(courseId, levelNumber){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getSublevels&courseId=${courseId}&levelNumber=${levelNumber}`)
+    request.send(formData)
 }
 
-function getExistingSublevel(courseId, levelNumber, sublevelNumber, topicTitle){
+function getExistingSublevel(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseSublevelApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -639,6 +638,51 @@ function getExistingSublevel(courseId, levelNumber, sublevelNumber, topicTitle){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)
     }
-    request.send(`getExistingSublevel&courseId=${courseId}&levelNumber=${levelNumber}` +
-        `&sublevelNumber=${sublevelNumber}&topicTitle=${topicTitle}`)
+    request.send(formData)
+}
+
+function setSeenSublevel(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseSublevelApi.php', true)
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+            alert(request.responseText)
+    }
+    request.send(formData)
+}
+
+// course category
+
+function insertCourseCategory(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseCategoryApi.php', true)
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+            alert(request.responseText)
+    }
+    request.send(formData)
+}
+
+function removeCategoryFromCourse(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseCategoryApi.php', true)
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+            alert(request.responseText)
+    }
+    request.send(formData)
+}
+
+function getCategoriesFromSelectedCourse(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseCategoryApi.php', true)
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+            alert(request.responseText)
+    }
+    request.send(formData)
 }

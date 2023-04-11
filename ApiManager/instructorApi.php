@@ -4,21 +4,41 @@ include_once(dirname(__DIR__).'/DatabaseManager/instructorDB.php');
 if(isset($_POST['insertInstructor']))
 {
 	$instructor = new Instructor();
-	$instructor->insertInstructor($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['genre'], $_POST['birthdate'], $_POST['email'], $_POST['image']);
+	$imageData = file_get_contents($_FILES['image']['tmp_name']);
+	$instructor->insertInstructor($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['genre'], $_POST['birthdate'], $_POST['email'], $imageData);
 }
 
 if(isset($_POST['getInstructor']))
 {
 	$instructor = new Instructor();
 	$result = $instructor->getInstructor($_POST['id']);
-	$currentInstructor = json_encode($result);
+
+	$arrInstructor = array();
+	$arrInstructor["results"];
+
+	foreach($result as $row){
+		$obj = array(
+			"username" => $row['username'],
+			"password" => $row['user_password'],
+			"first_name" => $row['first_name'],
+			"last_name" => $row['last_name'],
+			"email" => $row['email'],
+			"image" => base64_encode($row['image']),
+			"courses_number" => $row['courses_number'],
+			"score" => $row['score']
+		);
+		array_push($arrInstructor["results"], $obj);
+	}
+
+	$currentInstructor = json_encode($arrInstructor);
 	echo $currentInstructor;
 }
 
 if(isset($_POST['updateInstructor']))
 {
 	$instructor = new Instructor();
-	$instructor->updateInstructor($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['image'], $_POST['id']);
+	$imageData = file_get_contents($_FILES['image']['tmp_name']);
+	$instructor->updateInstructor($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $imageData, $_POST['id']);
 }
 
 if(isset($_POST['deleteInstructor']))

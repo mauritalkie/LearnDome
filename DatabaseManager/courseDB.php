@@ -63,5 +63,29 @@ class Course extends Connection{
 		$this->disconnect();
 		return $result;
 	}
+
+	public function getCoursesByCategory($categoryId){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_get_courses_by_category(?)");
+		$stmt->bindParam(1, $categoryId, PDO::PARAM_INT);
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
+	}
+
+	public function getCoursesBySearch($courseSearch){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_get_courses_by_search(?)");
+		$stmt->bindParam(1, $courseSearch, PDO::PARAM_INT);
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
+	}
 }
 ?>
