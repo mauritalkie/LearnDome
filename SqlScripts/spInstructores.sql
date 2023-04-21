@@ -65,8 +65,7 @@ CREATE PROCEDURE sp_get_instructor_username
 	IN _username VARCHAR(30)
 )
 BEGIN
-	SELECT username
-	FROM instructor
+	SELECT * FROM get_instructor_username_view
 	WHERE username =_username;
 END //
 DELIMITER ;
@@ -77,8 +76,7 @@ CREATE PROCEDURE sp_get_instructor_email
 	IN _email VARCHAR(40)
 )
 BEGIN
-	SELECT email
-	FROM instructor
+	SELECT * FROM get_instructor_email_view
 	WHERE email =_email;
 END //
 DELIMITER ;
@@ -145,8 +143,7 @@ CREATE PROCEDURE sp_login_instructor
 	IN _user_password VARCHAR(30)
 )
 BEGIN
-	SELECT username, user_password
-    FROM instructor
+	SELECT * FROM login_instructor_view
     WHERE username = _username AND user_password = _user_password;
 END //
 DELIMITER ;

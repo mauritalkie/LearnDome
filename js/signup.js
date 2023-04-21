@@ -154,7 +154,7 @@ function insertAdministrator(formData){
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             makeSweetAlert('success', 'Hecho', 'Administrador creado con éxito')
-            //window.location.href = "/LearnDome/html/admins/CourseCommentManager.html"
+            window.location.href = "/LearnDome/html/admins/CourseCommentManager.html"
         }
     }
     request.send(formData)

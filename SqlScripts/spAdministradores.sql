@@ -65,8 +65,7 @@ CREATE PROCEDURE sp_get_administrator_username
 	IN _username VARCHAR(30)
 )
 BEGIN
-	SELECT username
-	FROM administrator
+	SELECT * FROM get_administrator_username_view
 	WHERE username =_username;
 END //
 DELIMITER ;
@@ -77,8 +76,7 @@ CREATE PROCEDURE sp_get_administrator_email
 	IN _email VARCHAR(40)
 )
 BEGIN
-	SELECT email
-	FROM administrator
+	SELECT * FROM get_administrator_email_view
 	WHERE email =_email;
 END //
 DELIMITER ;
@@ -90,8 +88,7 @@ CREATE PROCEDURE sp_login_administrator
 	IN _user_password VARCHAR(30)
 )
 BEGIN
-	SELECT username, user_password
-    FROM administrator
+	SELECT * FROM login_administrator_view
     WHERE username = _username AND user_password = _user_password;
 END //
 DELIMITER ;

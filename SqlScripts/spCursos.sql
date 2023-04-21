@@ -92,7 +92,3 @@ BEGIN
     WHERE course_name LIKE CONCAT('%', _course_search, '%') AND is_active = TRUE;
 END //
 DELIMITER ;
-
--- TODO: sp de obtener cursos por categoría con like o con inner join - done
--- TODO: duplicar el último sp para que los estudiantes lo vizualicen - done
--- TODO: sp de los 5 cursos de la ventana principal

@@ -50,7 +50,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE sp_delete_student
 (
-IN _id INT
+	IN _id INT
 )
 BEGIN
 	UPDATE student
@@ -65,8 +65,7 @@ CREATE PROCEDURE sp_get_student_username
 	IN _username VARCHAR(30)
 )
 BEGIN
-	SELECT username
-	FROM student
+	SELECT * FROM get_student_username_view
 	WHERE username =_username;
 END //
 DELIMITER ;
@@ -77,8 +76,7 @@ CREATE PROCEDURE sp_get_student_email
 	IN _email VARCHAR(40)
 )
 BEGIN
-	SELECT email
-	FROM student
+	SELECT * FROM get_student_email_view
 	WHERE email =_email;
 END //
 DELIMITER ;
@@ -114,8 +112,7 @@ CREATE PROCEDURE sp_login_student
 	IN _user_password VARCHAR(30)
 )
 BEGIN
-	SELECT username, user_password
-    FROM student
+	SELECT * FROM login_student_view
     WHERE username = _username AND user_password = _user_password;
 END //
 DELIMITER ;

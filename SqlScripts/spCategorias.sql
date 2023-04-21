@@ -44,5 +44,3 @@ BEGIN
     WHERE id = _id;
 END //
 DELIMITER ;
-
--- todo: implementar una búsqueda de categorías con like

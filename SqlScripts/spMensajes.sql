@@ -24,5 +24,3 @@ BEGIN
     WHERE first_user_id = _first_user_id AND second_user_id = _second_user_id;
 END //
 DELIMITER ;
-
--- TODO: agregar nuevo campo en la tabla para saber quien envió el mensaje
