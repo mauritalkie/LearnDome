@@ -98,4 +98,67 @@ if(isset($_POST['getCoursesBySearch']))
 	$courses = json_encode($arrCourses);
 	echo $courses;
 }
+
+if(isset($_POST['getBestScoredCourses']))
+{
+	$course = new Course();
+	$result = $course->getBestScoredCourses();
+
+	$arrCourses = array();
+	$arrCourses["results"] = array();
+
+	foreach($results as $row){
+		$obj = array(
+			"id" => $row['id'],
+			"course_name" => $row['course_name'],
+			"course_description" => $row['course_description'],
+			"image" => base64_encode($row['image'])
+		);
+		array_push($arrCourses, $obj);
+	}
+	$courses = json_encode($arrCourses);
+	echo $courses;
+}
+
+if(isset($_POST['getTopSoldCourses']))
+{
+	$course = new Course();
+	$result = $course->getTopSoldCourses();
+
+	$arrCourses = array();
+	$arrCourses["results"] = array();
+
+	foreach($results as $row){
+		$obj = array(
+			"id" => $row['id'],
+			"course_name" => $row['course_name'],
+			"course_description" => $row['course_description'],
+			"image" => base64_encode($row['image'])
+		);
+		array_push($arrCourses, $obj);
+	}
+	$courses = json_encode($arrCourses);
+	echo $courses;
+}
+
+if(isset($_POST['getMostRecentCourses']))
+{
+	$course = new Course();
+	$result = $course->getMostRecentCourses();
+
+	$arrCourses = array();
+	$arrCourses["results"] = array();
+
+	foreach($results as $row){
+		$obj = array(
+			"id" => $row['id'],
+			"course_name" => $row['course_name'],
+			"course_description" => $row['course_description'],
+			"image" => base64_encode($row['image'])
+		);
+		array_push($arrCourses, $obj);
+	}
+	$courses = json_encode($arrCourses);
+	echo $courses;
+}
 ?>

@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activar usuarios</title>
+    <title>Mensajes</title>
 
     <link rel="stylesheet" href="/LearnDome/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/LearnDome/css/placeholder.css">
+    <link rel="stylesheet" href="/LearnDome/sweetalert/sweetalert_dark.css">
+
 </head>
 <body class="bg-dark">
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
@@ -45,70 +46,22 @@
         </div>
       </nav>
 
-      <div class="d-flex justify-content-center mt-3 mb-3">
-        <input class="form-control bg-dark w-50 text-white" type="text" placeholder="Buscar usuario" id="txtUserLogin">
-      </div>
-
-<div class="container">
-  
-  <table class="table table-striped table-dark">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Usuario</th>
-          <th scope="col">Habilitar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Usuario 1</td>
-          <td><button class=" btn btn-success">Activar</button></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Usuario 2</td>
-          <td><button class=" btn btn-success">Activar</button></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Usuario 3</td>
-          <td><button class=" btn btn-success">Activar</button></td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>Usuario 1</td>
-          <td><button class=" btn btn-success">Activar</button></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Usuario 2</td>
-          <td><button class=" btn btn-success">Activar</button></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Usuario 3</td>
-          <td><button class=" btn btn-success">Activar</button></td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>Usuario 1</td>
-          <td><button class=" btn btn-success">Activar</button></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Usuario 2</td>
-          <td><button class=" btn btn-success">Activar</button></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Usuario 3</td>
-          <td><button class=" btn btn-success">Activar</button></td>
-        </tr>
-      </tbody>
-    </table>
-
+<div class="container text-white">
+  <div class="d-flex">
+    <input class="form-control m-3" type="text" id="txtLookUserMT" placeholder="Buscar usuario">
+    <button class="btn btn-danger m-3">Buscar</button>
+  </div>
+  <div id="messeges">
+    <div class="d-flex justify-content-start"><p class="bg-danger rounded w-75" style="word-break: break-all;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, quasi dicta. Laborum optio dignissimos iure deleniti quod, itaque accusamus tenetur harum facere culpa incidunt ducimus in molestias quam. Aliquam, commodi.</p></div>
+    <div class="d-flex justify-content-end"><p class="bg-danger rounded w-75" style="word-break: break-all;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti ea nemo repudiandae quam, odio sunt eius asperiores iusto similique quisquam odit obcaecati omnis provident excepturi ipsam dicta ex ab? Ullam.</p></div>
+  </div>
+  <div class="d-flex">
+    <input class="form-control m-3" type="text" id="txtMessageMT" placeholder="Escribe un mensaje">
+    <button class="btn btn-danger m-3">Enviar</button>
+  </div>
 </div>
+
+    <script src="/LearnDome/sweetalert/sweetalert_dark.min.js"></script>
 
     <script src="/LearnDome/jquery/jquery.min.js"></script>
     <script src="/LearnDome/popper/popper.min.js"></script>

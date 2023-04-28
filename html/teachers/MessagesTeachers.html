@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir curso</title>
+    <title>Mensajes</title>
 
     <link rel="stylesheet" href="/LearnDome/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/LearnDome/sweetalert/sweetalert_dark.css">
@@ -46,32 +46,19 @@
         </div>
       </nav>
 
-      <div class="d-flex justify-content-center">
-        <h1 class="text-white">Subir un curso</h1>
-      </div>
-
-<div class="container">
-
-  <div class="row">
-        <div class="col-12 col-sm-6">
-          <input class="form-control mt-5 w-75" type="text" placeholder="Nombre del curso" id="txtNameAC">
-          <input class="form-control mt-5 w-75" type="text" placeholder="Descripción del curso" id="txtDescriptionAC">
-          <input class="form-control mt-5 w-75" type="text" placeholder="Precio del curso" id="txtPriceAC">
-        </div>
-
-        <div class="col-12 col-sm-6">
-          <select class="form-control bg-light w-75 mt-5" name="cbCategoriesAC" id="cbCategoriesAC">
-                <option hidden disabled selected value="No selection">Selecciona una categoría</option>
-          </select>
-          <button class="btn btn-success mt-2">Agregar categoría</button>
-        </div>
-      </div>
-    
-    <div class="d-flex justify-content-center mt-5 gap-5">
-        <input class="form-control w-75" type="file" id="courseFile">
-        <button class="btn btn-success" onclick="checkData()">Continuar</button>
-    </div>
-    
+<div class="container text-white">
+  <div class="d-flex">
+    <input class="form-control m-3" type="text" id="txtLookUserMT" placeholder="Buscar usuario">
+    <button class="btn btn-danger m-3">Buscar</button>
+  </div>
+  <div id="messeges">
+    <div class="d-flex justify-content-start"><p class="bg-danger rounded w-75" style="word-break: break-all;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, quasi dicta. Laborum optio dignissimos iure deleniti quod, itaque accusamus tenetur harum facere culpa incidunt ducimus in molestias quam. Aliquam, commodi.</p></div>
+    <div class="d-flex justify-content-end"><p class="bg-danger rounded w-75" style="word-break: break-all;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti ea nemo repudiandae quam, odio sunt eius asperiores iusto similique quisquam odit obcaecati omnis provident excepturi ipsam dicta ex ab? Ullam.</p></div>
+  </div>
+  <div class="d-flex">
+    <input class="form-control m-3" type="text" id="txtMessageMT" placeholder="Escribe un mensaje">
+    <button class="btn btn-danger m-3">Enviar</button>
+  </div>
 </div>
 
     <script src="/LearnDome/sweetalert/sweetalert_dark.min.js"></script>
@@ -79,7 +66,5 @@
     <script src="/LearnDome/jquery/jquery.min.js"></script>
     <script src="/LearnDome/popper/popper.min.js"></script>
     <script src="/LearnDome/bootstrap/js/bootstrap.min.js"></script>
-
-    <script src="/LearnDome/js/AddCourse.js"></script>
 </body>
 </html>

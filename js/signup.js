@@ -95,13 +95,31 @@ function rightFields(name, lastName, email, user, password, selectedGenre, selec
 
 function redirectPage(role){
     if(role === "Student"){
-        window.location.href = "/LearnDome/html/index.html"
-        return
+        let formData = new FormData()
+        formData.append("insertStudent", "")
+        formData.append("username", document.querySelector('#txtUserSignup').value)
+        formData.append("password", document.querySelector('#txtPasswordSignup').value)
+        formData.append("firstname", document.querySelector('#txtNameSignup').value)
+        formData.append("lastname", document.querySelector('#txtLastnameSignup').value)
+        formData.append("genre", document.querySelector('#cbGenderSignup').value)
+        formData.append("birthdate", document.querySelector('#bornDate').value)
+        formData.append("email", document.querySelector('#txtEmailSignup').value)
+        formData.append("image", document.querySelector('#file').files[0])
+        insertStudent(formData)
     }
 
     if(role === "Teacher"){
-        window.location.href = "/LearnDome/html/teachers/CourseManager.html"
-        return
+        let formData = new FormData()
+        formData.append("insertInstructor", "")
+        formData.append("username", document.querySelector('#txtUserSignup').value)
+        formData.append("password", document.querySelector('#txtPasswordSignup').value)
+        formData.append("firstname", document.querySelector('#txtNameSignup').value)
+        formData.append("lastname", document.querySelector('#txtLastnameSignup').value)
+        formData.append("genre", document.querySelector('#cbGenderSignup').value)
+        formData.append("birthdate", document.querySelector('#bornDate').value)
+        formData.append("email", document.querySelector('#txtEmailSignup').value)
+        formData.append("image", document.querySelector('#file').files[0])
+        insertInstructor(formData)
     }
 
     if(role === "Admin"){
@@ -146,15 +164,45 @@ function checkData(){
     redirectPage(selectedRole)
 }
 
-// AJAX functions
+// --------------------------------------- AJAX functions ---------------------------------------
 
 function insertAdministrator(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
+            let jsonAdmin = JSON.parse(request.responseText)
+            localStorage.setItem("globalId", jsonAdmin[0].id)
             makeSweetAlert('success', 'Hecho', 'Administrador creado con éxito')
             window.location.href = "/LearnDome/html/admins/CourseCommentManager.html"
+        }
+    }
+    request.send(formData)
+}
+
+function insertInstructor(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let jsonAdmin = JSON.parse(request.responseText)
+            localStorage.setItem("globalId", jsonAdmin[0].id)
+            makeSweetAlert('success', 'Hecho', 'Instructor creado con éxito')
+            window.location.href = "/LearnDome/html/teachers/CourseManager.html"
+        }
+    }
+    request.send(formData)
+}
+
+function insertStudent(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let jsonAdmin = JSON.parse(request.responseText)
+            localStorage.setItem("globalId", jsonAdmin[0].id)
+            makeSweetAlert('success', 'Hecho', 'Estudiante creado con éxito')
+            window.location.href = "/LearnDome/html/index.html"
         }
     }
     request.send(formData)

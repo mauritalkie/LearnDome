@@ -92,3 +92,39 @@ BEGIN
     WHERE course_name LIKE CONCAT('%', _course_search, '%') AND is_active = TRUE;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_best_scored_courses()
+BEGIN
+	SELECT id, course_name, score, created_at, price, image, course_description
+    FROM course
+    WHERE is_active = TRUE
+    ORDER BY score DESC
+    LIMIT 5;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_top_sold_courses()
+BEGIN
+	SELECT A.course_id, COUNT(A.course_id) AS purchases, B.course_name, B.score, B.created_at, B.price, B.image, B.course_description
+	FROM course_bought_by_student A
+	INNER JOIN course B
+	ON A.course_id = B.id
+	WHERE B.is_active = TRUE
+	GROUP BY A.course_id
+	ORDER BY COUNT(A.course_id) DESC
+	LIMIT 5;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_most_recent_courses()
+BEGIN
+	SELECT id, course_name, score, created_at, price, image, course_description
+    FROM course
+    WHERE is_active = TRUE
+    ORDER BY created_at DESC
+    LIMIT 5;
+END //
+DELIMITER ;

@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS administrator (
 	genre VARCHAR(20) NOT NULL,
 	birthdate DATE NOT NULL,
 	email VARCHAR(40) UNIQUE NOT NULL,
-    image BLOB NOT NULL,
+    image MEDIUMBLOB NOT NULL,
     created_at DATETIME DEFAULT NOW(),
     is_active BOOL DEFAULT TRUE,
 	PRIMARY KEY (id)
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS instructor (
     created_at DATETIME DEFAULT NOW(),
     courses_number TINYINT DEFAULT 0,
     score DECIMAL(6, 2) DEFAULT -1,
-    image BLOB NOT NULL,
+    image MEDIUMBLOB NOT NULL,
     unlocked BOOL DEFAULT TRUE,
     is_active BOOL DEFAULT TRUE,
     PRIMARY KEY (id)
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS student (
 	bought_courses TINYINT DEFAULT 0,
     completed_courses TINYINT DEFAULT 0,
     created_at DATETIME DEFAULT NOW(),
-    image BLOB NOT NULL,
+    image MEDIUMBLOB NOT NULL,
     unlocked BOOL DEFAULT TRUE,
     is_active BOOL DEFAULT TRUE,
     PRIMARY KEY (id)
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS course (
 	score DECIMAL(6, 2) DEFAULT -1,
 	created_at DATETIME DEFAULT NOW(),
 	price DECIMAL(7, 2) NOT NULL,
-	image BLOB NOT NULL,
+	image MEDIUMBLOB NOT NULL,
 	course_description VARCHAR(255) NOT NULL,
     is_active BOOL DEFAULT TRUE,
 	PRIMARY KEY (id),
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS course_bought_by_student (
     student_id INT NOT NULL,
     course_id INT NOT NULL,
     bought_date DATETIME DEFAULT NOW(),
-    current_level INT DEFAULT 1,
+    -- current_level INT DEFAULT 1,
     completed_date DATETIME,
     PRIMARY KEY (id),
     FOREIGN KEY (student_id) REFERENCES student(id),
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS course_sublevel (
     level_number TINYINT NOT NULL,
     sublevel_number TINYINT NOT NULL,
     topic_title VARCHAR(30) NOT NULL,
-    media_file MEDIUMBLOB NOT NULL,
+    media_file LONGBLOB NOT NULL,
     seen BOOL DEFAULT FALSE,
     PRIMARY KEY (id),
     FOREIGN KEY (course_id) REFERENCES course(id)

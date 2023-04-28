@@ -8,11 +8,12 @@ CREATE PROCEDURE sp_insert_administrator
 	IN _genre VARCHAR(20),
 	IN _birthdate DATE,
 	IN _email VARCHAR(40),
-	IN _image BLOB
+	IN _image MEDIUMBLOB
 )
 BEGIN
 	INSERT INTO administrator(username, user_password, first_name, last_name, genre, birthdate, email, image)
 	VALUES(_username, _user_password, _first_name, _last_name, _genre, _birthdate, _email, _image);
+    SELECT MAX(id) AS id FROM administrator;
 END //
 DELIMITER ;
 

@@ -87,5 +87,38 @@ class Course extends Connection{
 		$this->disconnect();
 		return $result;
 	}
+
+	public function getBestScoredCourses(){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_get_best_scored_courses()");
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
+	}
+
+	public function getTopSoldCourses(){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_get_top_sold_courses()");
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
+	}
+
+	public function getMostRecentCourses(){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_get_most_recent_courses()");
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
+	}
 }
 ?>

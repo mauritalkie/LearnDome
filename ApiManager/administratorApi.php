@@ -5,7 +5,9 @@ if(isset($_POST['insertAdministrator']))
 {
 	$admin = new Administrator();
 	$imageData = file_get_contents($_FILES['image']['tmp_name']);
-	$admin->insertAdministrator($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['genre'], $_POST['birthdate'], $_POST['email'], $imageData);
+	$result = $admin->insertAdministrator($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['genre'], $_POST['birthdate'], $_POST['email'], $imageData);
+	$currentId = json_encode($result);
+	echo $currentId;
 }
 
 if(isset($_POST['getAdministrator']))

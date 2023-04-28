@@ -5,7 +5,9 @@ if(isset($_POST['insertStudent']))
 {
 	$student = new Student();
 	$imageData = file_get_contents($_FILES['image']['tmp_name']);
-	$student->insertStudent($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['genre'], $_POST['birthdate'], $_POST['email'], $imageData);
+	$result = $student->insertStudent($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['genre'], $_POST['birthdate'], $_POST['email'], $imageData);
+	$currentId = json_encode($result);
+	echo $currentId;
 }
 
 if(isset($_POST['getStudent']))

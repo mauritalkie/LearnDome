@@ -105,29 +105,9 @@ function getAdministratorEmail(formData){
     request.send(formData)
 }
 
-function loginAdministrator(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
 
 // instructors
-
-function insertInstructor(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
 function getInstructor(formData){
     let request = new XMLHttpRequest()
@@ -229,16 +209,7 @@ function unlockInstructor(formData){
     request.send(formData)
 }
 
-function loginInstructor(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
 
 function getLockedInstructors(formData){
     let request = new XMLHttpRequest()
@@ -253,16 +224,7 @@ function getLockedInstructors(formData){
 
 // students
 
-function insertStudent(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
 
 function getStudent(formData){
     let request = new XMLHttpRequest()
@@ -341,16 +303,7 @@ function unlockStudent(formData){
     request.send(formData)
 }
 
-function loginStudent(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
 
 function buyCourse(formData){
     let request = new XMLHttpRequest()
@@ -457,6 +410,36 @@ function getCoursesBySearch(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+            alert(request.responseText)
+    }
+    request.send(formData)
+}
+
+function getBestScoredCourses(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+            alert(request.responseText)
+    }
+    request.send(formData)
+}
+
+function getTopSoldCourses(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+            alert(request.responseText)
+    }
+    request.send(formData)
+}
+
+function getMostRecentCourses(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200)
             alert(request.responseText)

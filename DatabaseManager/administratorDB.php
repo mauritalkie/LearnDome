@@ -16,7 +16,9 @@ class Administrator extends Connection{
 		$stmt->bindParam(8, $image, PDO::PARAM_STR);
 		$stmt->execute();
 
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$this->disconnect();
+		return $result;
 	}
 
 	public function getAdministrator($id){
