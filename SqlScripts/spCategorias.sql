@@ -14,7 +14,7 @@ DELIMITER //
 CREATE PROCEDURE sp_get_categories()
 BEGIN
 	SELECT id, category_name
-    FROM categories
+    FROM category
     WHERE is_active = TRUE;
 END //
 DELIMITER ;

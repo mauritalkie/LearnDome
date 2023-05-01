@@ -340,16 +340,7 @@ function getLockedStudents(formData){
 
 // courses
 
-function insertCourse(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
 
 function getCourse(formData){
     let request = new XMLHttpRequest()

@@ -5,7 +5,9 @@ if(isset($_POST['insertCourse']))
 {
 	$course = new Course();
 	$imageData = file_get_contents($_FILES['image']['tmp_name']);
-	$course->insertCourse($_POST['courseName'], $_POST['instructorId'], $_POST['price'], $imageData, $_POST['courseDescription']);
+	$result = $course->insertCourse($_POST['courseName'], $_POST['instructorId'], $_POST['price'], $imageData, $_POST['courseDescription']);
+	$currentId = json_encode($result);
+	echo $currentId;
 }
 
 if(isset($_POST['getCourse']))

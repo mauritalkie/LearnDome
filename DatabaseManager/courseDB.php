@@ -13,7 +13,9 @@ class Course extends Connection{
 		$stmt->bindParam(5, $courseDescription, PDO::PARAM_STR);
 		$stmt->execute();
 
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$this->disconnect();
+		return $result;
 	}
 
 	public function getCourse($id){

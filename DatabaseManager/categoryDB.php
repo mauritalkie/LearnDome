@@ -19,7 +19,7 @@ class Category extends Connection{
 		$stmt = $this->dbh->prepare("CALL sp_get_categories()");
 		$stmt->execute();
 
-		$result = stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$this->disconnect();
 		return $result;
 	}

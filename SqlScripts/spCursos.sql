@@ -4,12 +4,13 @@ CREATE PROCEDURE sp_insert_course
 	IN _course_name VARCHAR(50),
     IN _instructor_id INT,
     IN _price DECIMAL(5, 2),
-    IN _image BLOB,
+    IN _image MEDIUMBLOB,
     IN _course_description VARCHAR(255)
 )
 BEGIN
 	INSERT INTO course(course_name, instructor_id, price, image, course_description)
     VALUES(_course_name, _instructor_id, _price, _image, _course_description);
+    SELECT MAX(id) AS id FROM course;
 END //
 DELIMITER ;
 
