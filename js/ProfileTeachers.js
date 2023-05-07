@@ -1,3 +1,9 @@
+let currentInstructorId = localStorage.getItem("globalId")
+let formData = new FormData()
+formData.append("getInstructor", "")
+formData.append("id", currentInstructorId)
+getInstructor(formData)
+
 function makeSweetAlert(icon, title, message){
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -98,5 +104,48 @@ function checkData(){
         return
     }
 
-    makeSweetAlert('success', 'Éxito', 'Campos actualizados')
+    let formData = new FormData()
+    formData.append("updateInstructor", "")
+    formData.append("username", document.querySelector('#txtUserPT').value)
+    formData.append("password", document.querySelector('#txtPasswordPT').value)
+    formData.append("firstname", document.querySelector('#txtNamePT').value)
+    formData.append("lastname", document.querySelector('#txtLastNamePT').value)
+    formData.append("email", document.querySelector('#txtEmailPT').value)
+    formData.append("image", document.querySelector('#filePT').files[0])
+    formData.append("id", currentInstructorId)
+    updateInstructor(formData)
+}
+
+// --------------------------------------- AJAX functions ---------------------------------------
+
+function getInstructor(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let jsonInstructor = JSON.parse(request.responseText)
+            jsonInstructor['results'].forEach(instructor => {
+                document.querySelector('#lblUploadedCourses').innerHTML = `Cursos subidos: ${instructor.courses_number}`
+                document.querySelector('#lblInstructorScore').innerHTML = `Calificación como instructor: ${instructor.score}`
+                document.querySelector('#picturePT').src = "data:image/png;base64, " + instructor.image
+                document.querySelector('#txtNamePT').value = instructor.first_name
+                document.querySelector('#txtLastNamePT').value = instructor.last_name
+                document.querySelector('#txtEmailPT').value = instructor.email
+                document.querySelector('#txtUserPT').value = instructor.username
+                document.querySelector('#txtPasswordPT').value = instructor.password
+            })
+        }
+    }
+    request.send(formData)
+}
+
+function updateInstructor(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            makeSweetAlert('success', 'Éxito', 'Campos actualizados')
+        }
+    }
+    request.send(formData)
 }

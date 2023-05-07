@@ -117,7 +117,6 @@ CREATE TABLE IF NOT EXISTS course_bought_by_student (
     student_id INT NOT NULL,
     course_id INT NOT NULL,
     bought_date DATETIME DEFAULT NOW(),
-    -- current_level INT DEFAULT 1,
     completed_date DATETIME,
     PRIMARY KEY (id),
     FOREIGN KEY (student_id) REFERENCES student(id),
@@ -154,3 +153,15 @@ CREATE TABLE IF NOT EXISTS course_category (
     FOREIGN KEY (course_id) REFERENCES course(id),
     FOREIGN KEY (category_id) REFERENCES category(id)
 );
+
+CREATE TABLE IF NOT EXISTS seen_sublevel (
+	id INT AUTO_INCREMENT,
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
+    level_number INT NOT NULL,
+    sublevel_number INT NOT NULL,
+    seen BOOL DEFAULT FALSE,
+    PRIMARY KEY (id),
+    FOREIGN KEY (student_id) REFERENCES student(id),
+    FOREIGN KEY (course_id) REFERENCES course(id)
+); -- crear sp de insert y update

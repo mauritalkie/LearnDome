@@ -5,7 +5,7 @@ CREATE PROCEDURE sp_insert_course_sublevel
     IN _level_number TINYINT,
     IN _sublevel_number TINYINT,
     IN _topic_title VARCHAR(30),
-    IN _media_file BLOB
+    IN _media_file LONGBLOB
 )
 BEGIN
 	INSERT INTO course_sublevel(course_id, level_number, sublevel_number, topic_title, media_file)

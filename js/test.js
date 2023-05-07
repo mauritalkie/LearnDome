@@ -109,27 +109,9 @@ function getAdministratorEmail(formData){
 
 // instructors
 
-function getInstructor(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
-function updateInstructor(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
+
 
 function deleteInstructor(formData){
     let request = new XMLHttpRequest()
@@ -342,16 +324,7 @@ function getLockedStudents(formData){
 
 
 
-function getCourse(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
 
 function updateCourse(formData){
     let request = new XMLHttpRequest()
@@ -547,27 +520,7 @@ function setCompletedDate(formData){
 
 // levels
 
-function insertCourselevel(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseLevelApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
-function getLevels(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseLevelApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
 function getExistingLevel(formData){
     let request = new XMLHttpRequest()
@@ -582,27 +535,9 @@ function getExistingLevel(formData){
 
 // sublevels
 
-function insertCourseSublevel(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseSublevelApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
-function getSublevels(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseSublevelApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
+
 
 function getExistingSublevel(formData){
     let request = new XMLHttpRequest()

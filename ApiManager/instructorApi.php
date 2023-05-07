@@ -16,7 +16,7 @@ if(isset($_POST['getInstructor']))
 	$result = $instructor->getInstructor($_POST['id']);
 
 	$arrInstructor = array();
-	$arrInstructor["results"];
+	$arrInstructor["results"] = array();
 
 	foreach($result as $row){
 		$obj = array(
