@@ -104,7 +104,7 @@ if(isset($_POST['getCoursesBySearch']))
 if(isset($_POST['getBestScoredCourses']))
 {
 	$course = new Course();
-	$result = $course->getBestScoredCourses();
+	$results = $course->getBestScoredCourses();
 
 	$arrCourses = array();
 	$arrCourses["results"] = array();
@@ -116,7 +116,7 @@ if(isset($_POST['getBestScoredCourses']))
 			"course_description" => $row['course_description'],
 			"image" => base64_encode($row['image'])
 		);
-		array_push($arrCourses, $obj);
+		array_push($arrCourses["results"], $obj);
 	}
 	$courses = json_encode($arrCourses);
 	echo $courses;
@@ -125,7 +125,7 @@ if(isset($_POST['getBestScoredCourses']))
 if(isset($_POST['getTopSoldCourses']))
 {
 	$course = new Course();
-	$result = $course->getTopSoldCourses();
+	$results = $course->getTopSoldCourses();
 
 	$arrCourses = array();
 	$arrCourses["results"] = array();
@@ -137,7 +137,7 @@ if(isset($_POST['getTopSoldCourses']))
 			"course_description" => $row['course_description'],
 			"image" => base64_encode($row['image'])
 		);
-		array_push($arrCourses, $obj);
+		array_push($arrCourses["results"], $obj);
 	}
 	$courses = json_encode($arrCourses);
 	echo $courses;
@@ -146,7 +146,7 @@ if(isset($_POST['getTopSoldCourses']))
 if(isset($_POST['getMostRecentCourses']))
 {
 	$course = new Course();
-	$result = $course->getMostRecentCourses();
+	$results = $course->getMostRecentCourses();
 
 	$arrCourses = array();
 	$arrCourses["results"] = array();
@@ -158,7 +158,7 @@ if(isset($_POST['getMostRecentCourses']))
 			"course_description" => $row['course_description'],
 			"image" => base64_encode($row['image'])
 		);
-		array_push($arrCourses, $obj);
+		array_push($arrCourses["results"], $obj);
 	}
 	$courses = json_encode($arrCourses);
 	echo $courses;

@@ -37,7 +37,7 @@ CREATE PROCEDURE sp_update_student
 	IN _first_name VARCHAR(50),
 	IN _last_name VARCHAR(50),
     IN _email VARCHAR(40),
-	IN _image BLOB,
+	IN _image MEDIUMBLOB,
     IN _id INT
 )
 BEGIN

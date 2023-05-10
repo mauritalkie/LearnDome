@@ -1,11 +1,13 @@
+let selectedCourseId = localStorage.getItem("selectedCourseId")
+
 let formDataCourse = new FormData()
 formDataCourse.append("getCourse", "")
-formDataCourse.append("id", 1)
+formDataCourse.append("id", selectedCourseId)
 getCourse(formDataCourse)
 
 let formDataContent = new FormData()
 formDataContent.append("getLevels", "")
-formDataContent.append("courseId", 1)
+formDataContent.append("courseId", selectedCourseId)
 getLevels(formDataContent)
 
 /*document.getElementById("courseContent").innerHTML += 
@@ -111,7 +113,7 @@ function getLevels(formData){
 
                 let formDataSublevels = new FormData()
                 formDataSublevels.append("getSublevels", "")
-                formDataSublevels.append("courseId", 1)
+                formDataSublevels.append("courseId", selectedCourseId)
                 formDataSublevels.append("levelNumber", level.level_number)
                 getSublevels(formDataSublevels, level.level_number)
             })
@@ -141,7 +143,7 @@ function getSublevels(formData, levelNumber){
                     <label for="Level${levelNumber}Sublevel${sublevel.sublevel_number}">Subnivel ${sublevel.sublevel_number}: ${sublevel.topic_title} <span>&#x3e;</span></label>
                     <input type="radio" name="accordion" id="Level${levelNumber}Sublevel${sublevel.sublevel_number}">
                     <div class="content d-flex justify-content-center">
-                        <video controls="controls" poster="image" preload="metadata" src="data:video/mp4;base64, ${sublevel.media_file}" id="${sublevel.id}" onplay="printId(this.id)"></video>
+                        <video class="sizeVideo" controls="controls" poster="image" preload="metadata" src="data:video/mp4;base64, ${sublevel.media_file}" id="${sublevel.id}" onplay="printId(this.id)"></video>
                     </div>
                 </li>
                 `
@@ -150,8 +152,4 @@ function getSublevels(formData, levelNumber){
         }
     }
     request.send(formData)
-}
-
-function printId(id){
-    console.log(id)
 }

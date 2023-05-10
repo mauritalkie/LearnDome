@@ -5,8 +5,8 @@
 }
 
 .accordion{
-	margin: 100px auto;
-	width: 600px;
+	/* margin: 100px auto; */
+	/* width: 600px; */
 }
 
 .accordion li{
@@ -48,5 +48,10 @@
 }
 
 .accordion label + input[type="radio"]:checked + .content{
-	max-height: 400px;
+	max-height: 500px;
+}
+
+.sizeVideo{
+	height: 20em;
+	width: 40em;
 }
