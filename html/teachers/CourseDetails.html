@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir curso</title>
+    <title>Reporte de curso</title>
 
     <link rel="stylesheet" href="/LearnDome/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/LearnDome/sweetalert/sweetalert_dark.css">
 
 </head>
 <body class="bg-dark">
@@ -28,7 +27,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item text-white" href="/LearnDome/html/teachers/AddCourse.html">Subir cursos</a></li>
-                  <li><a class="dropdown-item text-white" href="/LearnDome/html/teachers/CourseManager.html">Administrar cursos</a></li>
+                  <li><a class="dropdown-item text-white" href="/LearnDome/html//teachers/CourseManager.html">Administrar cursos</a></li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -52,44 +51,47 @@
         </div>
       </nav>
 
-      <div class="d-flex justify-content-center">
-        <h1 class="text-white">Subir un curso</h1>
-      </div>
-
-<div class="container">
-
-  <div class="row">
-        <div class="col-12 col-sm-6">
-          <input class="form-control mt-5 w-75" type="text" placeholder="Nombre del curso" id="txtNameAC">
-          <input class="form-control mt-5 w-75" type="text" placeholder="Descripción del curso" id="txtDescriptionAC">
-          <input class="form-control mt-5 w-75" type="text" placeholder="Precio del curso" id="txtPriceAC">
+    <div class="container">
+        <div id="coursesTable" class="mt-5">
+            <table class="table table-striped table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Alumno</th>
+                    <th scope="col">Fecha de inscripción</th>
+                    <th scope="col">Niveles completados</th>
+                    <th scope="col">Precio pagado</th>
+                    <th scope="col">Forma de pago</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Alumno 1</td>
+                    <td>11/11/2011</td>
+                    <td>90</td>
+                    <td>23</td>
+                    <td>paypal</td>
+                  </tr>
+                  <tr>
+                    <td>Alumno 1</td>
+                    <td>11/11/2011</td>
+                    <td>90</td>
+                    <td>23</td>
+                    <td>paypal</td>
+                  </tr>
+                  <tr>
+                    <td>Alumno 1</td>
+                    <td>11/11/2011</td>
+                    <td>90</td>
+                    <td>23</td>
+                    <td>paypal</td>
+                  </tr>
+                </tbody>
+              </table>
         </div>
-
-        <div class="col-12 col-sm-6" id="categoriesSpace">
-          <select class="form-control bg-light w-75 mt-5" name="cbCategoriesAC" id="cbCategoriesAC">
-                <option id="0" hidden disabled selected value="No selection">Selecciona una categoría</option>
-          </select>
-          <button class="btn btn-success mt-2" onclick="addCategory()">Agregar categoría</button>
-        </div>
-      </div>
-    
-    <div class="d-flex justify-content-center mt-5 gap-5">
-        <input class="form-control w-75" type="file" id="courseFile">
-        <button class="btn btn-success" onclick="checkData()">Continuar</button>
-    </div>
-
-    <div class="m-5 d-flex justify-content-center" id="pictureCourse">
-      
     </div>
     
-</div>
-
-    <script src="/LearnDome/sweetalert/sweetalert_dark.min.js"></script>
-
     <script src="/LearnDome/jquery/jquery.min.js"></script>
     <script src="/LearnDome/popper/popper.min.js"></script>
     <script src="/LearnDome/bootstrap/js/bootstrap.min.js"></script>
-
-    <script src="/LearnDome/js/AddCourse.js"></script>
 </body>
 </html>
