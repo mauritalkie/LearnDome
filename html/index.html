@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="/LearnDome/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/LearnDome/css/MainPage.css">
+    <link rel="stylesheet" href="/LearnDome/sweetalert/sweetalert_dark.css">
 
 </head>
 <body class="bg-dark">
@@ -39,14 +40,24 @@
                       <li class="nav-item">
                         <a class="nav-link active" href="/LearnDome/html/students/MessagesStudents.html">Mensajes</a>
                       </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Búsqueda Avanzada
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item text-white" href="#" data-bs-toggle="modal" data-bs-target="#categoryModal">Por categoría</a></li>
+                          <li><a class="dropdown-item text-white" href="#" data-bs-toggle="modal" data-bs-target="#instructorModal">Por instructor</a></li>
+                          <li><a class="dropdown-item text-white" href="#" data-bs-toggle="modal" data-bs-target="#dateRangeModal">Por fecha</a></li>
+                        </ul>
+                      </li>
                       <li class="nav-item">
                         <a class="nav-link active" href="/LearnDome/html/login.html">Cerrar sesión</a>
                       </li>
                     </ul>
-                    <form class="d-flex" role="search">
+                    <div class="d-flex" role="search">
                       <input class="form-control me-2 bg-dark" type="search" placeholder="Buscar" aria-label="Search">
-                      <button class="btn btn-outline-danger" type="submit">Buscar</button>
-                    </form>
+                      <button class="btn btn-outline-danger">Buscar</button>
+                    </div>
                   </div>
                 </div>
               </nav>
@@ -324,7 +335,73 @@
   
 </div>
 
-    <script src="/LearnDome/js/test.js"></script>
+<!-- Modal -->
+<div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Búsqueda</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mt-1 d-flex justify-content-center align-items-center">
+            <select class="form-control bg-light w-75" name="cbCategoriesModal" id="cbCategoriesModal">
+                <option id="0" hidden disabled selected value="No selection">Selecciona una categoría</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger" onclick="selectedCategory()">Buscar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="instructorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Búsqueda</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mt-1 d-flex justify-content-center align-items-center">
+            <input class="form-control bg-light w-75" type="text" placeholder="Nombre del instructor" id="txtFilterInstructor">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger" onclick="selectedInstructor()">Buscar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="dateRangeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Búsqueda</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mt-1 gap-3 d-flex justify-content-center align-items-center">
+            <input class="form-control bg-light" type="date" id="firstDate">
+            <input class="form-control bg-light" type="date" id="lastDate">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger" onclick="selectedDates()">Buscar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="/LearnDome/sweetalert/sweetalert_dark.min.js"></script>
     <script src="/LearnDome/js/MainStudentsPage.js"></script>
 
     <script src="/LearnDome/jquery/jquery.min.js"></script>
