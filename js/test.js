@@ -359,27 +359,9 @@ function getCoursesByInstructor(formData){
     request.send(formData)
 }
 
-function getCoursesByCategory(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
-function getCoursesBySearch(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
+
 
 
 
@@ -535,16 +517,7 @@ function setSeenSublevel(formData){
 
 // course category
 
-function insertCourseCategory(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseCategoryApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
 
 function removeCategoryFromCourse(formData){
     let request = new XMLHttpRequest()

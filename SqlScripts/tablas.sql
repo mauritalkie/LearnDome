@@ -154,6 +154,7 @@ CREATE TABLE IF NOT EXISTS course_category (
     FOREIGN KEY (category_id) REFERENCES category(id)
 );
 
+-- not implemented yet --
 CREATE TABLE IF NOT EXISTS seen_sublevel (
 	id INT AUTO_INCREMENT,
     student_id INT NOT NULL,

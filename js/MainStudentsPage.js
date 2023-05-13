@@ -1,14 +1,17 @@
 let formDataBestScoredCourses = new FormData()
 let formDataTopSoldCourses = new FormData()
 let formDataMostRecentCourses = new FormData()
+let formDataCategories = new FormData()
 
 formDataBestScoredCourses.append("getBestScoredCourses", "")
 formDataTopSoldCourses.append("getTopSoldCourses", "")
 formDataMostRecentCourses.append("getMostRecentCourses", "")
+formDataCategories.append("getCategories", "")
 
 getBestScoredCourses(formDataBestScoredCourses)
 getTopSoldCourses(formDataTopSoldCourses)
 getMostRecentCourses(formDataMostRecentCourses)
+getCategories(formDataCategories)
 
 function makeSweetAlert(icon, title, message){
     const swalWithBootstrapButtons = Swal.mixin({
@@ -30,11 +33,16 @@ function setSelectedCourseId(id){
 }
 
 function selectedCategory(){
-    let selectedCategory = document.getElementById('cbCategoriesModal').value
-    if(selectedCategory === "No selection"){
+    let selectedCategory = document.getElementById('cbCategoriesModal')
+    if(selectedCategory.value === "No selection"){
         makeSweetAlert('error', 'Error', 'Se debe seleccionar una categoría')
         return
     }
+
+    let categoryId = selectedCategory.options[selectedCategory.selectedIndex].id
+    localStorage.setItem("categoryId", categoryId)
+    localStorage.setItem("filterType", "ByCategory")
+
     window.location.href = "/LearnDome/html/students/FilteredCourses.html"
 }
 
@@ -44,6 +52,10 @@ function selectedInstructor(){
         makeSweetAlert('error', 'Error', 'Se debe llenar el campo')
         return
     }
+
+    localStorage.setItem("selectedInstructor", selectedInstructor)
+    localStorage.setItem("filterType", "ByInstructor")
+
     window.location.href = "/LearnDome/html/students/FilteredCourses.html"
 }
 
@@ -67,6 +79,20 @@ function selectedDates(){
         return
     }
 
+    localStorage.setItem("firstDate", firstDate)
+    localStorage.setItem("lastDate", lastDate)
+    localStorage.setItem("filterType", "ByDateRange")
+
+    window.location.href = "/LearnDome/html/students/FilteredCourses.html"
+}
+
+function selectedCourse(){
+    let courseName = document.getElementById('txtSearchBar').value
+    if(courseName === "") return
+
+    localStorage.setItem("courseSearch", courseName)
+    localStorage.setItem("filterType", "BySearch")
+    
     window.location.href = "/LearnDome/html/students/FilteredCourses.html"
 }
 
@@ -144,6 +170,26 @@ function getMostRecentCourses(formData){
                     </div>
                 </div>
                 `
+            })
+        }
+    }
+    request.send(formData)
+}
+
+function getCategories(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/categoryApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+
+            let jsonCategories = JSON.parse(request.responseText)
+            if(jsonCategories.length == 0){
+                makeSweetAlert('info', 'Aviso', 'No existen categorías disponibles para los cursos')
+                return
+            }
+
+            jsonCategories.forEach(category => {
+                document.getElementById('cbCategoriesModal').innerHTML += `<option value="${category.category_name}" id="${category.id}">${category.category_name}</option>`
             })
         }
     }

@@ -82,7 +82,7 @@ class Course extends Connection{
 		$this->connect();
 
 		$stmt = $this->dbh->prepare("CALL sp_get_courses_by_search(?)");
-		$stmt->bindParam(1, $courseSearch, PDO::PARAM_INT);
+		$stmt->bindParam(1, $courseSearch, PDO::PARAM_STR);
 		$stmt->execute();
 
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -116,6 +116,31 @@ class Course extends Connection{
 		$this->connect();
 
 		$stmt = $this->dbh->prepare("CALL sp_get_most_recent_courses()");
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
+	}
+
+	public function getCoursesByInstructorName($completeName){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_get_courses_by_instructor_name(?)");
+		$stmt->bindParam(1, $completeName, PDO::PARAM_STR);
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
+	}
+
+	public function getCoursesByDateRange($firstDate, $lastDate){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_get_courses_by_date_range(?, ?)");
+		$stmt->bindParam(1, $firstDate, PDO::PARAM_STR);
+		$stmt->bindParam(2, $lastDate, PDO::PARAM_STR);
 		$stmt->execute();
 
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);

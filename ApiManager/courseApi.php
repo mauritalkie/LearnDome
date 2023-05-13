@@ -72,7 +72,7 @@ if(isset($_POST['getCoursesByCategory']))
 			"course_description" => $row['course_description'],
 			"image" => base64_encode($row['image'])
 		);
-		array_push($arrCourses, $obj);
+		array_push($arrCourses["results"], $obj);
 	}
 
 	$courses = json_encode($arrCourses);
@@ -94,7 +94,7 @@ if(isset($_POST['getCoursesBySearch']))
 			"course_description" => $row['course_description'],
 			"image" => base64_encode($row['image'])
 		);
-		array_push($arrCourses, $obj);
+		array_push($arrCourses["results"], $obj);
 	}
 
 	$courses = json_encode($arrCourses);
@@ -147,6 +147,48 @@ if(isset($_POST['getMostRecentCourses']))
 {
 	$course = new Course();
 	$results = $course->getMostRecentCourses();
+
+	$arrCourses = array();
+	$arrCourses["results"] = array();
+
+	foreach($results as $row){
+		$obj = array(
+			"id" => $row['id'],
+			"course_name" => $row['course_name'],
+			"course_description" => $row['course_description'],
+			"image" => base64_encode($row['image'])
+		);
+		array_push($arrCourses["results"], $obj);
+	}
+	$courses = json_encode($arrCourses);
+	echo $courses;
+}
+
+if(isset($_POST['getCoursesByInstructorName']))
+{
+	$course = new Course();
+	$results = $course->getCoursesByInstructorName($_POST['completeName']);
+
+	$arrCourses = array();
+	$arrCourses["results"] = array();
+
+	foreach($results as $row){
+		$obj = array(
+			"id" => $row['id'],
+			"course_name" => $row['course_name'],
+			"course_description" => $row['course_description'],
+			"image" => base64_encode($row['image'])
+		);
+		array_push($arrCourses["results"], $obj);
+	}
+	$courses = json_encode($arrCourses);
+	echo $courses;
+}
+
+if(isset($_POST['getCoursesByDateRange']))
+{
+	$course = new Course();
+	$results = $course->getCoursesByDateRange($_POST['firstDate'], $_POST['lastDate']);
 
 	$arrCourses = array();
 	$arrCourses["results"] = array();

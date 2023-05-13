@@ -147,7 +147,6 @@ function getSublevels(formData, levelNumber){
                     </div>
                 </li>
                 `
-                console.log(sublevel.id)
             })
         }
     }

@@ -142,8 +142,24 @@ function insertCourse(formData){
         if(this.readyState == 4 && this.status == 200){
             let jsonCourse = JSON.parse(request.responseText)
             localStorage.setItem("currentCourseId", jsonCourse[0].id)
+
+            let currentCourseId = localStorage.getItem("currentCourseId")
+            for(i=0; i<addedCategories.length; i++){
+                let formDataCourseCategory = new FormData()
+                formDataCourseCategory.append("insertCourseCategory", "")
+                formDataCourseCategory.append("courseId", currentCourseId)
+                formDataCourseCategory.append("categoryId", addedCategories[i])
+                insertCourseCategory(formDataCourseCategory)
+            }
+
             window.location.href = '/LearnDome/html/teachers/AddContent.html'
         }
     }
+    request.send(formData)
+}
+
+function insertCourseCategory(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseCategoryApi.php', true)
     request.send(formData)
 }

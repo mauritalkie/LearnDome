@@ -385,7 +385,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE sp_get_courses_by_category
 (
-	IN _cateogry_id INT
+	IN _category_id INT
 )
 BEGIN
 	SELECT A.id, A.course_name, A.course_description, A.image
@@ -402,9 +402,9 @@ CREATE PROCEDURE sp_get_courses_by_search
 	IN course_search VARCHAR(30)
 )
 BEGIN
-	SELECT A.id, A.course_name, A.course_description, A.image
+	SELECT id, course_name, course_description, image
     FROM course
-    WHERE course_name LIKE CONCAT('%', _course_search, '%') AND is_active = TRUE;
+    WHERE course_name LIKE CONCAT('%', course_search, '%') AND is_active = TRUE;
 END //
 DELIMITER ;
 
@@ -442,6 +442,33 @@ BEGIN
     ORDER BY created_at DESC
     LIMIT 5;
 END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_courses_by_instructor_name
+(
+	IN complete_name VARCHAR(50)
+)
+BEGIN
+	SELECT A.id, A.course_name, A.score, A.created_at, A.price, A.image, A.course_description
+    FROM course A
+    INNER JOIN instructor B
+    ON A.instructor_id = B.id
+    WHERE CONCAT(B.first_name, ' ', B.last_name) LIKE CONCAT('%', complete_name, '%') AND A.is_active = TRUE;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_courses_by_date_range
+(
+	IN first_date DATETIME,
+    IN last_date DATETIME
+)
+BEGIN
+	SELECT id, course_name, score, created_at, price, image, course_description
+    FROM course
+    WHERE created_at BETWEEN first_date AND last_date AND is_active = TRUE;
+END
 DELIMITER ;
 
 DELIMITER //
