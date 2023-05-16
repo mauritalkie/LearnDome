@@ -1,4 +1,6 @@
+let currentStudentId = localStorage.getItem("globalId")
 let selectedCourseId = localStorage.getItem("selectedCourseId")
+let currentPrice;
 
 let formDataCourse = new FormData()
 formDataCourse.append("getCourse", "")
@@ -9,6 +11,8 @@ let formDataContent = new FormData()
 formDataContent.append("getLevels", "")
 formDataContent.append("courseId", selectedCourseId)
 getLevels(formDataContent)
+
+showPaypalButton()
 
 /*document.getElementById("courseContent").innerHTML += 
 `
@@ -61,6 +65,56 @@ getLevels(formDataContent)
         </ul>
 `*/
 
+function makeSweetAlert(icon, title, message){
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+        icon: icon,
+        title: title,
+        html: `<p style='color:white'>${message}</p>`,
+        confirmButtonText: 'OK'
+    })
+}
+
+function showPaypalButton(){
+    paypal.Buttons({
+        style: {
+            color: 'blue',
+            shape: 'pill',
+            label: 'pay'
+        },
+        
+        createOrder: function(data, actions){
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: currentPrice
+                    }
+                }]
+            })
+        },
+
+        onApprove: function(data, actions){
+            actions.order.capture().then(function(details){
+
+                let formDataPurchase = new FormData()
+
+                formDataPurchase.append("insertPurchaseCourseStudent", "")
+                formDataPurchase.append("studentId", currentStudentId)
+                formDataPurchase.append("courseId", selectedCourseId)
+
+                insertPurchaseCourseStudent(formDataPurchase)
+
+            })
+        }
+
+    }).render('#paypalButtonContainer')
+}
+
 // --------------------------------------- AJAX functions ---------------------------------------
 
 function getCourse(formData){
@@ -81,6 +135,8 @@ function getCourse(formData){
                 if(course.score < 0){
                     document.getElementById('courseScore').innerHTML = "Calificación: Sin calificación"
                 }
+
+                currentPrice = course.price
             })
         }
     }
@@ -148,6 +204,17 @@ function getSublevels(formData, levelNumber){
                 </li>
                 `
             })
+        }
+    }
+    request.send(formData)
+}
+
+function insertPurchaseCourseStudent(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/CourseBoughtByStudentApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            makeSweetAlert('success', 'Hecho', 'Gracias por su compra')
         }
     }
     request.send(formData)

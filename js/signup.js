@@ -185,8 +185,8 @@ function insertInstructor(formData){
     request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
-            let jsonAdmin = JSON.parse(request.responseText)
-            localStorage.setItem("globalId", jsonAdmin[0].id)
+            let jsonInstructor = JSON.parse(request.responseText)
+            localStorage.setItem("globalId", jsonInstructor[0].id)
             makeSweetAlert('success', 'Hecho', 'Instructor creado con éxito')
             window.location.href = "/LearnDome/html/teachers/CourseManager.html"
         }
@@ -199,8 +199,8 @@ function insertStudent(formData){
     request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
-            let jsonAdmin = JSON.parse(request.responseText)
-            localStorage.setItem("globalId", jsonAdmin[0].id)
+            let jsonStudent = JSON.parse(request.responseText)
+            localStorage.setItem("globalId", jsonStudent[0].id)
             makeSweetAlert('success', 'Hecho', 'Estudiante creado con éxito')
             window.location.href = "/LearnDome/html/index.html"
         }

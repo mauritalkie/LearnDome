@@ -132,7 +132,7 @@ if(isset($_POST['getTopSoldCourses']))
 
 	foreach($results as $row){
 		$obj = array(
-			"id" => $row['id'],
+			"id" => $row['course_id'],
 			"course_name" => $row['course_name'],
 			"course_description" => $row['course_description'],
 			"image" => base64_encode($row['image'])
