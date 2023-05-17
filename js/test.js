@@ -367,27 +367,9 @@ function getCoursesByInstructor(formData){
 
 // comments
 
-function insertComment(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseCommentApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
-function getComments(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseCommentApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
+
 
 function deleteComment(formData){
     let request = new XMLHttpRequest()
@@ -426,16 +408,7 @@ function getMesseges(formData){
 
 // scores
 
-function insertScore(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseScoreApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
 
 // courses bought by students
 

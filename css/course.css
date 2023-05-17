@@ -55,3 +55,23 @@
 	height: 20em;
 	width: 40em;
 }
+
+.likeDislikeButton{
+	background-color: #5b5b5b;
+	color: white;
+	border: none;
+	border-radius: 0.5em;
+	padding: 0.35em 0.75em;
+	transition-duration: 0.1s;
+	font-size: 1em;
+}
+
+.commentUser{
+    font-weight: bold;
+    color: rgb(150, 0, 0) !important;
+}
+
+.alignRight{
+	margin-right: 0;
+	margin-left: auto;
+}

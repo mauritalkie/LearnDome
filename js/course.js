@@ -12,6 +12,11 @@ formDataContent.append("getLevels", "")
 formDataContent.append("courseId", selectedCourseId)
 getLevels(formDataContent)
 
+let formDataGetComments = new FormData()
+formDataGetComments.append("getComments", "")
+formDataGetComments.append("courseId", selectedCourseId)
+getComments(formDataGetComments)
+
 showPaypalButton()
 
 /*document.getElementById("courseContent").innerHTML += 
@@ -64,6 +69,49 @@ showPaypalButton()
           </li>
         </ul>
 `*/
+
+function checkEmptyComment(){
+    let comment = document.getElementById('txtComment').value
+    if(comment === "")
+        return
+
+    let formDataComment = new FormData()
+    formDataComment.append("insertComment", "")
+    formDataComment.append("studentId", currentStudentId)
+    formDataComment.append("courseId", selectedCourseId)
+    formDataComment.append("commentContent", comment)
+    insertComment(formDataComment)
+
+    document.getElementById('txtComment').value = ""
+}
+
+function likeButtonPressed(){
+    let likeButton = document.getElementById('likeButton')
+    let dislikeButton = document.getElementById('dislikeButton')
+    likeButton.style.backgroundColor = "darkgreen"
+    dislikeButton.style.backgroundColor = "#5b5b5b"
+
+    let formDataScore = new FormData()
+    formDataScore.append("insertScore", "")
+    formDataScore.append("studentId", currentStudentId)
+    formDataScore.append("courseId", selectedCourseId)
+    formDataScore.append("liked", 1)
+    insertScore(formDataScore)
+}
+
+function dislikeButtonPressed(){
+    let likeButton = document.getElementById('likeButton')
+    let dislikeButton = document.getElementById('dislikeButton')
+    likeButton.style.backgroundColor = "#5b5b5b"
+    dislikeButton.style.backgroundColor = "darkred"
+
+    let formDataScore = new FormData()
+    formDataScore.append("insertScore", "")
+    formDataScore.append("studentId", currentStudentId)
+    formDataScore.append("courseId", selectedCourseId)
+    formDataScore.append("liked", 0)
+    insertScore(formDataScore)
+}
 
 function makeSweetAlert(icon, title, message){
     const swalWithBootstrapButtons = Swal.mixin({
@@ -215,6 +263,54 @@ function insertPurchaseCourseStudent(formData){
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             makeSweetAlert('success', 'Hecho', 'Gracias por su compra')
+        }
+    }
+    request.send(formData)
+}
+
+function insertScore(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseScoreApi.php', true)
+    request.send(formData)
+}
+
+function insertComment(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseCommentApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            document.getElementById('courseComments').innerHTML = ''
+            let formDataUpdateComments = new FormData()
+            formDataUpdateComments.append("getComments", "")
+            formDataUpdateComments.append("courseId", selectedCourseId)
+            getComments(formDataUpdateComments)
+        }
+    }
+    request.send(formData)
+}
+
+function getComments(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseCommentApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let jsonComments = JSON.parse(request.responseText)
+            jsonComments.forEach(comment => {
+                document.getElementById('courseComments').innerHTML += 
+                `
+                <div>
+                    <div class="d-flex">
+                        <h6 class="commentUser">${comment.username}</h6>
+                        <div class="alignRight">
+                            <h6>${comment.commented_at}</h6>
+                        </div>
+                    </div>
+                    <div class="p-1 mb-3 bg-secondary rounded">
+                        <p>${comment.comment_content}</p>
+                    </div>
+                </div>
+                `
+            })
         }
     }
     request.send(formData)
