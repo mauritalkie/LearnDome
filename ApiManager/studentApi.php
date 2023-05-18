@@ -104,4 +104,34 @@ if(isset($_POST['getLockedStudents']))
 	$lockedStudents = json_encode($result);
 	echo $lockedStudents;
 }
+
+if(isset($_POST['getStudentInfo']))
+{
+	$student = new Student();
+	$result = $student->getStudentInfo($_POST['studentId']);
+
+	$arrStudent = array();
+	$arrStudent["results"] = array();
+
+	foreach($result as $row){
+		$obj = array(
+			"first_name" => $row['first_name'],
+			"last_name" => $row['last_name'],
+			"image" => base64_encode($row['image']),
+			"bought_courses" => $row['bought_courses'],
+		);
+		array_push($arrStudent["results"], $obj);
+	}
+
+	$currentStudent = json_encode($arrStudent);
+	echo $currentStudent;
+}
+
+if(isset($_POST['getStudentKardex']))
+{
+	$student = new Student();
+	$result = $student->getStudentKardex($_POST['studentId']);
+	$kardex = json_encode($result);
+	echo $kardex;
+}
 ?>

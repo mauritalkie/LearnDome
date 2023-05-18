@@ -139,7 +139,6 @@ CREATE TABLE IF NOT EXISTS course_sublevel (
     sublevel_number TINYINT NOT NULL,
     topic_title VARCHAR(30) NOT NULL,
     media_file LONGBLOB NOT NULL,
-    seen BOOL DEFAULT FALSE,
     PRIMARY KEY (id),
     FOREIGN KEY (course_id) REFERENCES course(id)
 );
@@ -154,15 +153,12 @@ CREATE TABLE IF NOT EXISTS course_category (
     FOREIGN KEY (category_id) REFERENCES category(id)
 );
 
--- not implemented yet --
 CREATE TABLE IF NOT EXISTS seen_sublevel (
 	id INT AUTO_INCREMENT,
     student_id INT NOT NULL,
     course_id INT NOT NULL,
-    level_number INT NOT NULL,
-    sublevel_number INT NOT NULL,
-    seen BOOL DEFAULT FALSE,
+    sublevel_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (student_id) REFERENCES student(id),
     FOREIGN KEY (course_id) REFERENCES course(id)
-); -- crear sp de insert y update
+);

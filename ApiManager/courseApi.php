@@ -205,4 +205,12 @@ if(isset($_POST['getCoursesByDateRange']))
 	$courses = json_encode($arrCourses);
 	echo $courses;
 }
+
+if(isset($_POST['getCompletedCourses']))
+{
+	$course = new Course();
+	$result = $course->getCompletedCourses($_POST['studentId']);
+	$completedCourses = json_encode($result);
+	echo $completedCourses;
+}
 ?>

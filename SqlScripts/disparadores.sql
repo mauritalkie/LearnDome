@@ -18,3 +18,11 @@ BEGIN
 	UPDATE instructor SET score = get_instructor_score_function(NEW.instructor_id);
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER update_kardex_trigger
+AFTER INSERT ON course_bought_by_student FOR EACH ROW
+BEGIN
+	INSERT INTO seen_sublevel(student_id, course_id, sublevel_id) VALUES(NEW.student_id, NEW.course_id, 0);
+END //
+DELIMITER ;

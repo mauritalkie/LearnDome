@@ -150,3 +150,47 @@ BEGIN
     WHERE unlocked = FALSE;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_student_info
+(
+	IN _student_id INT
+)
+BEGIN
+	DECLARE at_least_one_bought_course INT;
+    SET at_least_one_bought_course = (SELECT COUNT(*) FROM course_bought_by_student WHERE student_id = _student_id);
+    
+    IF at_least_one_bought_course = 0 THEN
+		CREATE TEMPORARY TABLE student_info_table(SELECT image, first_name, last_name FROM student WHERE id = _student_id);
+        ALTER TABLE student_info_table ADD COLUMN bought_courses TINYINT;
+        UPDATE student_info_table SET bought_courses = 0;
+        SELECT * FROM student_info_table;
+        DROP TABLE student_info_table;
+    ELSE
+		SELECT A.image, A.first_name, A.last_name, COUNT(B.student_id) AS bought_courses
+		FROM student A
+		INNER JOIN course_bought_by_student B
+		ON A.id = B.student_id
+		WHERE B.student_id = _student_id
+		GROUP BY B.student_id;
+	END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_student_kardex
+(
+	IN _student_id INT
+)
+BEGIN
+	CALL sp_get_total_and_seen_sublevels(_student_id);
+    
+    SELECT A.course_name, B.bought_date, C.total_sublevels, C.seen_sublevels
+    FROM ((course A
+    INNER JOIN course_bought_by_student B ON A.id = B.course_id)
+    INNER JOIN compare_sublevels_table C ON B.course_id = C.course_id)
+    WHERE B.student_id = _student_id;
+    
+    CALL sp_drop_temporary_tables();
+END //
+DELIMITER ;

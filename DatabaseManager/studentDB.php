@@ -146,5 +146,29 @@ class Student extends Connection{
 		$this->disconnect();
 		return $result;
 	}
+
+	public function getStudentInfo($studentId){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL get_student_info(?)");
+		$stmt->bindParam(1, $studentId, PDO::PARAM_INT);
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
+	}
+
+	public function getStudentKardex($studentId){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_get_student_kardex(?)");
+		$stmt->bindParam(1, $studentId, PDO::PARAM_INT);
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
+	}
 }
 ?>

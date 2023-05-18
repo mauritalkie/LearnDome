@@ -37,6 +37,9 @@
                 <a class="nav-link active" href="/LearnDome/html/students/MessagesStudents.html">Mensajes</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link active" href="/LearnDome/html/students/kardex.html">Kárdex</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link active" href="/LearnDome/html/login.html">Cerrar sesión</a>
               </li>
             </ul>
@@ -50,16 +53,16 @@
 
     <div class="container">
         <div id="generalInfo" class="d-flex justify-content-center mt-5">
-            <img src="https://i.pinimg.com/originals/bd/b4/d7/bdb4d7a23dfaa9da0a6f6b6010128f9f.png" class="imageSize">
+            <img src="https://i.pinimg.com/originals/bd/b4/d7/bdb4d7a23dfaa9da0a6f6b6010128f9f.png" class="imageSize" id="image">
             <div id="generalInfoText" class="marginData">
-                <h3 class="text-white mt-4">Estudiante: Mauricio Guzmán</h3>
-                <h3 class="text-white mt-3">ID: 1938</h3>
-                <h3 class="text-white mt-3">Cursos comprados: 32</h3>
-                <h3 class="text-white mt-3">Cursos completados: 23</h3>
+                <h3 class="text-white mt-4" id="lblName">Estudiante: Mauricio Guzmán</h3>
+                <h3 class="text-white mt-3" id="lblId">ID: 1938</h3>
+                <h3 class="text-white mt-3" id="lblBoughtCourses">Cursos comprados: 32</h3>
+                <h3 class="text-white mt-3" id="lblCompletedCourses">Cursos completados: 23</h3>
             </div>
         </div>
 
-        <div id="kardexTable" class="mt-5">
+        <div class="mt-5">
             <table class="table table-striped table-dark">
                 <thead>
                   <tr>
@@ -70,8 +73,8 @@
                     <th scope="col">Estado</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
+                <tbody id="kardexContent">
+                  <!-- <tr>
                     <td>Curso 1</td>
                     <td>11/11/2011</td>
                     <td>90</td>
@@ -91,11 +94,12 @@
                     <td>90</td>
                     <td>23</td>
                     <td>Incompleto</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
         </div>
     </div>
+    <script src="/LearnDome/js/kardex.js"></script>
 
     <script src="/LearnDome/jquery/jquery.min.js"></script>
     <script src="/LearnDome/popper/popper.min.js"></script>

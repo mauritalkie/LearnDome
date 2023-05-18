@@ -247,7 +247,7 @@ function getSublevels(formData, levelNumber){
                     <label for="Level${levelNumber}Sublevel${sublevel.sublevel_number}">Subnivel ${sublevel.sublevel_number}: ${sublevel.topic_title} <span>&#x3e;</span></label>
                     <input type="radio" name="accordion" id="Level${levelNumber}Sublevel${sublevel.sublevel_number}">
                     <div class="content d-flex justify-content-center">
-                        <video class="sizeVideo" controls="controls" poster="image" preload="metadata" src="data:video/mp4;base64, ${sublevel.media_file}" id="${sublevel.id}" onplay="printId(this.id)"></video>
+                        <video class="sizeVideo" controls="controls" poster="image" preload="metadata" src="data:video/mp4;base64, ${sublevel.media_file}" id="${sublevel.id}" onplay="insertSeenSublevel(this.id)"></video>
                     </div>
                 </li>
                 `
@@ -313,5 +313,18 @@ function getComments(formData){
             })
         }
     }
+    request.send(formData)
+}
+
+function insertSeenSublevel(sublevelId){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/seenSublevelApi.php', true)
+
+    let formData = new FormData()
+    formData.append("insertSeenSublevel", "")
+    formData.append("studentId", currentStudentId)
+    formData.append("courseId", selectedCourseId)
+    formData.append("sublevelId", sublevelId)
+
     request.send(formData)
 }

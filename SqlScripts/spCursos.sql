@@ -130,8 +130,6 @@ BEGIN
 END //
 DELIMITER ;
 
--- not implemented yet --
-
 DELIMITER //
 CREATE PROCEDURE sp_get_courses_by_instructor_name
 (
@@ -156,5 +154,21 @@ BEGIN
 	SELECT id, course_name, score, created_at, price, image, course_description
     FROM course
     WHERE created_at BETWEEN first_date AND last_date AND is_active = TRUE;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_completed_courses
+(
+	IN student_id INT
+)
+BEGIN
+	CALL sp_get_total_and_seen_sublevels(student_id);
+    
+    SELECT COUNT(*) AS completed_courses
+    FROM compare_sublevels_table
+    WHERE total_sublevels = seen_sublevels;
+    
+    CALL sp_drop_temporary_tables();
 END //
 DELIMITER ;
