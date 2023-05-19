@@ -17,6 +17,12 @@ formDataGetComments.append("getComments", "")
 formDataGetComments.append("courseId", selectedCourseId)
 getComments(formDataGetComments)
 
+let formDataFinishedCourse = new FormData()
+formDataFinishedCourse.append("getCourseStatus", "")
+formDataFinishedCourse.append("studentId", currentStudentId)
+formDataFinishedCourse.append("courseId", selectedCourseId)
+getCourseStatus(formDataFinishedCourse)
+
 showPaypalButton()
 
 /*document.getElementById("courseContent").innerHTML += 
@@ -326,5 +332,18 @@ function insertSeenSublevel(sublevelId){
     formData.append("courseId", selectedCourseId)
     formData.append("sublevelId", sublevelId)
 
+    request.send(formData)
+}
+
+function getCourseStatus(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let jsonStatus = JSON.parse(request.responseText)
+            if(jsonStatus[0].is_finished == false)
+                document.getElementById('getCertificateOption').style.display = 'none'
+        }
+    }
     request.send(formData)
 }

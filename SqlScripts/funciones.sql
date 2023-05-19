@@ -27,3 +27,19 @@ BEGIN
 	END IF;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION is_course_finished_function(_student_id INT, _course_id INT)
+RETURNS BOOL DETERMINISTIC
+BEGIN
+	DECLARE counter INT;
+	CALL sp_get_total_and_seen_sublevels(_student_id);
+    SET counter = (SELECT COUNT(*) FROM compare_sublevels_table WHERE course_id = _course_id AND total_sublevels = seen_sublevels);
+    IF counter = 0 THEN
+		RETURN FALSE;
+    ELSE
+		CALL sp_set_completed_date(_student_id, _course_id);
+		RETURN TRUE;
+    END IF;
+END //
+DELIMITER ;

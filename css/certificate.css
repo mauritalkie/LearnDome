@@ -1,0 +1,27 @@
+body{
+	background-image: url("/LearnDome/assets/certificado.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+#student{
+	position: absolute;
+	left: 6.1em;
+	top: 3.65em;
+	font-size: 5em;
+}
+
+#course{
+	position: absolute;
+	left: 5em;
+	top: 10em;
+	font-size: 3em;
+}
+
+#date{
+	position: absolute;
+	left: 29em;
+	top: 16em;
+	font-size: 2em;
+}

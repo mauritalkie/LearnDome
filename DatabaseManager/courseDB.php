@@ -159,5 +159,31 @@ class Course extends Connection{
 		$this->disconnect();
 		return $result;
 	}
+
+	public function getCourseStatus($studentId, $courseId){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_get_course_status(?, ?)");
+		$stmt->bindParam(1, $studentId, PDO::PARAM_INT);
+		$stmt->bindParam(2, $courseId, PDO::PARAM_INT);
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
+	}
+
+	public function getCourseCertificate($studentId, $courseId){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_get_course_certificate(?, ?)");
+		$stmt->bindParam(1, $studentId, PDO::PARAM_INT);
+		$stmt->bindParam(2, $courseId, PDO::PARAM_INT);
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
+	}
 }
 ?>

@@ -267,9 +267,13 @@ CREATE PROCEDURE sp_set_completed_date
     IN _course_id INT
 )
 BEGIN
-	UPDATE course_bought_by_student
-    SET completed_date = NOW()
-    WHERE student_id = _student_id AND course_id = _course_id;
+	DECLARE _completed_date DATETIME;
+    SET _completed_date = (SELECT completed_date FROM course_bought_by_student WHERE student_id = _student_id AND course_id = _course_id);
+    IF _completed_date IS NULL THEN
+		UPDATE course_bought_by_student
+		SET completed_date = NOW()
+		WHERE student_id = _student_id AND course_id = _course_id;
+    END IF;
 END //
 DELIMITER ;
 
@@ -978,5 +982,32 @@ BEGIN
 	DROP TABLE total_sublevels_table;
     DROP TABLE seen_sublevels_table;
     DROP TABLE compare_sublevels_table;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_course_status
+(
+	IN _student_id INT,
+    IN _course_id INT
+)
+BEGIN
+    SELECT is_course_finished_function(_student_id, _course_id) AS is_finished;
+    CALL sp_drop_temporary_tables();
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_course_certificate
+(
+	IN _student_id INT,
+    IN _course_id INT
+)
+BEGIN
+	SELECT A.first_name, A.last_name, B.completed_date, C.course_name
+    FROM ((student A
+    INNER JOIN course_bought_by_student B ON A.id = B.student_id)
+    INNER JOIN course C ON B.course_id = C.id)
+    WHERE B.student_id = _student_id AND B.course_id = _course_id;
 END //
 DELIMITER ;

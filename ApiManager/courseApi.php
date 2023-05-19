@@ -213,4 +213,20 @@ if(isset($_POST['getCompletedCourses']))
 	$completedCourses = json_encode($result);
 	echo $completedCourses;
 }
+
+if(isset($_POST['getCourseStatus']))
+{
+	$course = new Course();
+	$result = $course->getCourseStatus($_POST['studentId'], $_POST['courseId']);
+	$courseStatus = json_encode($result);
+	echo $courseStatus;
+}
+
+if(isset($_POST['getCourseCertificate']))
+{
+	$course = new Course();
+	$result = $course->getCourseCertificate($_POST['studentId'], $_POST['courseId']);
+	$courseCertificate = json_encode($result);
+	echo $courseCertificate;
+}
 ?>

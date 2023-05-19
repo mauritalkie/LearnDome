@@ -31,8 +31,12 @@ CREATE PROCEDURE sp_set_completed_date
     IN _course_id INT
 )
 BEGIN
-	UPDATE course_bought_by_student
-    SET completed_date = NOW()
-    WHERE student_id = _student_id AND course_id = _course_id;
+	DECLARE _completed_date DATETIME;
+    SET _completed_date = (SELECT completed_date FROM course_bought_by_student WHERE student_id = _student_id AND course_id = _course_id);
+    IF _completed_date IS NULL THEN
+		UPDATE course_bought_by_student
+		SET completed_date = NOW()
+		WHERE student_id = _student_id AND course_id = _course_id;
+    END IF;
 END //
 DELIMITER ;

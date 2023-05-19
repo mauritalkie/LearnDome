@@ -172,3 +172,30 @@ BEGIN
     CALL sp_drop_temporary_tables();
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_course_status
+(
+	IN _student_id INT,
+    IN _course_id INT
+)
+BEGIN
+    SELECT is_course_finished_function(_student_id, _course_id) AS is_finished;
+    CALL sp_drop_temporary_tables();
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_course_certificate
+(
+	IN _student_id INT,
+    IN _course_id INT
+)
+BEGIN
+	SELECT A.first_name, A.last_name, B.completed_date, C.course_name
+    FROM ((student A
+    INNER JOIN course_bought_by_student B ON A.id = B.student_id)
+    INNER JOIN course C ON B.course_id = C.id)
+    WHERE B.student_id = _student_id AND B.course_id = _course_id;
+END //
+DELIMITER ;
