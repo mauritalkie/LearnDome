@@ -125,16 +125,7 @@ function deleteInstructor(formData){
 }
 
 
-function getInstructorUsername(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
 
 function getInstructorEmail(formData){
     let request = new XMLHttpRequest()
@@ -169,66 +160,15 @@ function decreaseCoursesNumber(formData){
     request.send(formData)
 }
 
-function lockInstructor(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
-
-function unlockInstructor(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
 
 
-function getLockedInstructors(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
 // students
 
 
 
-function getStudent(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
-function updateStudent(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
 function deleteStudent(formData){
     let request = new XMLHttpRequest()
@@ -241,16 +181,7 @@ function deleteStudent(formData){
     request.send(formData)
 }
 
-function getStudentUsername(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
 
 function getStudentEmail(formData){
     let request = new XMLHttpRequest()
@@ -263,27 +194,8 @@ function getStudentEmail(formData){
     request.send(formData)
 }
 
-function lockStudent(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
-function unlockStudent(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
 
 
 
@@ -309,16 +221,7 @@ function completeCourse(formData){
     request.send(formData)
 }
 
-function getLockedStudents(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
+
 
 // courses
 

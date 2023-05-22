@@ -1,3 +1,6 @@
+let instructorAttemps = 0, studentAttemps = 0
+let pastInstructorUsername = '', pastStudentUsername = ''
+
 function makeSweetAlert(icon, title, message){
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -57,6 +60,11 @@ function checkData(){
     redirectPage(selectedRole)
 }
 
+function resetAttemps(){
+    instructorAttemps = 0
+    studentAttemps = 0
+}
+
 // --------------------------------------- AJAX functions ---------------------------------------
 
 function sendEmail(){
@@ -101,8 +109,19 @@ function loginInstructor(formData){
         if(this.readyState == 4 && this.status == 200){
 
             let jsonInstructor = JSON.parse(request.responseText)
+            if(jsonInstructor.length !== 0){
+                let unlocked = jsonInstructor[0].unlocked
+                if(!unlocked){
+                    makeSweetAlert('warning', 'Advertencia', 'No es posible acceder porque este usuario está bloqueado, favor de contactar a un administrador')
+                    return
+                }
+            }
+
             if(jsonInstructor.length === 0){
-                makeSweetAlert('error', 'Error', 'Usuario no encontrado')
+                let formDataUsername = new FormData()
+                formDataUsername.append("getInstructorUsername", "")
+                formDataUsername.append("username", document.querySelector('#txtUserLogin').value)
+                getInstructorUsername(formDataUsername)
                 return
             }
 
@@ -120,13 +139,126 @@ function loginStudent(formData){
         if(this.readyState == 4 && this.status == 200){
 
             let jsonStudent = JSON.parse(request.responseText)
+            if(jsonStudent.length !== 0){
+                let unlocked = jsonStudent[0].unlocked
+                if(!unlocked){
+                    makeSweetAlert('warning', 'Advertencia', 'No es posible acceder porque este usuario está bloqueado, favor de contactar a un administrador')
+                    return
+                }
+            }
+
             if(jsonStudent.length === 0){
-                makeSweetAlert('error', 'Error', 'Usuario no encontrado')
+                let formDataUsername = new FormData()
+                formDataUsername.append("getStudentUsername", "")
+                formDataUsername.append("username", document.querySelector('#txtUserLogin').value)
+                getStudentUsername(formDataUsername)
                 return
             }
 
             localStorage.setItem("globalId", jsonStudent[0].id)
             window.location.href = "/LearnDome/html/index.html"
+        }
+    }
+    request.send(formData)
+}
+
+function lockInstructor(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            resetAttemps()
+            makeSweetAlert('warning', 'Usuario bloqueado', 'Este usuario ha sido bloqueado, favor de contactar con un administrador')
+        }
+    }
+    request.send(formData)
+}
+
+function getInstructorUsername(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/instructorApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let jsonInstructor = JSON.parse(request.responseText)
+            if(jsonInstructor.length === 0){
+                resetAttemps()
+                makeSweetAlert('error', 'Error', 'Usuario no encontrado')
+                return
+            }
+
+            let unlocked = jsonInstructor[0].unlocked
+            if(!unlocked){
+                makeSweetAlert('warning', 'Advertencia', 'No es posible acceder porque este usuario está bloqueado, favor de contactar a un administrador')
+                return
+            }
+
+            let username = document.querySelector('#txtUserLogin').value
+            if(username !== pastInstructorUsername){
+                resetAttemps()
+            }
+            pastInstructorUsername = jsonInstructor[0].username
+
+            instructorAttemps++
+            if(instructorAttemps < 3){
+                makeSweetAlert('error', 'Error', `Contraseña incorrecta, le quedan ${3 - instructorAttemps} intentos`)
+                return
+            }
+
+            let formDataLock = new FormData()
+            formDataLock.append("lockInstructor", "")
+            formDataLock.append("id", jsonInstructor[0].id)
+            lockInstructor(formDataLock)
+        }
+    }
+    request.send(formData)
+}
+
+function lockStudent(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            resetAttemps()
+            makeSweetAlert('warning', 'Usuario bloqueado', 'Este usuario ha sido bloqueado, favor de contactar con un administrador')
+        }
+    }
+    request.send(formData)
+}
+
+function getStudentUsername(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let jsonStudent = JSON.parse(request.responseText)
+            if(jsonStudent.length === 0){
+                resetAttemps()
+                makeSweetAlert('error', 'Error', 'Usuario no encontrado')
+                return
+            }
+
+            let unlocked = jsonStudent[0].unlocked
+            if(!unlocked){
+                makeSweetAlert('warning', 'Advertencia', 'No es posible acceder porque este usuario está bloqueado, favor de contactar a un administrador')
+                return
+            }
+
+            let username = document.querySelector('#txtUserLogin').value
+            if(username !== pastStudentUsername){
+                resetAttemps()
+            }
+            pastStudentUsername = jsonStudent[0].username
+
+            studentAttemps++
+            if(studentAttemps < 3){
+                makeSweetAlert('error', 'Error', `Contraseña incorrecta, le quedan ${3 - studentAttemps} intentos`)
+                return
+            }
+
+            let formDataLock = new FormData()
+            formDataLock.append("lockStudent", "")
+            formDataLock.append("id", jsonStudent[0].id)
+            lockStudent(formDataLock)
         }
     }
     request.send(formData)
