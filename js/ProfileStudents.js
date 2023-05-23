@@ -1,3 +1,9 @@
+let currentStudentId = localStorage.getItem("globalId")
+let formData = new FormData()
+formData.append("getStudent", "")
+formData.append("id", currentStudentId)
+getStudent(formData)
+
 function makeSweetAlert(icon, title, message){
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -98,5 +104,46 @@ function checkData(){
         return
     }
 
-    makeSweetAlert('success', 'Éxito', 'Campos actualizados')
+    let formData = new FormData()
+    formData.append("updateStudent", "")
+    formData.append("username", document.querySelector('#txtUserPS').value)
+    formData.append("password", document.querySelector('#txtPasswordPS').value)
+    formData.append("firstname", document.querySelector('#txtNamePS').value)
+    formData.append("lastname", document.querySelector('#txtLastNamePS').value)
+    formData.append("email", document.querySelector('#txtEmailPS').value)
+    formData.append("image", document.querySelector('#filePS').files[0])
+    formData.append("id", currentStudentId)
+    updateStudent(formData)
+}
+
+// --------------------------------------- AJAX functions ---------------------------------------
+
+function getStudent(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let jsonStudent = JSON.parse(request.responseText)
+            jsonStudent['results'].forEach(student => {
+                document.querySelector('#picturePS').src = "data:image/png;base64, " + student.image
+                document.querySelector('#txtNamePS').value = student.first_name
+                document.querySelector('#txtLastNamePS').value = student.last_name
+                document.querySelector('#txtEmailPS').value = student.email
+                document.querySelector('#txtUserPS').value = student.username
+                document.querySelector('#txtPasswordPS').value = student.password
+            })
+        }
+    }
+    request.send(formData)
+}
+
+function updateStudent(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            makeSweetAlert('success', 'Éxito', 'Campos actualizados')
+        }
+    }
+    request.send(formData)
 }

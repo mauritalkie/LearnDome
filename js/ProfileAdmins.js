@@ -1,6 +1,7 @@
+let currentAdministratorId = localStorage.getItem("globalId")
 let formData = new FormData();
 formData.append("getAdministrator", "")
-formData.append("id", 11)
+formData.append("id", currentAdministratorId)
 
 getAdministrator(formData)
 
@@ -104,8 +105,16 @@ function checkData(){
         return
     }
 
-    updateAdministrator()
-    makeSweetAlert('success', 'Éxito', 'Campos actualizados')
+    let formData = new FormData()
+    formData.append("updateAdministrator", "")
+    formData.append("username", document.getElementById("txtUserPA").value)
+    formData.append("password", document.getElementById("txtPasswordPA").value)
+    formData.append("firstname", document.getElementById("txtNamePA").value)
+    formData.append("lastname", document.getElementById("txtLastNamePA").value)
+    formData.append("email", document.getElementById("txtEmailPA").value)
+    formData.append("image", document.getElementById("filePA").files[0])
+    formData.append("id", currentAdministratorId)
+    updateAdministrator(formData)
 }
 
 // --------------------------------------- AJAX functions ---------------------------------------
@@ -122,30 +131,20 @@ function getAdministrator(formData){
                 document.querySelector('#txtLastNamePA').value = admin.last_name
                 document.querySelector('#txtEmailPA').value = admin.email
                 document.querySelector('#txtUserPA').value = admin.username
-                document.querySelector('#txtPasswordPA').value = admin.user_password
+                document.querySelector('#txtPasswordPA').value = admin.password
             })
         }
     }
     request.send(formData)
 }
 
-function updateAdministrator(){
+function updateAdministrator(formData){
     let request = new XMLHttpRequest()
     request.open('POST', '/LearnDome/ApiManager/administratorApi.php', true)
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
     request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            getAdministrator()
+        if(this.readyState == 4 && this.status == 200){
+            makeSweetAlert('success', 'Éxito', 'Campos actualizados')
+        }
     }
-
-    let firstname = document.getElementById("txtNamePA").value
-    let lastname = document.getElementById("txtLastNamePA").value
-    let email = document.getElementById("txtEmailPA").value
-    let username = document.getElementById("txtUserPA").value
-    let password = document.getElementById("txtPasswordPA").value
-    let image = 'XD'
-    let id = 1
-
-    request.send(`updateAdministrator&username=${username}&password=${password}&firstname=${firstname}` +
-        `&lastname=${lastname}&email=${email}&image=${image}&id=${id}`)
+    request.send(formData)
 }

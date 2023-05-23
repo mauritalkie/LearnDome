@@ -77,8 +77,6 @@ if(isset($_POST['decreaseCoursesNumber']))
 	$instructor->decreaseCoursesNumber($_POST['id']);
 }
 
-// if(isset($_POST['updateInstructorScore'])){} -> pendiente hasta averiguar con exactitud el sp
-
 if(isset($_POST['lockInstructor']))
 {
 	$instructor = new Instructor();

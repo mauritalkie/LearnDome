@@ -29,7 +29,7 @@ if(isset($_POST['getStudent']))
 			"bought_courses" => $row['bought_courses'],
 			"completed_courses" => $row['completed_courses']
 		);
-		array_push($arrStudent, $obj);
+		array_push($arrStudent["results"], $obj);
 	}
 
 	$currentStudent = json_encode($arrStudent);

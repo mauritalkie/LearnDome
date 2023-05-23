@@ -53,7 +53,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE sp_delete_administrator
 (
-IN _id INT
+	IN _id INT
 )
 BEGIN
 	UPDATE administrator

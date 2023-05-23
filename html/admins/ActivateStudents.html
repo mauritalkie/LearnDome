@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar cursos</title>
+    <title>Activar usuarios</title>
 
     <link rel="stylesheet" href="/LearnDome/bootstrap/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="/LearnDome/css/placeholder.css">
 </head>
 <body class="bg-dark">
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
@@ -46,59 +46,71 @@
         </div>
       </nav>
 
-<div class="container">
-  <div class="row Separator">
-        <div class="col-12">
-            <h1 class="text-light">Cursos</h1>
-        </div>
-      </div>
-      
-      <div class="row Separator d-flex justify-content-center">
-      <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-          <div class="card bg-dark">
-            <img src="/LearnDome/assets/fundamentos.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-light">Fundamentos de la programación</h5>
-              <p class="card-text text-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="/LearnDome/html/admins/comments.html" class="btn btn-danger">Ver comentarios</a>
-            </div>
-          </div>
-        </div>
-      
-        <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-          <div class="card bg-dark">
-            <img src="/LearnDome/assets/python.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-light">Python</h5>
-              <p class="card-text text-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="/LearnDome/html/admins/comments.html" class="btn btn-danger">Ver comentarios</a>
-            </div>
-          </div>
-        </div>
-      
-        <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-          <div class="card bg-dark">
-            <img src="/LearnDome/assets/mysql.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-light">MySql</h5>
-              <p class="card-text text-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="/LearnDome/html/admins/comments.html" class="btn btn-danger">Ver comentarios</a>
-            </div>
-          </div>
-        </div>
-      
-        <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-          <div class="card bg-dark">
-            <img src="/LearnDome/assets/hacking.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-light">Hacking ético</h5>
-              <p class="card-text text-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="/LearnDome/html/admins/comments.html" class="btn btn-danger">Ver comentarios</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- <div class="d-flex justify-content-center mt-3 mb-3">
+        <input class="form-control bg-dark w-50 text-white" type="text" placeholder="Buscar usuario" id="txtUserLogin">
+      </div> -->
+
+<div class="container mt-3 mb-3">
+  
+  <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Usuario</th>
+          <th scope="col">Habilitar</th>
+        </tr>
+      </thead>
+      <tbody id="lockedStudents">
+        <!-- <tr>
+          <th scope="row">1</th>
+          <td>Usuario 1</td>
+          <td><button class=" btn btn-success">Activar</button></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Usuario 2</td>
+          <td><button class=" btn btn-success">Activar</button></td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Usuario 3</td>
+          <td><button class=" btn btn-success">Activar</button></td>
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>Usuario 1</td>
+          <td><button class=" btn btn-success">Activar</button></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Usuario 2</td>
+          <td><button class=" btn btn-success">Activar</button></td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Usuario 3</td>
+          <td><button class=" btn btn-success">Activar</button></td>
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>Usuario 1</td>
+          <td><button class=" btn btn-success">Activar</button></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Usuario 2</td>
+          <td><button class=" btn btn-success">Activar</button></td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Usuario 3</td>
+          <td><button class=" btn btn-success">Activar</button></td>
+        </tr> -->
+      </tbody>
+    </table>
+
 </div>
+    <script src="/LearnDome/js/ActivateStudents.js"></script>
 
     <script src="/LearnDome/jquery/jquery.min.js"></script>
     <script src="/LearnDome/popper/popper.min.js"></script>
