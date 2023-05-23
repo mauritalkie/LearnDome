@@ -53,7 +53,21 @@ if(isset($_POST['getCoursesByInstructor']))
 {
 	$course = new Course();
 	$result = $course->getCoursesByInstructor($_POST['instructorId']);
-	$courses = json_encode($result);
+
+	$arrCourses = array();
+	$arrCourses["results"] = array();
+
+	foreach($result as $row){
+		$obj = array(
+			"id" => $row['id'],
+			"course_name" => $row['course_name'],
+			"course_description" => $row['course_description'],
+			"image" => base64_encode($row['image'])
+		);
+		array_push($arrCourses["results"], $obj);
+	}
+
+	$courses = json_encode($arrCourses);
 	echo $courses;
 }
 

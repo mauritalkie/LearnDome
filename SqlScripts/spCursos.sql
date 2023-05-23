@@ -62,7 +62,7 @@ CREATE PROCEDURE sp_get_courses_by_instructor
 	IN _instructor_id INT
 )
 BEGIN
-	SELECT id, course_name
+	SELECT id, course_name, course_description, image
     FROM course
     WHERE instructor_id = _instructor_id;
 END //

@@ -106,4 +106,12 @@ if(isset($_POST['getLockedInstructors']))
 	$lockedInstructors = json_encode($result);
 	echo $lockedInstructors;
 }
+
+if(isset($_POST['getCourseReport']))
+{
+	$instructor = new Instructor();
+	$result = $instructor->getCourseReport($_POST['courseId']);
+	$courseReport = json_encode($result);
+	echo $courseReport;
+}
 ?>

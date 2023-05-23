@@ -125,7 +125,6 @@ function getInstructor(formData){
         if(this.readyState == 4 && this.status == 200){
             let jsonInstructor = JSON.parse(request.responseText)
             jsonInstructor['results'].forEach(instructor => {
-                document.querySelector('#lblUploadedCourses').innerHTML = `Cursos subidos: ${instructor.courses_number}`
                 document.querySelector('#lblInstructorScore').innerHTML = `Calificación como instructor: ${instructor.score}`
                 document.querySelector('#picturePT').src = "data:image/png;base64, " + instructor.image
                 document.querySelector('#txtNamePT').value = instructor.first_name
@@ -133,6 +132,10 @@ function getInstructor(formData){
                 document.querySelector('#txtEmailPT').value = instructor.email
                 document.querySelector('#txtUserPT').value = instructor.username
                 document.querySelector('#txtPasswordPT').value = instructor.password
+
+                if(instructor.instructor_score == -1){
+                    document.querySelector('#lblInstructorScore').innerHTML = "Calificación como instructor: Sin calificación"
+                }
             })
         }
     }

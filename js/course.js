@@ -76,6 +76,16 @@ showPaypalButton()
         </ul>
 `*/
 
+function buyCourseWithoutPaypal(){
+    let formDataPurchase = new FormData()
+
+    formDataPurchase.append("insertPurchaseCourseStudent", "")
+    formDataPurchase.append("studentId", currentStudentId)
+    formDataPurchase.append("courseId", selectedCourseId)
+
+    insertPurchaseCourseStudent(formDataPurchase)
+}
+
 function checkEmptyComment(){
     let comment = document.getElementById('txtComment').value
     if(comment === "")

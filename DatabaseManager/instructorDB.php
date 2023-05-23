@@ -148,5 +148,17 @@ class Instructor extends Connection{
 		$this->disconnect();
 		return $result;
 	}
+
+	public function getCourseReport($courseId){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_get_course_report(?)");
+		$stmt->bindParam(1, $courseId, PDO::PARAM_INT);
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
+	}
 }
 ?>

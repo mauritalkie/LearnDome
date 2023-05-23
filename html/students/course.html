@@ -71,7 +71,10 @@
       <h5 class="text-white mt-1" id="courseDescription">Descripción</h5>
       <!--<div class="d-flex justify-content-center"><button class="btn btn-danger ResponsiveButton mt-1">Comprar</button></div>-->
       <div class="mt-3" id="paypalButtonContainer"></div>
-      <div class="d-flex justify-content-center gap-5 mb-2">
+      <div class="d-flex justify-content-center">
+        <button class="mt-3 btn btn-danger" onclick="buyCourseWithoutPaypal()">Comprar sin paypal</button>
+      </div>
+      <div class="d-flex justify-content-center gap-5 mb-2 mt-3">
         <button class="likeDislikeButton" id="likeButton" onclick="likeButtonPressed(this.id)">Me gusta</button>
         <button class="likeDislikeButton" id="dislikeButton" onclick="dislikeButtonPressed(this.id)">No me gusta</button>
       </div>
