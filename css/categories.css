@@ -1,0 +1,11 @@
+.OnlyTextButton{
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
+}
+
+.theMargin{
+    margin-right: 5px;
+}
