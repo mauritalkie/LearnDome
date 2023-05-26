@@ -193,7 +193,7 @@ function getCourse(formData){
                 document.getElementById('courseTeacher').innerHTML = `Instructor del curso: ${course.first_name} ${course.last_name}`
                 document.getElementById('courseScore').innerHTML = `Calificación: ${course.score}`
                 document.getElementById('courseDate').innerHTML = `Fecha de subida: ${course.created_at}`
-                document.getElementById('coursePrice').innerHTML = `Precio: ${course.price}`
+                document.getElementById('coursePrice').innerHTML = `Precio: $${course.price}`
                 document.getElementById('courseDescription').innerHTML = `Descripción del curso: ${course.course_description}`
 
                 if(course.score < 0){

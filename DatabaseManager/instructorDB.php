@@ -160,5 +160,17 @@ class Instructor extends Connection{
 		$this->disconnect();
 		return $result;
 	}
+
+	public function getSalesReport($instructorId){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_get_sales_report(?)");
+		$stmt->bindParam(1, $instructorId, PDO::PARAM_INT);
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
+	}
 }
 ?>

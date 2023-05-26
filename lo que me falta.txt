@@ -1,0 +1,14 @@
+- edición del curso
+- validación de categorías
+- model view controller
+- pdf del certificado corregido
+- host
+
+- validaciones en la BD
+    - que no se repita la categoría
+    - que no se inserte la misma compra
+    - que no se inserte la misma vista de subnivel
+    - que solo muestre un subnivel si no se ha comprado el curso
+    - que no se muestren los botones de compra cuando se compre el curso
+
+- cambiar las views por unas mas complejas

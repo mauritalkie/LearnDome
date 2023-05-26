@@ -10,8 +10,16 @@ if(isset($_POST['insertMessage']))
 if(isset($_POST['getMesseges']))
 {
 	$message = new Message();
-	$result = $message->getMessages($_POST['firstUserId'], $_POST['secondUserId']);
+	$result = $message->getMessages($_POST['firstUserId'], $_POST['secondUserId'], $_POST["userWhoSentId"]);
 	$messages = json_encode($result);
 	echo $messages;
+}
+
+if(isset($_POST['getUserByUsername']))
+{
+	$message = new Message();
+	$result = $message->getUserByUsername($_POST['username']);
+	$user = json_encode($result);
+	echo $user;
 }
 ?>

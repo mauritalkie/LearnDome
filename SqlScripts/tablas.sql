@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS administrator (
     image MEDIUMBLOB NOT NULL,
     created_at DATETIME DEFAULT NOW(),
     is_active BOOL DEFAULT TRUE,
+    id_for_message VARCHAR(36) DEFAULT (uuid()),
 	PRIMARY KEY (id)
 );
 
@@ -32,6 +33,7 @@ CREATE TABLE IF NOT EXISTS instructor (
     image MEDIUMBLOB NOT NULL,
     unlocked BOOL DEFAULT TRUE,
     is_active BOOL DEFAULT TRUE,
+    id_for_message VARCHAR(36) DEFAULT (uuid()),
     PRIMARY KEY (id)
 );
 
@@ -50,6 +52,7 @@ CREATE TABLE IF NOT EXISTS student (
     image MEDIUMBLOB NOT NULL,
     unlocked BOOL DEFAULT TRUE,
     is_active BOOL DEFAULT TRUE,
+    id_for_message VARCHAR(36) DEFAULT (uuid()),
     PRIMARY KEY (id)
 );
 
@@ -90,16 +93,12 @@ CREATE TABLE IF NOT EXISTS course_comment (
 
 CREATE TABLE IF NOT EXISTS message (
 	id BIGINT AUTO_INCREMENT,
-	first_user_id INT NOT NULL,
-	second_user_id INT NOT NULL,
-    user_who_sent_id INT NOT NULL,
+	first_user_id VARCHAR(36) NOT NULL,
+	second_user_id VARCHAR(36) NOT NULL,
+    user_who_sent_id VARCHAR(36) NOT NULL,
 	message_content VARCHAR(255) NOT NULL,
 	messaged_at DATETIME DEFAULT NOW(),
-    is_active BOOL DEFAULT TRUE,
-	PRIMARY KEY (id),
-	FOREIGN KEY (first_user_id) REFERENCES student(id),
-	FOREIGN KEY (second_user_id) REFERENCES student(id),
-    FOREIGN KEY (user_who_sent_id) REFERENCES student(id)
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS course_score (

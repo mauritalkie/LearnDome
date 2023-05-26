@@ -96,6 +96,7 @@ function loginAdministrator(formData){
             }
 
             localStorage.setItem("globalId", jsonAdmin[0].id)
+            localStorage.setItem("messageId", jsonAdmin[0].id_for_message)
             window.location.href = "/LearnDome/html/admins/CourseCommentManager.html"
         }
     }
@@ -126,6 +127,7 @@ function loginInstructor(formData){
             }
 
             localStorage.setItem("globalId", jsonInstructor[0].id)
+            localStorage.setItem("messageId", jsonInstructor[0].id_for_message)
             window.location.href = "/LearnDome/html/teachers/CourseManager.html"
         }
     }
@@ -156,6 +158,7 @@ function loginStudent(formData){
             }
 
             localStorage.setItem("globalId", jsonStudent[0].id)
+            localStorage.setItem("messageId", jsonStudent[0].id_for_message)
             window.location.href = "/LearnDome/html/index.html"
         }
     }

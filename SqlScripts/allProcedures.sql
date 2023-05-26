@@ -190,8 +190,16 @@ CREATE PROCEDURE sp_insert_score
     IN _liked BOOL
 )
 BEGIN
-	INSERT INTO course_score(student_id, course_id, liked)
-    VALUES(_student_id, _course_id, _liked);
+	DECLARE scored_before INT;
+    SET scored_before = (SELECT COUNT(liked) FROM course_score WHERE student_id = _student_id AND course_id = _course_id);
+    IF scored_before > 0 THEN
+		UPDATE course_score
+        SET liked = _liked
+        WHERE student_id = _student_id AND course_id = _course_id;
+	ELSE
+		INSERT INTO course_score(student_id, course_id, liked)
+		VALUES(_student_id, _course_id, _liked);
+	END IF;
 END //
 DELIMITER ;
 
@@ -472,7 +480,7 @@ BEGIN
 	SELECT id, course_name, score, created_at, price, image, course_description
     FROM course
     WHERE created_at BETWEEN first_date AND last_date AND is_active = TRUE;
-END
+END //
 DELIMITER ;
 
 DELIMITER //
@@ -906,9 +914,9 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE sp_insert_message
 (
-	IN _first_user_id INT,
-    IN _second_user_id INT,
-    IN _user_who_sent_id INT,
+	IN _first_user_id VARCHAR(36),
+    IN _second_user_id VARCHAR(36),
+    IN _user_who_sent_id VARCHAR(36),
     IN _message_content VARCHAR(255)
 )
 BEGIN
@@ -920,13 +928,40 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE sp_get_messages
 (
-	IN _first_user_id INT,
-    IN _second_user_id INT
+	IN _first_user_id VARCHAR(36),
+    IN _second_user_id VARCHAR(36),
+    IN _user_who_sent_id VARCHAR(36)
 )
 BEGIN
 	SELECT message_content, user_who_sent_id
     FROM message
-    WHERE first_user_id = _first_user_id AND second_user_id = _second_user_id;
+    WHERE (first_user_id = _first_user_id AND second_user_id = _second_user_id) OR (first_user_id = _second_user_id AND second_user_id = _first_user_id);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_user_by_username
+(
+	IN _username VARCHAR(30)
+)
+BEGIN
+	DECLARE student_exists INT;
+    DECLARE instructor_exists INT;
+    DECLARE administrator_exists INT;
+    
+    SET student_exists = (SELECT COUNT(id_for_message) FROM student WHERE username = _username);
+    SET instructor_exists = (SELECT COUNT(id_for_message) FROM instructor WHERE username = _username);
+    SET administrator_exists = (SELECT COUNT(id_for_message) FROM administrator WHERE username = _username);
+    
+    IF student_exists > 0 THEN
+		SELECT id_for_message FROM student WHERE username = _username;
+	ELSE IF instructor_exists > 0 THEN
+		SELECT id_for_message FROM instructor WHERE username = _username;
+	ELSE
+		SELECT id_for_message FROM administrator WHERE username = _username;
+	END IF;
+	END IF;
+    
 END //
 DELIMITER ;
 
@@ -1049,5 +1084,44 @@ BEGIN
     WHERE A.course_id = _course_id;
     
     CALL sp_drop_temporary_tables();
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_sales_report
+(
+	IN _instructor_id INT
+)
+BEGIN
+	CREATE TEMPORARY TABLE IF NOT EXISTS total_income_table AS (
+		SELECT A.id, A.course_name, COUNT(C.student_id) AS students, SUM(A.price) AS total_income
+		FROM ((course A
+		INNER JOIN instructor B ON A.instructor_id = B.id)
+		INNER JOIN course_bought_by_student C ON A.id = C.course_id )
+		WHERE B.id = _instructor_id
+		GROUP BY A.id, A.course_name
+	);
+
+	CREATE TEMPORARY TABLE IF NOT EXISTS average_seen_table AS (
+		SELECT A.course_id, ROUND(AVG(B.sublevel_number)) AS average_seen_sublevel
+		FROM seen_sublevel A
+		INNER JOIN course_sublevel B
+		ON A.sublevel_id = B.id
+		GROUP BY course_id
+	);
+
+	CREATE TEMPORARY TABLE IF NOT EXISTS sales_report_table AS (
+		SELECT A.id, A.course_name, A.students, A.total_income, B.course_id, B.average_seen_sublevel
+		FROM total_income_table A
+		INNER JOIN average_seen_table B
+		ON A.id = B.course_id
+	);
+
+	SELECT * FROM sales_report_table;
+    
+    DROP TABLE total_income_table;
+    DROP TABLE average_seen_table;
+    DROP TABLE sales_report_table;
+    
 END //
 DELIMITER ;

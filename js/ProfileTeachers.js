@@ -133,7 +133,7 @@ function getInstructor(formData){
                 document.querySelector('#txtUserPT').value = instructor.username
                 document.querySelector('#txtPasswordPT').value = instructor.password
 
-                if(instructor.instructor_score == -1){
+                if(instructor.score == -1){
                     document.querySelector('#lblInstructorScore').innerHTML = "Calificación como instructor: Sin calificación"
                 }
             })

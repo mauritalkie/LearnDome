@@ -112,4 +112,12 @@ if(isset($_POST['getCourseReport']))
 	$courseReport = json_encode($result);
 	echo $courseReport;
 }
+
+if(isset($_POST['getSalesReport']))
+{
+	$instructor = new Instructor();
+	$result = $instructor->getSalesReport($_POST['instructorId']);
+	$salesReport = json_encode($result);
+	echo $salesReport;
+}
 ?>

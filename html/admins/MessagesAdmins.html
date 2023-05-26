@@ -49,19 +49,20 @@
 
 <div class="container text-white">
   <div class="d-flex">
-    <input class="form-control m-3" type="text" id="txtLookUserMT" placeholder="Buscar usuario">
-    <button class="btn btn-danger m-3">Buscar</button>
+    <input class="form-control m-3" type="text" id="txtLookUser" placeholder="Buscar usuario">
+    <button class="btn btn-danger m-3" onclick="lookUser()">Buscar</button>
   </div>
-  <div id="messeges">
-    <div class="d-flex justify-content-start"><p class="bg-danger rounded w-75" style="word-break: break-all;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, quasi dicta. Laborum optio dignissimos iure deleniti quod, itaque accusamus tenetur harum facere culpa incidunt ducimus in molestias quam. Aliquam, commodi.</p></div>
-    <div class="d-flex justify-content-end"><p class="bg-danger rounded w-75" style="word-break: break-all;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti ea nemo repudiandae quam, odio sunt eius asperiores iusto similique quisquam odit obcaecati omnis provident excepturi ipsam dicta ex ab? Ullam.</p></div>
+  <div id="messages">
+    <!-- <div class="d-flex justify-content-start"><p class="bg-danger rounded w-75" style="word-break: break-all;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, quasi dicta. Laborum optio dignissimos iure deleniti quod, itaque accusamus tenetur harum facere culpa incidunt ducimus in molestias quam. Aliquam, commodi.</p></div>
+    <div class="d-flex justify-content-end"><p class="bg-danger rounded w-75" style="word-break: break-all;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti ea nemo repudiandae quam, odio sunt eius asperiores iusto similique quisquam odit obcaecati omnis provident excepturi ipsam dicta ex ab? Ullam.</p></div> -->
   </div>
-  <div class="d-flex">
-    <input class="form-control m-3" type="text" id="txtMessageMT" placeholder="Escribe un mensaje">
-    <button class="btn btn-danger m-3">Enviar</button>
+  <div class="d-flex" id="messageSender">
+    <input class="form-control m-3" type="text" id="txtMessage" placeholder="Escribe un mensaje">
+    <button class="btn btn-danger m-3" id="btnMessage" onclick="sendMessage()">Enviar</button>
   </div>
 </div>
 
+    <script src="/LearnDome/js/messages.js"></script>
     <script src="/LearnDome/sweetalert/sweetalert_dark.min.js"></script>
 
     <script src="/LearnDome/jquery/jquery.min.js"></script>

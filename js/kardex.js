@@ -16,7 +16,7 @@ formDataKardex.append("studentId", currentStudentId)
 getStudentKardex(formDataKardex)
 
 function setStatus(totalSublevels, seenSublevels){
-	return totalSublevels == seenSublevels ? 'Completo' : 'Incompleto'
+	return totalSublevels <= seenSublevels ? 'Completo' : 'Incompleto'
 }
 
 // --------------------------------------- AJAX functions ---------------------------------------

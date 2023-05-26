@@ -197,3 +197,42 @@ BEGIN
     CALL sp_drop_temporary_tables();
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_sales_report
+(
+	IN _instructor_id INT
+)
+BEGIN
+	CREATE TEMPORARY TABLE IF NOT EXISTS total_income_table AS (
+		SELECT A.id, A.course_name, COUNT(C.student_id) AS students, SUM(A.price) AS total_income
+		FROM ((course A
+		INNER JOIN instructor B ON A.instructor_id = B.id)
+		INNER JOIN course_bought_by_student C ON A.id = C.course_id )
+		WHERE B.id = _instructor_id
+		GROUP BY A.id, A.course_name
+	);
+
+	CREATE TEMPORARY TABLE IF NOT EXISTS average_seen_table AS (
+		SELECT A.course_id, ROUND(AVG(B.sublevel_number)) AS average_seen_sublevel
+		FROM seen_sublevel A
+		INNER JOIN course_sublevel B
+		ON A.sublevel_id = B.id
+		GROUP BY course_id
+	);
+
+	CREATE TEMPORARY TABLE IF NOT EXISTS sales_report_table AS (
+		SELECT A.id, A.course_name, A.students, A.total_income, B.course_id, B.average_seen_sublevel
+		FROM total_income_table A
+		INNER JOIN average_seen_table B
+		ON A.id = B.course_id
+	);
+
+	SELECT * FROM sales_report_table;
+    
+    DROP TABLE total_income_table;
+    DROP TABLE average_seen_table;
+    DROP TABLE sales_report_table;
+    
+END //
+DELIMITER ;
