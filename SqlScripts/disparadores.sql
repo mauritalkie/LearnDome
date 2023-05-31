@@ -1,5 +1,3 @@
-USE learn_dome;
-
 DELIMITER //
 CREATE TRIGGER update_course_score_trigger
 AFTER INSERT ON course_score FOR EACH ROW

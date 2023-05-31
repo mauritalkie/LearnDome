@@ -1,5 +1,3 @@
-USE learn_dome;
-
 DELIMITER //
 CREATE FUNCTION get_course_percentege_function(likes INT, dislikes INT)
 RETURNS DECIMAL(6, 2) DETERMINISTIC

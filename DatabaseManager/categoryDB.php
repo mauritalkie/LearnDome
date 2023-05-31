@@ -24,26 +24,16 @@ class Category extends Connection{
 		return $result;
 	}
 
-	public function updateCategory($id, $categoryName, $categoryDescription){
+	public function getCategoryByName($categoryName){
 		$this->connect();
 
-		$stmt = $this->dbh->prepare("CALL sp_update_category(?, ?, ?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_INT);
-		$stmt->bindParam(2, $categoryName, PDO::PARAM_STR);
-		$stmt->bindParam(3, $categoryDescription, PDO::PARAM_STR);
+		$stmt = $this->dbh->prepare("CALL sp_get_category_by_name(?)");
+		$stmt->bindParam(1, $categoryName, PDO::PARAM_STR);
 		$stmt->execute();
 
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$this->disconnect();
-	}
-
-	public function deleteCategory($id){
-		$this->connect();
-
-		$stmt = $this->dbh->prepare("CALL sp_delete_category(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_INT);
-		$stmt->execute();
-
-		$this->disconnect();
+		return $result;
 	}
 }
 ?>

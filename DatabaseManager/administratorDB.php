@@ -49,16 +49,6 @@ class Administrator extends Connection{
 		$this->disconnect();
 	}
 
-	public function deleteAdministrator($id){
-		$this->connect();
-
-		$stmt = $this->dbh->prepare("CALL sp_delete_administrator(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_INT);
-		$stmt->execute();
-
-		$this->disconnect();
-	}
-
 	public function getAdministratorUsername($username){
 		$this->connect();
 

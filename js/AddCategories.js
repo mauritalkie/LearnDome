@@ -27,11 +27,10 @@ function checkData(){
 		return
 	}
 
-    let formData = new FormData()
-    formData.append("insertCategory", "")
-    formData.append("categoryName", document.querySelector('#txtCategoryNameACT').value)
-    formData.append("categoryDescription", document.querySelector('#txtDescriptionCategoryACT').value)
-    insertCategory(formData)
+    let formDataGet = new FormData()
+    formDataGet.append("getCategoryByName", "")
+    formDataGet.append("categoryName", categoryName)
+    getCategoryByName(formDataGet)
 }
 
 // --------------------------------------- AJAX functions ---------------------------------------
@@ -44,6 +43,30 @@ function insertCategory(formData){
             makeSweetAlert('success', 'Hecho', 'Categoría insertada con éxito')
             document.getElementById('txtCategoryNameACT').value = ''
             document.getElementById('txtDescriptionCategoryACT').value = ''
+        }
+    }
+    request.send(formData)
+}
+
+function getCategoryByName(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/categoryApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+
+            let jsonCategory = JSON.parse(request.responseText)
+            if(jsonCategory.length > 0){
+                makeSweetAlert('error', 'Error', 'La categoría ya se encuentra registrada')
+                document.getElementById('txtCategoryNameACT').value = ''
+                document.getElementById('txtDescriptionCategoryACT').value = ''
+                return
+            }
+
+            let formDataInsert = new FormData()
+            formDataInsert.append("insertCategory", "")
+            formDataInsert.append("categoryName", document.querySelector('#txtCategoryNameACT').value)
+            formDataInsert.append("categoryDescription", document.querySelector('#txtDescriptionCategoryACT').value)
+            insertCategory(formDataInsert)
         }
     }
     request.send(formData)

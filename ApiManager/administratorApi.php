@@ -41,12 +41,6 @@ if(isset($_POST['updateAdministrator']))
 	$admin->updateAdministrator($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $imageData, $_POST['id']);
 }
 
-if(isset($_POST['deleteAdministrator']))
-{
-	$admin = new Administrator();
-	$admin->deleteAdministrator($_POST['id']);
-}
-
 if(isset($_POST['getAdministratorUsername']))
 {
 	$admin = new Administrator();

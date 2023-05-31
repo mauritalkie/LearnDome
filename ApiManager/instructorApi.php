@@ -43,12 +43,6 @@ if(isset($_POST['updateInstructor']))
 	$instructor->updateInstructor($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $imageData, $_POST['id']);
 }
 
-if(isset($_POST['deleteInstructor']))
-{
-	$instructor = new Instructor();
-	$instructor->deleteInstructor($_POST['id']);
-}
-
 if(isset($_POST['getInstructorUsername']))
 {
 	$instructor = new Instructor();
@@ -63,18 +57,6 @@ if(isset($_POST['getInstructorEmail']))
 	$result = $instructor->getInstructorEmail($_POST['email']);
 	$email = json_encode($result);
 	echo $email;
-}
-
-if(isset($_POST['increaseCoursesNumber']))
-{
-	$instructor = new Instructor();
-	$instructor->increaseCoursesNumber($_POST['id']);
-}
-
-if(isset($_POST['decreaseCoursesNumber']))
-{
-	$instructor = new Instructor();
-	$instructor->decreaseCoursesNumber($_POST['id']);
 }
 
 if(isset($_POST['lockInstructor']))

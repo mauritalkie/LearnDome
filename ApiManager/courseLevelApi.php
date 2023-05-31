@@ -10,15 +10,7 @@ if(isset($_POST['insertCourselevel']))
 if(isset($_POST['getLevels']))
 {
 	$level = new CourseLevel();
-	$result = $level->getLevels($_POST['courseId']);
-	$levels = json_encode($result);
-	echo $levels;
-}
-
-if(isset($_POST['getExistingLevel']))
-{
-	$level = new CourseLevel();
-	$result = $level->getExistingLevel($_POST['courseId'], $_POST['levelNumber'], $_POST['blockTitle']);
+	$result = $level->getLevels($_POST['courseId'], $_POST['studentId']);
 	$levels = json_encode($result);
 	echo $levels;
 }

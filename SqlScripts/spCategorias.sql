@@ -13,34 +13,19 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE sp_get_categories()
 BEGIN
-	SELECT id, category_name
-    FROM category
+	SELECT * FROM categories_view
     WHERE is_active = TRUE;
 END //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE sp_update_category
+CREATE PROCEDURE sp_get_category_by_name
 (
-	IN _id INT,
-    IN _category_name VARCHAR(20),
-    IN _category_description VARCHAR(50)
+	IN _category_name VARCHAR(20)
 )
 BEGIN
-	UPDATE category
-    SET category_name = _category_name, category_description = _category_description
-    WHERE id = _id;
-END //
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE sp_delete_category
-(
-	IN _id INT
-)
-BEGIN
-	UPDATE category
-    SET is_active = FALSE
-    WHERE id = _id;
+	SELECT id
+    FROM category
+    WHERE category_name = _category_name;
 END //
 DELIMITER ;

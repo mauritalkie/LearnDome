@@ -62,8 +62,7 @@ CREATE PROCEDURE sp_get_courses_by_instructor
 	IN _instructor_id INT
 )
 BEGIN
-	SELECT id, course_name, course_description, image
-    FROM course
+	SELECT * FROM courses_by_instructor_view
     WHERE instructor_id = _instructor_id;
 END //
 DELIMITER ;
@@ -88,8 +87,7 @@ CREATE PROCEDURE sp_get_courses_by_search
 	IN course_search VARCHAR(30)
 )
 BEGIN
-	SELECT id, course_name, course_description, image
-    FROM course
+	SELECT * FROM courses_by_search_view
     WHERE course_name LIKE CONCAT('%', course_search, '%') AND is_active = TRUE;
 END //
 DELIMITER ;
@@ -151,8 +149,7 @@ CREATE PROCEDURE sp_get_courses_by_date_range
     IN last_date DATETIME
 )
 BEGIN
-	SELECT id, course_name, score, created_at, price, image, course_description
-    FROM course
+	SELECT * FROM courses_by_date_range_view
     WHERE created_at BETWEEN first_date AND last_date AND is_active = TRUE;
 END //
 DELIMITER ;

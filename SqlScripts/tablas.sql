@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS course_score (
 	student_id INT NOT NULL,
 	course_id INT NOT NULL,
 	liked BOOL NOT NULL,
+    enabled BOOL DEFAULT TRUE,
 	PRIMARY KEY (id),
 	FOREIGN KEY (student_id) REFERENCES student(id),
 	FOREIGN KEY (course_id) REFERENCES course(id)
@@ -127,6 +128,7 @@ CREATE TABLE IF NOT EXISTS course_level (
     course_id INT NOT NULL,
     level_number TINYINT NOT NULL,
     block_title VARCHAR(30) NOT NULL,
+    is_active BOOL DEFAULT TRUE,
     PRIMARY KEY (id),
     FOREIGN KEY (course_id) REFERENCES course(id)
 );
@@ -138,6 +140,7 @@ CREATE TABLE IF NOT EXISTS course_sublevel (
     sublevel_number TINYINT NOT NULL,
     topic_title VARCHAR(30) NOT NULL,
     media_file LONGBLOB NOT NULL,
+    is_active BOOL DEFAULT TRUE,
     PRIMARY KEY (id),
     FOREIGN KEY (course_id) REFERENCES course(id)
 );

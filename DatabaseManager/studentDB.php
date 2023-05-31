@@ -49,16 +49,6 @@ class Student extends Connection{
 		$this->disconnect();
 	}
 
-	public function deleteStudent($id){
-		$this->connect();
-
-		$stmt = $this->dbh->prepare("CALL sp_delete_student(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_INT);
-		$stmt->execute();
-
-		$this->disconnect();
-	}
-
 	public function getStudentUsername($username){
 		$this->connect();
 
@@ -114,26 +104,6 @@ class Student extends Connection{
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$this->disconnect();
 		return $result;
-	}
-
-	public function buyCourse($id){
-		$this->connect();
-
-		$stmt = $this->dbh->prepare("CALL sp_buy_course(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_INT);
-		$stmt->execute();
-
-		$this->disconnect();
-	}
-
-	public function completeCourse($id){
-		$this->connect();
-
-		$stmt = $this->dbh->prepare("CALL sp_complete_course(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_INT);
-		$stmt->execute();
-
-		$this->disconnect();
 	}
 
 	public function getLockedStudents(){

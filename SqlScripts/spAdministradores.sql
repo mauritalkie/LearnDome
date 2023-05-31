@@ -11,9 +11,16 @@ CREATE PROCEDURE sp_insert_administrator
 	IN _image MEDIUMBLOB
 )
 BEGIN
+	DECLARE lastId INT;
+    
 	INSERT INTO administrator(username, user_password, first_name, last_name, genre, birthdate, email, image)
 	VALUES(_username, _user_password, _first_name, _last_name, _genre, _birthdate, _email, _image);
-    SELECT MAX(id) AS id FROM administrator;
+    
+    SET lastId = (SELECT MAX(id) AS id FROM administrator);
+    
+    SELECT id, id_for_message
+    FROM administrator
+    WHERE id = lastId;
 END //
 DELIMITER ;
 
@@ -49,24 +56,13 @@ END //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE sp_delete_administrator
-(
-IN _id INT
-)
-BEGIN
-	UPDATE administrator
-    SET is_active = FALSE
-    WHERE id = _id;
-END //
-DELIMITER ;
-
-DELIMITER //
 CREATE PROCEDURE sp_get_administrator_username
 (
 	IN _username VARCHAR(30)
 )
 BEGIN
-	SELECT * FROM get_administrator_username_view
+	SELECT id, username
+    FROM administrator
 	WHERE username =_username;
 END //
 DELIMITER ;
@@ -77,7 +73,8 @@ CREATE PROCEDURE sp_get_administrator_email
 	IN _email VARCHAR(40)
 )
 BEGIN
-	SELECT * FROM get_administrator_email_view
+	SELECT email
+    FROM administrator
 	WHERE email =_email;
 END //
 DELIMITER ;
@@ -89,7 +86,8 @@ CREATE PROCEDURE sp_login_administrator
 	IN _user_password VARCHAR(30)
 )
 BEGIN
-	SELECT * FROM login_administrator_view
+	SELECT id, username, user_password, id_for_message
+    FROM administrator
     WHERE username = _username AND user_password = _user_password;
 END //
 DELIMITER ;

@@ -16,42 +16,18 @@ class CourseSublevel extends Connection{
 		$this->disconnect();
 	}
 
-	public function getSublevels($courseId, $levelNumber){
+	public function getSublevels($courseId, $levelNumber, $studentId){
 		$this->connect();
 
-		$stmt = $this->dbh->prepare("CALL sp_get_sublevels(?, ?)");
+		$stmt = $this->dbh->prepare("CALL sp_get_sublevels(?, ?, ?)");
 		$stmt->bindParam(1, $courseId, PDO::PARAM_INT);
 		$stmt->bindParam(2, $levelNumber, PDO::PARAM_INT);
+		$stmt->bindParam(3, $studentId, PDO::PARAM_INT);
 		$stmt->execute();
 
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$this->disconnect();
 		return $result;
-	}
-
-	public function getExistingSublevel($courseId, $levelNumber, $sublevelNumber, $topicTitle){
-		$this->connect();
-
-		$stmt = $this->dbh->prepare("CALL sp_get_existing_sublevel(?, ?, ?, ?)");
-		$stmt->bindParam(1, $courseId, PDO::PARAM_INT);
-		$stmt->bindParam(2, $levelNumber, PDO::PARAM_INT);
-		$stmt->bindParam(3, $sublevelNumber, PDO::PARAM_INT);
-		$stmt->bindParam(4, $topicTitle, PDO::PARAM_STR);
-		$stmt->execute();
-
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$this->disconnect();
-		return $result;
-	}
-
-	public function setSeenSublevel($id){
-		$this->connect();
-
-		$stmt = $this->dbh->prepare("CALL sp_set_seen_sublevel(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_INT);
-		$stmt->execute();
-
-		$this->disconnect();
 	}
 }
 ?>

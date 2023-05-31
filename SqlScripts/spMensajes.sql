@@ -20,8 +20,7 @@ CREATE PROCEDURE sp_get_messages
     IN _user_who_sent_id VARCHAR(36)
 )
 BEGIN
-	SELECT message_content, user_who_sent_id
-    FROM message
+	SELECT * FROM messages_view
     WHERE (first_user_id = _first_user_id AND second_user_id = _second_user_id) OR (first_user_id = _second_user_id AND second_user_id = _first_user_id);
 END //
 DELIMITER ; 
@@ -51,5 +50,3 @@ BEGIN
     
 END //
 DELIMITER ;
-
-CALL sp_get_user_by_username('akaisoul');

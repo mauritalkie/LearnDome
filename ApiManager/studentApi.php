@@ -43,12 +43,6 @@ if(isset($_POST['updateStudent']))
 	$student->updateStudent($_POST['username'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $imageData, $_POST['id']);
 }
 
-if(isset($_POST['deleteStudent']))
-{
-	$student = new Student();
-	$student->deleteStudent($_POST['id']);
-}
-
 if(isset($_POST['getStudentUsername']))
 {
 	$student = new Student();
@@ -83,18 +77,6 @@ if(isset($_POST['loginStudent']))
 	$result = $student->loginStudent($_POST['username'], $_POST['password']);
 	$keys = json_encode($result);
 	echo $keys;
-}
-
-if(isset($_POST['buyCourse']))
-{
-	$student = new Student();
-	$student->buyCourse($_POST['id']);
-}
-
-if(isset($_POST['completeCourse']))
-{
-	$student = new Student();
-	$student->completeCourse($_POST['id']);
 }
 
 if(isset($_POST['getLockedStudents']))

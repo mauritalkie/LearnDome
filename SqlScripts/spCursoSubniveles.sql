@@ -17,38 +17,21 @@ DELIMITER //
 CREATE PROCEDURE sp_get_sublevels
 (
 	IN _course_id INT,
-    IN _level_number INT
-)
-BEGIN
-	SELECT id, sublevel_number, topic_title, media_file
-    FROM course_sublevel
-    WHERE course_id = _course_id AND level_number = _level_number;
-END //
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE sp_get_existing_sublevel
-(
-	IN _course_id INT,
     IN _level_number INT,
-    IN _sublevel_number INT,
-    IN _topic_title VARCHAR(30)
+    IN _student_id INT
 )
 BEGIN
-	SELECT id
-    FROM course_sublevel
-    WHERE course_id = _course_id AND level_number = _level_number AND (sublevel_number = _sublevel_number OR topic_title = _topic_title);
-END //
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE sp_set_seen_sublevel
-(
-	IN _id INT
-)
-BEGIN
-	UPDATE course_sublevel
-    SET seen = TRUE
-    WHERE id = _id;
+	DECLARE purchase INT;
+    SET purchase = (SELECT COUNT(id) FROM course_bought_by_student WHERE course_id = _course_id AND student_id = _student_id);
+    IF purchase > 0 THEN
+		SELECT id, sublevel_number, topic_title, media_file
+		FROM course_sublevel
+		WHERE course_id = _course_id AND level_number = _level_number;
+	ELSE
+		SELECT id, sublevel_number, topic_title, media_file
+		FROM course_sublevel
+		WHERE course_id = _course_id AND level_number = _level_number
+        LIMIT 1;
+	END IF;
 END //
 DELIMITER ;

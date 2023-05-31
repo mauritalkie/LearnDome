@@ -6,8 +6,16 @@ CREATE PROCEDURE sp_insert_seen_sublevel
     IN _sublevel_id INT
 )
 BEGIN
-	INSERT INTO seen_sublevel(student_id, course_id, sublevel_id)
-    VALUES(_student_id, _course_id, _sublevel_id);
+	DECLARE seen INT;
+    DECLARE purchase INT;
+    
+    SET seen = (SELECT COUNT(id) FROM seen_sublevel WHERE student_id = _student_id AND course_id = _course_id AND sublevel_id = _sublevel_id);
+    SET purchase = (SELECT COUNT(id) FROM course_bought_by_student WHERE student_id = _student_id AND course_id = _course_id);
+    
+    IF seen = 0 AND purchase > 0 THEN
+		INSERT INTO seen_sublevel(student_id, course_id, sublevel_id)
+		VALUES(_student_id, _course_id, _sublevel_id);
+    END IF;
 END //
 DELIMITER ;
 
@@ -52,11 +60,3 @@ BEGIN
     DROP TABLE compare_sublevels_table;
 END //
 DELIMITER ;
-
-/* SELECT A.course_name, B.bought_date, COUNT(B.student_id) AS bought_courses, C.total_sublevels, C.seen_sublevels, D.image, D.first_name, D.last_name
-FROM (((course A
-INNER JOIN course_bought_by_student B ON A.id = B.course_id)
-INNER JOIN compare_sublevels_table C ON B.course_id = C.course_id)
-INNER JOIN student D ON B.student_id = D.id)
-WHERE B.student_id = 1
-GROUP BY A.course_name, B.bought_date, B.student_id, C.total_sublevels, C.seen_sublevels, D.image, D.first_name, D.last_name; */

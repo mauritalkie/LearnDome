@@ -173,6 +173,7 @@ function insertAdministrator(formData){
         if(this.readyState == 4 && this.status == 200){
             let jsonAdmin = JSON.parse(request.responseText)
             localStorage.setItem("globalId", jsonAdmin[0].id)
+            localStorage.setItem("messageId", jsonAdmin[0].id_for_message)
             makeSweetAlert('success', 'Hecho', 'Administrador creado con éxito')
             window.location.href = "/LearnDome/html/admins/CourseCommentManager.html"
         }
@@ -187,6 +188,7 @@ function insertInstructor(formData){
         if(this.readyState == 4 && this.status == 200){
             let jsonInstructor = JSON.parse(request.responseText)
             localStorage.setItem("globalId", jsonInstructor[0].id)
+            localStorage.setItem("messageId", jsonInstructor[0].id_for_message)
             makeSweetAlert('success', 'Hecho', 'Instructor creado con éxito')
             window.location.href = "/LearnDome/html/teachers/CourseManager.html"
         }
@@ -201,6 +203,7 @@ function insertStudent(formData){
         if(this.readyState == 4 && this.status == 200){
             let jsonStudent = JSON.parse(request.responseText)
             localStorage.setItem("globalId", jsonStudent[0].id)
+            localStorage.setItem("messageId", jsonStudent[0].id_for_message)
             makeSweetAlert('success', 'Hecho', 'Estudiante creado con éxito')
             window.location.href = "/LearnDome/html/index.html"
         }

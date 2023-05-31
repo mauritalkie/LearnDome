@@ -11,9 +11,16 @@ CREATE PROCEDURE sp_insert_student
 	IN _image MEDIUMBLOB
 )
 BEGIN
+	DECLARE lastId INT;
+    
 	INSERT INTO student(username, user_password, first_name, last_name, genre, birthdate, email, image)
 	VALUES(_username, _user_password, _first_name, _last_name, _genre, _birthdate, _email, _image);
-    SELECT MAX(id) AS id FROM student;
+    
+    SET lastId = (SELECT MAX(id) AS id FROM student);
+    
+    SELECT id, id_for_message
+    FROM student
+    WHERE id = lastId;
 END //
 DELIMITER ;
 
@@ -49,24 +56,13 @@ END //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE sp_delete_student
-(
-	IN _id INT
-)
-BEGIN
-	UPDATE student
-    SET is_active = FALSE
-    WHERE id = _id;
-END //
-DELIMITER ;
-
-DELIMITER //
 CREATE PROCEDURE sp_get_student_username
 (
 	IN _username VARCHAR(30)
 )
 BEGIN
-	SELECT * FROM get_student_username_view
+	SELECT id, username, unlocked
+    FROM student
 	WHERE username =_username;
 END //
 DELIMITER ;
@@ -77,7 +73,8 @@ CREATE PROCEDURE sp_get_student_email
 	IN _email VARCHAR(40)
 )
 BEGIN
-	SELECT * FROM get_student_email_view
+	SELECT email
+    FROM student
 	WHERE email =_email;
 END //
 DELIMITER ;
@@ -113,40 +110,16 @@ CREATE PROCEDURE sp_login_student
 	IN _user_password VARCHAR(30)
 )
 BEGIN
-	SELECT * FROM login_student_view
+	SELECT id, username, user_password, unlocked, id_for_message
+    FROM student
     WHERE username = _username AND user_password = _user_password;
-END //
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE sp_buy_course
-(
-	IN _id INT
-)
-BEGIN
-	UPDATE student
-	SET bought_courses = bought_courses + 1
-	WHERE id = _id;
-END //
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE sp_complete_course
-(
-	IN _id INT
-)
-BEGIN
-	UPDATE student
-	SET completed_courses = completed_courses + 1
-	WHERE id = _id;
 END //
 DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE sp_get_locked_students()
 BEGIN
-	SELECT id, username
-    FROM student
+	SELECT * FROM locked_students_view
     WHERE unlocked = FALSE;
 END //
 DELIMITER ;

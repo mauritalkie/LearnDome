@@ -10,6 +10,7 @@ getCourse(formDataCourse)
 let formDataContent = new FormData()
 formDataContent.append("getLevels", "")
 formDataContent.append("courseId", selectedCourseId)
+formDataContent.append("studentId", currentStudentId)
 getLevels(formDataContent)
 
 let formDataGetComments = new FormData()
@@ -23,7 +24,11 @@ formDataFinishedCourse.append("studentId", currentStudentId)
 formDataFinishedCourse.append("courseId", selectedCourseId)
 getCourseStatus(formDataFinishedCourse)
 
-showPaypalButton()
+let formDataPurchaseStatus = new FormData()
+formDataPurchaseStatus.append("getPurchaseStatus", "")
+formDataPurchaseStatus.append("studentId", currentStudentId)
+formDataPurchaseStatus.append("courseId", selectedCourseId)
+getPurchaseStatus(formDataPurchaseStatus)
 
 /*document.getElementById("courseContent").innerHTML += 
 `
@@ -192,7 +197,7 @@ function getCourse(formData){
                 document.getElementById('courseImage').src = "data:image/png;base64, " +  course.image
                 document.getElementById('courseTeacher').innerHTML = `Instructor del curso: ${course.first_name} ${course.last_name}`
                 document.getElementById('courseScore').innerHTML = `Calificación: ${course.score}`
-                document.getElementById('courseDate').innerHTML = `Fecha de subida: ${course.created_at}`
+                document.getElementById('courseDate').innerHTML = `Fecha de alta: ${course.created_at.substr(0, 10)}`
                 document.getElementById('coursePrice').innerHTML = `Precio: $${course.price}`
                 document.getElementById('courseDescription').innerHTML = `Descripción del curso: ${course.course_description}`
 
@@ -235,6 +240,7 @@ function getLevels(formData){
                 formDataSublevels.append("getSublevels", "")
                 formDataSublevels.append("courseId", selectedCourseId)
                 formDataSublevels.append("levelNumber", level.level_number)
+                formDataSublevels.append("studentId", currentStudentId)
                 getSublevels(formDataSublevels, level.level_number)
             })
         }
@@ -279,6 +285,7 @@ function insertPurchaseCourseStudent(formData){
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             makeSweetAlert('success', 'Hecho', 'Gracias por su compra')
+            location.reload()
         }
     }
     request.send(formData)
@@ -351,8 +358,81 @@ function getCourseStatus(formData){
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             let jsonStatus = JSON.parse(request.responseText)
-            if(jsonStatus[0].is_finished == false)
+            if(jsonStatus[0].is_finished == false){
                 document.getElementById('getCertificateOption').style.display = 'none'
+                document.getElementById('likeButton').style.display = 'none'
+                document.getElementById('dislikeButton').style.display = 'none'
+                document.getElementById('commentArea').style.display = 'none'
+            }
+        }
+    }
+    request.send(formData)
+}
+
+function getCourseCertificate(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let jsonCertificate = JSON.parse(request.responseText)
+
+            let student = `${jsonCertificate[0].first_name} ${jsonCertificate[0].last_name}`
+            let course = jsonCertificate[0].course_name
+            let date = jsonCertificate[0].completed_date
+
+            makePDF(student, course, date)
+        }
+    }
+
+    let formDataCertificate = new FormData()
+    formDataCertificate.append("getCourseCertificate", "")
+    formDataCertificate.append("studentId", currentStudentId)
+    formDataCertificate.append("courseId", selectedCourseId)
+
+    request.send(formDataCertificate)
+}
+
+function makePDF(student, course, date){
+    let request = new XMLHttpRequest()
+    request.open('GET', '/LearnDome/assets/certificado.jpg', true)
+    request.responseType = 'blob'
+    request.onload = function(e){
+        let reader = new FileReader()
+        reader.onload = function(event){
+            let background = event.target.result
+
+            let doc = new jsPDF({orientation: 'landscape'})
+            let width = doc.internal.pageSize.getWidth()
+            let height = doc.internal.pageSize.getHeight()
+
+            doc.addImage(background, 0, 0, width, height);
+            doc.setFontSize(50)
+            doc.text(student, 100, 130)
+            doc.setFontSize(30)
+            doc.text(course, 50, 170)
+            doc.text(date.substr(0, 10), 215, 170)
+            doc.save("certificado.pdf")
+
+        }
+        let file = this.response
+        reader.readAsDataURL(file)
+    }
+    request.send()
+}
+
+function getPurchaseStatus(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/ApiManager/courseBoughtByStudentApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            console.log(request.responseText)
+            let jsonPurchase = JSON.parse(request.responseText)
+            if(jsonPurchase[0].purchase > 0){
+                document.getElementById('buyWithoutPaypalButton').style.display = 'none'
+            }
+            else{
+                showPaypalButton()
+            }
         }
     }
     request.send(formData)

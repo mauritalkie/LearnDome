@@ -13,18 +13,6 @@ class CourseBoughtByStudent extends Connection{
 		$this->disconnect();
 	}
 
-	public function updateCurrentLevel($studentId, $courseId, $newLevel){
-		$this->connect();
-
-		$stmt = $this->dbh->prepare("CALL sp_update_current_level(?, ?, ?)");
-		$stmt->bindParam(1, $studentId, PDO::PARAM_INT);
-		$stmt->bindParam(2, $courseId, PDO::PARAM_INT);
-		$stmt->bindParam(3, $newLevel, PDO::PARAM_INT);
-		$stmt->execute();
-
-		$this->disconnect();
-	}
-
 	public function setCompletedDate($studentId, $courseId){
 		$this->connect();
 
@@ -34,6 +22,19 @@ class CourseBoughtByStudent extends Connection{
 		$stmt->execute();
 
 		$this->disconnect();
+	}
+
+	public function getPurchaseStatus($studentId, $courseId){
+		$this->connect();
+
+		$stmt = $this->dbh->prepare("CALL sp_get_purchase_status(?, ?)");
+		$stmt->bindParam(1, $studentId, PDO::PARAM_INT);
+		$stmt->bindParam(2, $courseId, PDO::PARAM_INT);
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->disconnect();
+		return $result;
 	}
 }
 ?>

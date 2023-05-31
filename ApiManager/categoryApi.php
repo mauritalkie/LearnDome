@@ -15,15 +15,11 @@ if(isset($_POST['getCategories']))
 	echo $categories;
 }
 
-if(isset($_POST['updateCategory']))
+if(isset($_POST['getCategoryByName']))
 {
 	$category = new Category();
-	$category->updateCategory($_POST['id'], $_POST['categoryName'], $_POST['categoryDescription']);
-}
-
-if(isset($_POST['deleteCategory']))
-{
-	$category = new Category();
-	$category->deleteCategory($_POST['id']);
+	$result = $category->getCategoryByName($_POST['categoryName']);
+	$foundCategory = json_encode($result);
+	echo $foundCategory;
 }
 ?>

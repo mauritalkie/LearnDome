@@ -49,16 +49,6 @@ class Instructor extends Connection{
 		$this->disconnect();
 	}
 
-	public function deleteInstructor($id){
-		$this->connect();
-
-		$stmt = $this->dbh->prepare("CALL sp_delete_instructor(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_INT);
-		$stmt->execute();
-
-		$this->disconnect();
-	}
-
 	public function getInstructorUsername($username){
 		$this->connect();
 
@@ -82,28 +72,6 @@ class Instructor extends Connection{
 		$this->disconnect();
 		return $result;
 	}
-
-	public function increaseCoursesNumber($id){
-		$this->connect();
-
-		$stmt = $this->dbh->prepare("CALL sp_increase_courses_number(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_INT);
-		$stmt->execute();
-
-		$this->disconnect();
-	}
-
-	public function decreaseCoursesNumber($id){
-		$this->connect();
-
-		$stmt = $this->dbh->prepare("CALL sp_decrease_courses_number(?)");
-		$stmt->bindParam(1, $id, PDO::PARAM_INT);
-		$stmt->execute();
-
-		$this->disconnect();
-	}
-
-	// public function updateInstructorScore() -> pendiente hasta averiguar con exactitud el sp
 
 	public function lockInstructor($id){
 		$this->connect();
