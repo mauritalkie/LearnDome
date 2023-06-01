@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar cursos</title>
+
+    <link rel="stylesheet" href="/LearnDome/Utils/bootstrap/css/bootstrap.min.css">
+
+</head>
+<body class="bg-dark">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">LearnDome</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/LearnDome/View/html/admins/ProfileAdmins.html">Perfil</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Opciones
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item text-white" href="/LearnDome/View/html/admins/CourseCommentManager.html">Ver comentarios por curso</a></li>
+                  <li><a class="dropdown-item text-white" href="/LearnDome/View/html/admins/ActivateInstructors.html">Habilitar instructores bloqueados</a></li>
+                  <li><a class="dropdown-item text-white" href="/LearnDome/View/html/admins/ActivateStudents.html">Habilitar estudiantes bloqueados</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/LearnDome/View/html/admins/MessagesAdmins.html">Mensajes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/LearnDome/View/html/index.html">Cerrar sesión</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2 bg-dark" type="search" placeholder="Buscar" aria-label="Search">
+              <button class="btn btn-outline-danger" type="submit">Buscar</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+<div class="container">
+  <div class="row Separator">
+        <div class="col-12">
+            <h1 class="text-light">Cursos</h1>
+        </div>
+      </div>
+      
+      <div class="row Separator d-flex justify-content-center">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+          <div class="card bg-dark">
+            <img src="/LearnDome/assets/fundamentos.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title text-light">Fundamentos de la programación</h5>
+              <p class="card-text text-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="/LearnDome/View/html/admins/comments.html" class="btn btn-danger">Ver comentarios</a>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+          <div class="card bg-dark">
+            <img src="/LearnDome/assets/python.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title text-light">Python</h5>
+              <p class="card-text text-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="/LearnDome/View/html/admins/comments.html" class="btn btn-danger">Ver comentarios</a>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+          <div class="card bg-dark">
+            <img src="/LearnDome/assets/mysql.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title text-light">MySql</h5>
+              <p class="card-text text-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="/LearnDome/View/html/admins/comments.html" class="btn btn-danger">Ver comentarios</a>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+          <div class="card bg-dark">
+            <img src="/LearnDome/assets/hacking.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title text-light">Hacking ético</h5>
+              <p class="card-text text-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="/LearnDome/View/html/admins/comments.html" class="btn btn-danger">Ver comentarios</a>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+    <script src="/LearnDome/Utils/jquery/jquery.min.js"></script>
+    <script src="/LearnDome/Utils/popper/popper.min.js"></script>
+    <script src="/LearnDome/Utils/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
