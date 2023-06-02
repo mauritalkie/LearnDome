@@ -1,5 +1,4 @@
 let currentInstructorId = localStorage.getItem("globalId")
-let selectedCourseId = localStorage.getItem("selectedCourseId")
 
 let formData = new FormData()
 formData.append("getCoursesByInstructor", "")

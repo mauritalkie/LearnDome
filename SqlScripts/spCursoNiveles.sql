@@ -31,3 +31,14 @@ BEGIN
 	END IF;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_all_levels
+(
+	IN _course_id INT
+)
+BEGIN
+	SELECT * FROM levels_view
+	WHERE course_id = _course_id;
+END //
+DELIMITER ;

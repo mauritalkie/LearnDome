@@ -29,4 +29,26 @@ if(isset($_POST['getSublevels']))
 	$sublevels = json_encode($arrSublevels);
 	echo $sublevels;
 }
+
+if(isset($_POST['getAllSublevels']))
+{
+	$sublevel = new CourseSublevel();
+	$result = $sublevel->getAllSublevels($_POST['courseId'], $_POST['levelNumber']);
+
+	$arrSublevels = array();
+	$arrSublevels["results"] = array();
+
+	foreach($result as $row){
+		$obj = array(
+			"id" => $row["id"],
+			"sublevel_number" => $row["sublevel_number"],
+			"topic_title" => $row["topic_title"],
+			"media_file" => base64_encode($row["media_file"])
+		);
+		array_push($arrSublevels["results"], $obj);
+	}
+
+	$sublevels = json_encode($arrSublevels);
+	echo $sublevels;
+}
 ?>

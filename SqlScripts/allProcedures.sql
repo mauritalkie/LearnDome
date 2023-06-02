@@ -503,7 +503,7 @@ CREATE PROCEDURE sp_update_course
 	IN _id INT,
     IN _course_name VARCHAR(50),
     IN _price DECIMAL(5, 2),
-    IN _image BLOB,
+    IN _image LONGBLOB,
     IN _course_description VARCHAR(255)
 )
 BEGIN
@@ -663,6 +663,15 @@ BEGIN
     INNER JOIN course_bought_by_student B ON A.id = B.student_id)
     INNER JOIN course C ON B.course_id = C.id)
     WHERE B.student_id = _student_id AND B.course_id = _course_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_all_courses()
+BEGIN
+	SELECT id, course_name, course_description, image
+    FROM course
+    WHERE is_active = TRUE;
 END //
 DELIMITER ;
 
@@ -892,6 +901,17 @@ END //
 DELIMITER ;
 
 DELIMITER //
+CREATE PROCEDURE sp_get_all_levels
+(
+	IN _course_id INT
+)
+BEGIN
+	SELECT * FROM levels_view
+	WHERE course_id = _course_id;
+END //
+DELIMITER ;
+
+DELIMITER //
 CREATE PROCEDURE sp_insert_course_sublevel
 (
 	IN _course_id INT,
@@ -926,6 +946,19 @@ BEGIN
 		WHERE course_id = _course_id AND level_number = _level_number
         LIMIT 1;
 	END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_all_sublevels
+(
+	IN _course_id INT,
+    IN _level_number INT
+)
+BEGIN
+	SELECT id, sublevel_number, topic_title, media_file
+	FROM course_sublevel
+	WHERE course_id = _course_id AND level_number = _level_number;
 END //
 DELIMITER ;
 

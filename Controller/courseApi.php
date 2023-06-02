@@ -243,4 +243,25 @@ if(isset($_POST['getCourseCertificate']))
 	$courseCertificate = json_encode($result);
 	echo $courseCertificate;
 }
+
+if(isset($_POST['getAllCourses']))
+{
+	$course = new Course();
+	$results = $course->getAllCourses();
+
+	$arrCourses = array();
+	$arrCourses["results"] = array();
+
+	foreach($results as $row){
+		$obj = array(
+			"id" => $row['id'],
+			"course_name" => $row['course_name'],
+			"course_description" => $row['course_description'],
+			"image" => base64_encode($row['image'])
+		);
+		array_push($arrCourses["results"], $obj);
+	}
+	$courses = json_encode($arrCourses);
+	echo $courses;
+}
 ?>

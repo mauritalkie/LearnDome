@@ -2,7 +2,7 @@ document.getElementById('sublevelSpace').style.display = "none"
 
 let isThereVideo = false
 let atLeastOneSublevel = false
-let currentLevel = 0
+let currentLevel = localStorage.getItem("currentLevelNumber")
 let currentSublevel = 0
 
 function makeSweetAlert(icon, title, message){

@@ -35,3 +35,16 @@ BEGIN
 	END IF;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_all_sublevels
+(
+	IN _course_id INT,
+    IN _level_number INT
+)
+BEGIN
+	SELECT id, sublevel_number, topic_title, media_file
+	FROM course_sublevel
+	WHERE course_id = _course_id AND level_number = _level_number;
+END //
+DELIMITER ;

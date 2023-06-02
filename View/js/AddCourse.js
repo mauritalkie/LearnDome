@@ -152,6 +152,7 @@ function insertCourse(formData){
                 insertCourseCategory(formDataCourseCategory)
             }
 
+            localStorage.setItem("currentLevelNumber", 0)
             window.location.href = '/LearnDome/View/html/teachers/AddContent.html'
         }
     }

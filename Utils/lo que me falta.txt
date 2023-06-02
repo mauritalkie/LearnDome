@@ -1,6 +1,6 @@
-- edición del curso
+- edición del curso -> done or i guess
 - validación de categorías -> done
-- model view controller
+- model view controller -> done
 - pdf del certificado corregido -> done
 - host
 

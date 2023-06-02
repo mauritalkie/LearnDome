@@ -1,9 +1,15 @@
 a.comment:hover{
     font-weight: bold;
     color: rgb(150, 0, 0) !important;
+    cursor: pointer;
 }
 
 .commentUser{
     font-weight: bold;
     color: rgb(150, 0, 0) !important;
+}
+
+.alignRight{
+    margin-right: 0;
+    margin-left: auto;
 }

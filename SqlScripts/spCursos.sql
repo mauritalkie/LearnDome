@@ -34,7 +34,7 @@ CREATE PROCEDURE sp_update_course
 	IN _id INT,
     IN _course_name VARCHAR(50),
     IN _price DECIMAL(5, 2),
-    IN _image BLOB,
+    IN _image LONGBLOB,
     IN _course_description VARCHAR(255)
 )
 BEGIN
@@ -194,5 +194,14 @@ BEGIN
     INNER JOIN course_bought_by_student B ON A.id = B.student_id)
     INNER JOIN course C ON B.course_id = C.id)
     WHERE B.student_id = _student_id AND B.course_id = _course_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_all_courses()
+BEGIN
+	SELECT id, course_name, course_description, image
+    FROM course
+    WHERE is_active = TRUE;
 END //
 DELIMITER ;

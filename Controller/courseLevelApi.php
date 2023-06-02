@@ -14,4 +14,12 @@ if(isset($_POST['getLevels']))
 	$levels = json_encode($result);
 	echo $levels;
 }
+
+if(isset($_POST['getAllLevels']))
+{
+	$level = new CourseLevel();
+	$result = $level->getAllLevels($_POST['courseId']);
+	$levels = json_encode($result);
+	echo $levels;
+}
 ?>
