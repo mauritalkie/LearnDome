@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cursos</title>
+
+	<link rel="stylesheet" href="/LearnDome/Utils/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/LearnDome/Utils/sweetalert/sweetalert_dark.css">
+
+</head>
+<body class="bg-dark">
+	<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="/LearnDome/View/html/students/MainStudentsPage.html">LearnDome</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Categorías
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item text-white" href="/LearnDome/View/html/students/CourseByCategory.html">Categoría 1</a></li>
+                          <li><a class="dropdown-item text-white" href="/LearnDome/View/html/students/CourseByCategory.html">Categoría 2</a></li>
+                          <!-- <li><hr class="dropdown-divider"></li> -->
+                          <li><a class="dropdown-item text-white" href="/LearnDome/View/html/students/CourseByCategory.html">Categoría 3</a></li>
+                        </ul>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/LearnDome/View/html/students/ProfileStudents.html">Perfil</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" href="/LearnDome/View/html/students/MessagesStudents.html">Mensajes</a>
+                      </li>
+                      <!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Búsqueda Avanzada
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item text-white" href="#" data-bs-toggle="modal" data-bs-target="#categoryModal">Por categoría</a></li>
+                          <li><a class="dropdown-item text-white" href="#" data-bs-toggle="modal" data-bs-target="#instructorModal">Por instructor</a></li>
+                          <li><a class="dropdown-item text-white" href="#" data-bs-toggle="modal" data-bs-target="#dateRangeModal">Por fecha</a></li>
+                        </ul>
+                      </li> -->
+                      <li class="nav-item">
+                        <a class="nav-link active" href="/LearnDome/View/html/students/kardex.html">Kárdex</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" href="/LearnDome/View/html/index.html">Cerrar sesión</a>
+                      </li>
+                    </ul>
+                    <!-- <form class="d-flex" role="search">
+                      <input class="form-control me-2 bg-dark" type="search" placeholder="Buscar" aria-label="Search">
+                      <button class="btn btn-outline-danger" type="submit">Buscar</button>
+                    </form> -->
+                  </div>
+                </div>
+              </nav>
+
+      <div class="row container d-flex justify-content-center" id="filteredCourses">
+         <!-- <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-2">
+            <div class="card bg-dark">
+              <img src="/LearnDome/assets/csharp.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-light">Aprende C#</h5>
+                <p class="card-text text-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="/LearnDome/html/students/course.html" class="btn btn-outline-danger">Iniciar</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-2">
+            <div class="card bg-dark">
+              <img src="/LearnDome/assets/fundamentos.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-light">Fundamentos de la programación</h5>
+                <p class="card-text text-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="/LearnDome/html/students/course.html" class="btn btn-outline-danger">Iniciar</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-2">
+            <div class="card bg-dark">
+              <img src="/LearnDome/assets/hacking.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-light">Hackeo ético</h5>
+                <p class="card-text text-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="/LearnDome/html/students/course.html" class="btn btn-outline-danger">Iniciar</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-2">
+            <div class="card bg-dark">
+              <img src="/LearnDome/assets/mysql.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-light">MySql</h5>
+                <p class="card-text text-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="/LearnDome/html/students/course.html" class="btn btn-outline-danger">Iniciar</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-2">
+            <div class="card bg-dark">
+              <img src="/LearnDome/assets/python.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-light">Python</h5>
+                <p class="card-text text-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="/LearnDome/html/students/course.html" class="btn btn-outline-danger">Iniciar</a>
+              </div>
+            </div>
+          </div>  -->
+    </div>
+
+    <!-- Modal -->
+<!-- <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Búsqueda</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mt-1 d-flex justify-content-center align-items-center">
+            <select class="form-control bg-light w-75" name="cbCategoriesModal" id="cbCategoriesModal">
+                <option id="0" hidden disabled selected value="No selection">Selecciona una categoría</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger" onclick="selectedCategory()">Buscar</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="instructorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Búsqueda</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mt-1 d-flex justify-content-center align-items-center">
+            <input class="form-control bg-light w-75" type="text" placeholder="Nombre del instructor" id="txtFilterInstructor">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger" onclick="selectedInstructor()">Buscar</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="dateRangeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Búsqueda</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mt-1 gap-3 d-flex justify-content-center align-items-center">
+            <input class="form-control bg-light" type="date" id="firstDate">
+            <input class="form-control bg-light" type="date" id="lastDate">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger" onclick="selectedDates()">Buscar</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+    <script src="/LearnDome/Utils/sweetalert/sweetalert_dark.min.js"></script>
+    <script src="/LearnDome/View/js/FilteredCourses.js"></script>
+
+    <script src="/LearnDome/Utils/jquery/jquery.min.js"></script>
+    <script src="/LearnDome/Utils/popper/popper.min.js"></script>
+    <script src="/LearnDome/Utils/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

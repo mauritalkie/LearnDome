@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentarios</title>
+
+    <link rel="stylesheet" href="/LearnDome/Utils/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/LearnDome/View/css/comment.css">
+
+</head>
+<body class="bg-dark text-white">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">LearnDome</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/LearnDome/View/html/admins/ProfileAdmins.html">Perfil</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Opciones
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item text-white" href="/LearnDome/View/html/admins/CourseCommentManager.html">Ver comentarios por curso</a></li>
+                  <li><a class="dropdown-item text-white" href="/LearnDome/View/html/admins/ActivateInstructors.html">Habilitar instructores bloqueados</a></li>
+                  <li><a class="dropdown-item text-white" href="/LearnDome/View/html/admins/ActivateStudents.html">Habilitar estudiantes bloqueados</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/LearnDome/View/html/admins/MessagesAdmins.html">Mensajes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/LearnDome/View/html/index.html">Cerrar sesión</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2 bg-dark" type="search" placeholder="Buscar" aria-label="Search">
+              <button class="btn btn-outline-danger" type="submit">Buscar</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+<div class="container">
+
+  <div class="row">
+        <div class="col-12 col-sm-12 col-md-12">
+            <div class="d-flex justify-content-center">
+                <h1>Info del curso</h1>
+            </div>
+            <h5 id="courseTitle">Nombre del curso:</h5>
+            <h5 id="coursePrice">Precio del curso:</h5>
+            <h5 id="courseTeacher">Profesor del curso:</h5>
+            <h5 id="courseDescription">Descripción del curso:</h5>
+        </div>
+
+        <!--<div class="col-12 col-sm-12 col-md-6 d-flex justify-content-center">
+            <h1>Categorías del curso</h1>
+        </div>-->
+    </div>
+    
+    <hr>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-center">
+                <h1>Comentarios del curso</h1>
+            </div>
+
+            <div id="courseComments">
+                <!-- <h6 class="commentUser">Nombre del que comenta</h6>
+                <div class="p-1 mb-3 bg-secondary rounded">
+                  <p >Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam expedita. Est harum non nesciunt itaque adipisci ut, veritatis qui quia, rem dolor, fugit dolorem architecto a reprehenderit pariatur quis!</p>
+                  <a href="#" class="text-decoration-none text-white comment">Eliminar comentario</a>
+                </div>
+                
+
+                <h6 class="commentUser">Nombre del que comenta</h6>
+                <div class="p-1 mb-3 bg-secondary rounded">
+                  <p >Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam expedita. Est harum non nesciunt itaque adipisci ut, veritatis qui quia, rem dolor, fugit dolorem architecto a reprehenderit pariatur quis!</p>
+                  <a href="#" class="text-decoration-none text-white comment">Eliminar comentario</a>
+                </div>
+
+                <h6 class="commentUser">Nombre del que comenta</h6>
+                <div class="p-1 mb-3 bg-secondary rounded">
+                  <p >Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam expedita. Est harum non nesciunt itaque adipisci ut, veritatis qui quia, rem dolor, fugit dolorem architecto a reprehenderit pariatur quis!</p>
+                  <a href="#" class="text-decoration-none text-white comment">Eliminar comentario</a>
+                </div>
+
+                <h6 class="commentUser">Nombre del que comenta</h6>
+                <div class="p-1 mb-3 bg-secondary rounded">
+                  <p >Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam expedita. Est harum non nesciunt itaque adipisci ut, veritatis qui quia, rem dolor, fugit dolorem architecto a reprehenderit pariatur quis!</p>
+                  <a href="#" class="text-decoration-none text-white comment">Eliminar comentario</a>
+                </div>
+
+                <h6 class="commentUser">Nombre del que comenta</h6>
+                <div class="p-1 mb-3 bg-secondary rounded">
+                  <p >Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam expedita. Est harum non nesciunt itaque adipisci ut, veritatis qui quia, rem dolor, fugit dolorem architecto a reprehenderit pariatur quis!</p>
+                  <a href="#" class="text-decoration-none text-white comment">Eliminar comentario</a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+  
+
+</div>
+
+    <script src="/LearnDome/View/js/comments.js"></script>
+
+    <script src="/LearnDome/Utils/jquery/jquery.min.js"></script>
+    <script src="/LearnDome/Utils/popper/popper.min.js"></script>
+    <script src="/LearnDome/Utils/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
