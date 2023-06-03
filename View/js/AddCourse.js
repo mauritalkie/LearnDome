@@ -140,6 +140,7 @@ function insertCourse(formData){
     request.open('POST', '/LearnDome/Controller/courseApi.php', true)
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
+            console.log(request.responseText)
             let jsonCourse = JSON.parse(request.responseText)
             localStorage.setItem("currentCourseId", jsonCourse[0].id)
 

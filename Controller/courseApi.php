@@ -27,7 +27,8 @@ if(isset($_POST['getCourse']))
 			"created_at" => $row['created_at'],
 			"price" => $row['price'],
 			"image" => base64_encode($row['image']),
-			"course_description" => $row['course_description']
+			"course_description" => $row['course_description'],
+			"is_active" => $row['is_active']
 		);
 		array_push($arrCourse["results"], $obj);
 	}

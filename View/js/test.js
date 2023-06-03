@@ -170,17 +170,6 @@ function decreaseCoursesNumber(formData){
 
 
 
-function deleteStudent(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
-
 
 
 function getStudentEmail(formData){
@@ -199,27 +188,6 @@ function getStudentEmail(formData){
 
 
 
-function buyCourse(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
-
-function completeCourse(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/studentApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
 
 
@@ -229,38 +197,8 @@ function completeCourse(formData){
 
 
 
-function updateCourse(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
-function deleteCourse(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
-function getCoursesByInstructor(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}
 
 
 
@@ -368,13 +306,3 @@ function removeCategoryFromCourse(formData){
     request.send(formData)
 }
 
-function getCategoriesFromSelectedCourse(formData){
-    let request = new XMLHttpRequest()
-    request.open('POST', '/LearnDome/ApiManager/courseCategoryApi.php', true)
-    /**/
-    request.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200)
-            alert(request.responseText)
-    }
-    request.send(formData)
-}

@@ -68,18 +68,6 @@ END //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE sp_get_administrator_email
-(
-	IN _email VARCHAR(40)
-)
-BEGIN
-	SELECT email
-    FROM administrator
-	WHERE email =_email;
-END //
-DELIMITER ;
-
-DELIMITER //
 CREATE PROCEDURE sp_login_administrator
 (
 	IN _username VARCHAR(30),
@@ -158,18 +146,6 @@ BEGIN
 	SELECT id, username, unlocked
     FROM instructor
 	WHERE username =_username;
-END //
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE sp_get_instructor_email
-(
-	IN _email VARCHAR(40)
-)
-BEGIN
-	SELECT email
-    FROM instructor
-	WHERE email =_email;
 END //
 DELIMITER ;
 
@@ -367,18 +343,6 @@ END //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE sp_get_student_email
-(
-	IN _email VARCHAR(40)
-)
-BEGIN
-	SELECT email
-    FROM student
-	WHERE email =_email;
-END //
-DELIMITER ;
-
-DELIMITER //
 CREATE PROCEDURE sp_lock_student
 (
 	IN _id INT
@@ -489,11 +453,11 @@ CREATE PROCEDURE sp_get_course
 	IN _id INT
 )
 BEGIN
-	SELECT A.course_name, B.first_name, B.last_name, A.score, A.created_at, A.price, A.image, A.course_description
+	SELECT A.course_name, B.first_name, B.last_name, A.score, A.created_at, A.price, A.image, A.course_description, A.is_active
     FROM course A
     INNER JOIN instructor B
     ON A.instructor_id = B.id
-    WHERE A.id = _id AND A.is_active = TRUE;
+    WHERE A.id = _id;
 END //
 DELIMITER ;
 
@@ -708,6 +672,32 @@ END //
 DELIMITER ;
 
 DELIMITER //
+CREATE PROCEDURE sp_update_category
+(
+	IN _category_name VARCHAR(20),
+    IN _category_description VARCHAR(50),
+	IN _id INT
+)
+BEGIN
+	UPDATE category
+    SET category_name = _category_name, category_description = _category_description
+    WHERE id = _id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_delete_category
+(
+	IN _id INT
+)
+BEGIN
+	UPDATE category
+    SET is_active = FALSE
+    WHERE id = _id;
+END //
+DELIMITER ;
+
+DELIMITER //
 CREATE PROCEDURE sp_insert_comment
 (
 	IN _student_id INT,
@@ -817,6 +807,19 @@ BEGIN
 		INSERT INTO course_score(student_id, course_id, liked)
 		VALUES(_student_id, _course_id, _liked);
 	END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_score
+(
+	IN _student_id INT,
+    IN _course_id INT
+)
+BEGIN
+	SELECT liked
+    FROM course_score
+    WHERE student_id = _student_id AND course_id = _course_id;
 END //
 DELIMITER ;
 
@@ -975,29 +978,16 @@ END //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE sp_remove_category_from_course
-(
-	IN _course_id INT,
-    IN _category_id INT
-)
-BEGIN
-	UPDATE course_category
-    SET is_active = FALSE
-    WHERE course_id = _course_id AND category_id = _category_id;
-END //
-DELIMITER ;
-
-DELIMITER //
 CREATE PROCEDURE sp_get_categories_from_selected_course
 (
 	IN _course_id INT
 )
 BEGIN
 	SELECT A.id, A.category_name
-    FROM category
+    FROM category A
     INNER JOIN course_category B
     ON A.id = B.category_id
-    WHERE B.course_id = _course_id;
+    WHERE B.course_id = _course_id AND A.is_active = TRUE AND B.is_active = TRUE;
 END //
 DELIMITER ;
 

@@ -30,6 +30,17 @@ formDataPurchaseStatus.append("studentId", currentStudentId)
 formDataPurchaseStatus.append("courseId", selectedCourseId)
 getPurchaseStatus(formDataPurchaseStatus)
 
+let formDataGetScore = new FormData()
+formDataGetScore.append("getScore", "")
+formDataGetScore.append("studentId", currentStudentId)
+formDataGetScore.append("courseId", selectedCourseId)
+getScore(formDataGetScore)
+
+let formDataCategories = new FormData()
+formDataCategories.append("getCategoriesFromSelectedCourse", "")
+formDataCategories.append("courseId", selectedCourseId)
+getCategoriesFromSelectedCourse(formDataCategories)
+
 /*document.getElementById("courseContent").innerHTML += 
 `
 <ul class="accordion">
@@ -425,7 +436,6 @@ function getPurchaseStatus(formData){
     request.open('POST', '/LearnDome/Controller/courseBoughtByStudentApi.php', true)
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
-            console.log(request.responseText)
             let jsonPurchase = JSON.parse(request.responseText)
             if(jsonPurchase[0].purchase > 0){
                 document.getElementById('buyWithoutPaypalButton').style.display = 'none'
@@ -433,6 +443,48 @@ function getPurchaseStatus(formData){
             else{
                 showPaypalButton()
             }
+        }
+    }
+    request.send(formData)
+}
+
+function getScore(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/Controller/courseScoreApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+
+            let jsonScore = JSON.parse(request.responseText)
+            if(jsonScore.length == 0)
+                return
+
+            if(jsonScore[0].liked == 1){
+                let likeButton = document.getElementById('likeButton')
+                likeButton.style.backgroundColor = "darkgreen"
+            }
+            else{
+                let dislikeButton = document.getElementById('dislikeButton')
+                dislikeButton.style.backgroundColor = "darkred"
+            }
+
+        }
+    }
+    request.send(formData)
+}
+
+function getCategoriesFromSelectedCourse(formData){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/Controller/courseCategoryApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let jsonCategories = JSON.parse(request.responseText)
+            
+            if(jsonCategories.length > 0){
+                let categories = 'Categorías: '
+                jsonCategories.forEach(category => { categories += `${category.category_name}, `})
+                document.getElementById('courseCategories').innerHTML = categories.substr(0, categories.length - 2)
+            }
+            
         }
     }
     request.send(formData)

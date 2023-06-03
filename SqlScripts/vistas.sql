@@ -19,7 +19,7 @@ AS SELECT id, course_name, image, course_description, created_at, is_active
 FROM course;
 
 CREATE VIEW categories_view
-AS SELECT id, category_name, is_active
+AS SELECT id, category_name, category_description, is_active
 FROM category;
 
 CREATE VIEW messages_view

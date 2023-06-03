@@ -18,3 +18,16 @@ BEGIN
 	END IF;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_score
+(
+	IN _student_id INT,
+    IN _course_id INT
+)
+BEGIN
+	SELECT liked
+    FROM course_score
+    WHERE student_id = _student_id AND course_id = _course_id;
+END //
+DELIMITER ;

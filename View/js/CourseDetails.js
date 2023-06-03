@@ -153,8 +153,19 @@ function getCourse(formData){
                 if(course.score < 0){
                     document.getElementById('courseScore').innerHTML = "Calificación: Sin calificación"
                 }
+                if(course.is_active == 0){
+                    document.getElementById('btnUpdateCourse').style.display = 'none'
+                    document.getElementById('btnAddContent').style.display = 'none'
+                    document.getElementById('btnDeleteCourse').style.display = 'none'
 
-                currentPrice = course.price
+                    document.getElementById('courseData').innerHTML += 
+                    `
+                    <div id="btnDeleteCourse" class="d-flex justify-content-center mt-3">
+                        <h5 class="text-white mt-1">Este curso se ha dado de baja</h5>
+                    </div>
+                    `
+                }
+
             })
         }
     }
@@ -236,5 +247,19 @@ function updateCourse(formData){
             location.reload()
         }
     }
+    request.send(formData)
+}
+
+function deleteCourse(){
+    let request = new XMLHttpRequest()
+    request.open('POST', '/LearnDome/Controller/courseApi.php', true)
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            location.reload()
+        }
+    }
+    let formData = new FormData()
+    formData.append("deleteCourse", "")
+    formData.append("id", selectedCourseId)
     request.send(formData)
 }

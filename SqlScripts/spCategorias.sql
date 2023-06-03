@@ -29,3 +29,29 @@ BEGIN
     WHERE category_name = _category_name;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_update_category
+(
+	IN _category_name VARCHAR(20),
+    IN _category_description VARCHAR(50),
+	IN _id INT
+)
+BEGIN
+	UPDATE category
+    SET category_name = _category_name, category_description = _category_description
+    WHERE id = _id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_delete_category
+(
+	IN _id INT
+)
+BEGIN
+	UPDATE category
+    SET is_active = FALSE
+    WHERE id = _id;
+END //
+DELIMITER ;

@@ -159,7 +159,7 @@ function loginStudent(formData){
 
             localStorage.setItem("globalId", jsonStudent[0].id)
             localStorage.setItem("messageId", jsonStudent[0].id_for_message)
-            window.location.href = "/LearnDome/View/html/MainStudentsPage.html"
+            window.location.href = "/LearnDome/View/html/students/MainStudentsPage.html"
         }
     }
     request.send(formData)

@@ -22,4 +22,16 @@ if(isset($_POST['getCategoryByName']))
 	$foundCategory = json_encode($result);
 	echo $foundCategory;
 }
+
+if(isset($_POST['updateCategory']))
+{
+	$category = new Category();
+	$category->updateCategory($_POST['categoryName'], $_POST['categoryDescription'], $_POST['id']);
+}
+
+if(isset($_POST['deleteCategory']))
+{
+	$category = new Category();
+	$category->deleteCategory($_POST['id']);
+}
 ?>
