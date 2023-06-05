@@ -2,6 +2,9 @@
 	.ResponsiveButton{
 		margin-bottom: 15px;
 	}
+	.sizeVideo{
+		width: 30em !important;
+	}
 }
 
 .accordion{
@@ -53,7 +56,7 @@
 
 .sizeVideo{
 	height: 20em;
-	width: 40em;
+	width: 50em;
 }
 
 .likeDislikeButton{
