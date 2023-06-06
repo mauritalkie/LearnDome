@@ -24,7 +24,7 @@ DELIMITER //
 CREATE TRIGGER update_instructor_score_trigger
 AFTER UPDATE ON course FOR EACH ROW
 BEGIN
-	UPDATE instructor SET score = get_instructor_score_function(NEW.instructor_id);
+	UPDATE instructor SET score = get_instructor_score_function(NEW.instructor_id) WHERE id = NEW.instructor_id;
 END //
 DELIMITER ;
 

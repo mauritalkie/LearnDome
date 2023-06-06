@@ -59,7 +59,7 @@ function nextLevel(){
     document.getElementById('txtTopicName').value = ''
 
     document.getElementById("inputSpace").innerHTML = ""
-    document.getElementById("inputSpace").innerHTML += `<input class="form-control mt-3" type="file" id="mediaFile">`
+    document.getElementById("inputSpace").innerHTML += `<input class="form-control mt-3" type="file" accept="video/*" id="mediaFile">`
 
     document.getElementById('sublevelSpace').style.display = "none"
     currentSublevel = 0
@@ -116,7 +116,7 @@ function insertCourseSublevel(formData){
             atLeastOneSublevel = true
             document.getElementById('txtTopicName').value = ''
             document.getElementById("inputSpace").innerHTML = ""
-            document.getElementById("inputSpace").innerHTML += `<input class="form-control mt-3" type="file" id="mediaFile">`
+            document.getElementById("inputSpace").innerHTML += `<input class="form-control mt-3" type="file" accept="video/*" id="mediaFile">`
         }
     }
     request.send(formData)

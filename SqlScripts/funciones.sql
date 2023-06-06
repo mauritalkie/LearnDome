@@ -17,11 +17,11 @@ CREATE FUNCTION get_instructor_score_function(_instructor_id INT)
 RETURNS DECIMAL(6, 2) DETERMINISTIC
 BEGIN
 	DECLARE total_scores INT;
-    SET total_scores = (SELECT COUNT(score) FROM course WHERE instructor_id = _instructor_id);
+    SET total_scores = (SELECT COUNT(score) FROM course WHERE instructor_id = _instructor_id AND score != -1);
     IF total_scores = 0 THEN
 		RETURN -1;
 	ELSE
-		RETURN (SELECT AVG(score) FROM course WHERE instructor_id = _instructor_id);
+		RETURN (SELECT AVG(score) FROM course WHERE instructor_id = _instructor_id AND score != -1);
 	END IF;
 END //
 DELIMITER ;
